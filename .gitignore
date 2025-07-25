@@ -1,0 +1,22 @@
+# Object files
+*.o
+obj/
+
+# Executable files
+cub3d
+
+# Editor/OS files
+*~
+*.swp
+.DS_Store
+
+# Libraries
+libft/libft.a 
+
+# Minilibx
+minilibx-linux/libmlx.a
+minilibx-linux/libmlx_linux.a
+
+# additional files
+todo
+.vscode/
