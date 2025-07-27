@@ -16,12 +16,12 @@ typedef struct s_game_data
     char	*map_path;
     char	**map;
     int		fd;
-    char	*NO_path;
-    char	*SO_path;
-    char	*WE_path;
-    char	*EA_path;
-    int		F_RGB;
-    int		C_RGB;
+    char	*no_path;
+    char	*so_path;
+    char	*we_path;
+    char	*ea_path;
+    int		f_rgb;
+    int		c_rgb;
 } t_game_data;
 
 #endif
