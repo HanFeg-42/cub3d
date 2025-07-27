@@ -1,19 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/27 23:48:32 by kali              #+#    #+#             */
+/*   Updated: 2025/07/27 23:50:19 by kali             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
 // TODO: chech .cub extention
 // TODO: open the file 
 // TODO: use get_next_line to read it
 
-void	init_game_data(t_game_data *data)
+static void	init_game_data(t_game_data *data)
 {
 	data->mlx_ptr = NULL;
 	data->win_ptr = NULL;
 	data->map_path = NULL;
+	data->join = NULL;
 	data->map = NULL;
 	data->fd = 0;
+	data->no_path = NULL;
+	data->so_path = NULL;
+	data->we_path = NULL;
+	data->ea_path = NULL;
+	data->f_rgb = -1;
+	data->c_rgb = -1;
 }
 
-void	check_file_extention(char *filename)
+static void	check_file_extention(char *filename)
 {
 	char	*ext;
 
@@ -22,7 +41,7 @@ void	check_file_extention(char *filename)
 		clean_and_exit("Usage: ./cub3D path_to_map.cub\n");
 }
 
-void	open_file(char *filename, t_game_data *data)
+static void	open_file(char *filename, t_game_data *data)
 {
 	check_file_extention(filename);
 	data->fd = open(filename, O_RDONLY);
@@ -30,17 +49,18 @@ void	open_file(char *filename, t_game_data *data)
 		clean_and_exit("Failed to open the file");
 }
 
-void	read_file(t_game_data *data)
+static void	read_file(t_game_data *data)
 {
 	char	*line;
 
-	line = get_next_line(data->fd);
+	line = get_next_line(data->fd, 0);
 	while (line)
 	{
 		load_line(line, data);
 		free(line);
-		line = get_next_line(data->fd);
+		line = get_next_line(data->fd, 0);
 	}
+	init_map_matrix(data);
 }
 
 /**
@@ -49,17 +69,9 @@ void	read_file(t_game_data *data)
  * @param av Argument vector.
  * @param data Pointer to the game data structure to be initialized.
  * @return true if parsing and initialization are successful, false otherwise.
- * @details
- * This function checks if the correct number of arguments is provided,
- * initializes the MinilibX library, creates a new window, and sets the map path.
- * It also initializes the map to NULL, which will be set when loading the map.
- * If any step fails, it prints an error message and returns false.
- * If successful, it returns true.
  */
 bool	parse_args(int ac, char **av, t_game_data *data)
 {
-	t_parse_data	parse_data;
-
 	init_game_data(data);
 	if (ac != 2)
 	{
@@ -67,6 +79,6 @@ bool	parse_args(int ac, char **av, t_game_data *data)
 		return (1);
 	}
 	open_file(av[1], data);
-	read_file(data);	
-	return true;
+	read_file(data);
+	return (true);
 }

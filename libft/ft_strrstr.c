@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   ft_strrstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 23:45:59 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:50:42 by kali             ###   ########.fr       */
+/*   Created: 2025/07/27 23:39:58 by kali              #+#    #+#             */
+/*   Updated: 2025/07/27 23:39:59 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "libft.h"
 
-// TODO : load each line to the map array for the moment
-// find a way to handle newlines in between
-// and make sure it is encountered by walls
-// no 0 are facing the outside
-void	map_line_loader(char *line, t_game_data *data)
+char	*ft_strrstr(char *str, char *to_find)
 {
-	data->join = ft_str_join(data->join, line);
-}
+	int		len;
+	char	*ret;
+	char	*tmp;
 
-void	init_map_matrix(t_game_data *data)
-{
-	data->map = ft_split(data->join, '\n');
+	ret = NULL;
+	tmp = str;
+	len = ft_strlen(to_find);
+	while (tmp)
+	{
+		tmp = ft_strnstr(tmp, to_find, ft_strlen(tmp));
+		if (tmp)
+		{
+			ret = tmp;
+			tmp = tmp + len;
+		}
+	}
+	return (ret);
 }

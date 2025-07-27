@@ -1,7 +1,7 @@
 NAME		=	cub3D
 CC		=	cc
 RM		=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g3
 MLXFLAGS	=	-lXext -lX11
 HEADER		=	cub3D.h
 LIBMLX_D	=       ./minilibx-linux
@@ -11,12 +11,17 @@ LIBFT_D		=       ./libft
 LIBFT		=       libft/libft.a
 CLEAN		=       clean
 FCLEAN		=       fclean
-SRC		=       main.c
+SRC		=       main.c \
+				src/parsing/get_next_line.c \
+				src/parsing/parse_loader.c \
+				src/parsing/parse.c \
+				src/parsing/parse_utils.c \
+				src/parsing/parse_map.c
 OBJ		=       ${SRC:%.c=$(OBJ_D)/%.o}
 OBJ_D		=	obj
 
 $(OBJ_D)/%.o:%.c
-	mkdir -p $(OBJ_D)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

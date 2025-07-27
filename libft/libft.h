@@ -52,6 +52,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strnstr(const char *str, const char *to_find, size_t n);
 char				*ft_strrchr(const char *str, int c);
+char				*ft_strrstr(char *str, char *to_find);
 int					ft_tolower(int ch);
 int					ft_toupper(int ch);
 
@@ -67,5 +68,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+
+char				*ft_str_join(char *s1, char *s2);
 
 #endif
