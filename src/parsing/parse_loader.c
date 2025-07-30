@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:43:30 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:48:19 by kali             ###   ########.fr       */
+/*   Updated: 2025/07/30 01:00:16 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int	get_rgb_color(char *color)
 	int		parsed_rgb[3];
 	int		rgb;
 
-	split_rgb = ft_split(color, ',');
+	split_rgb = ft_split(color, ',');// should not be splitted
+	free(color); 
 	if (!(split_rgb[0] && split_rgb[1] && split_rgb[2] && split_rgb[3] == NULL))
 		clean_and_exit("mochkiil");
 	parsed_rgb[0] = parse_color(split_rgb[0]);
@@ -42,27 +43,38 @@ static int	get_rgb_color(char *color)
 static void	detect_identifier(char *line, t_game_data *data)
 {
 	char	**info;
-
+	char	*trimmed_line;
+	
+	if (line[0] == '\n')
+		return ;	
 	info = ft_split(line, ' ');
-	if (info[2][0] == '\n')
+	if (!(info[2] == NULL || info[2][0] == '\n') || info[0] == NULL || info[1] == NULL)
 	{
-		if (ft_strcmp(info[0], "NO") == 0)
-			data->no_path = ft_strdup(info[1]);
-		else if (ft_strcmp(info[0], "SO") == 0)
-			data->so_path = ft_strdup(info[1]);
-		else if (ft_strcmp(info[0], "WE") == 0)
-			data->we_path = ft_strdup(info[1]);
-		else if (ft_strcmp(info[0], "EA") == 0)
-			data->ea_path = ft_strdup(info[1]);
-		else if (ft_strcmp(info[0], "F") == 0)
-			data->f_rgb = get_rgb_color(info[1]);
-		else if (ft_strcmp(info[0], "C") == 0)
-			data->c_rgb = get_rgb_color(info[1]);
-		else
-			clean_and_exit("Unvalid map format!");
-	}
-	else
+		ft_free_split(info);
 		clean_and_exit("Unvalid map format!");
+	}
+	if (!info[2])
+		trimmed_line = ft_substr(info[1], 0, ft_strlen(info[1]) - 1);
+	else
+		trimmed_line = ft_strdup(info[1]);
+	if (ft_strcmp(info[0], "NO") == 0 && data->no_path == NULL)
+		data->no_path = trimmed_line;
+	else if (ft_strcmp(info[0], "SO") == 0 && data->so_path == NULL)
+		data->so_path = trimmed_line;
+	else if (ft_strcmp(info[0], "WE") == 0 && data->we_path == NULL)
+		data->we_path = trimmed_line;
+	else if (ft_strcmp(info[0], "EA") == 0 && data->ea_path == NULL)
+		data->ea_path = trimmed_line;
+	else if (ft_strcmp(info[0], "F") == 0)
+		data->f_rgb = get_rgb_color(trimmed_line);
+	else if (ft_strcmp(info[0], "C") == 0)
+		data->c_rgb = get_rgb_color(trimmed_line);
+	else
+	{
+		free(trimmed_line);
+		ft_free_split(info);
+		clean_and_exit("Unvalid map format!");
+	}
 	ft_free_split(info);
 }
 

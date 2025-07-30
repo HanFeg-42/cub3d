@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:46:19 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:51:52 by kali             ###   ########.fr       */
+/*   Updated: 2025/07/29 21:15:11 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clean_and_exit(char *message)
 {
-	ft_putstr_fd(message, STDERR_FILENO);
+	ft_putendl_fd(message, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 
