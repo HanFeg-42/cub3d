@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:46:19 by kali              #+#    #+#             */
-/*   Updated: 2025/07/29 21:15:11 by kali             ###   ########.fr       */
+/*   Updated: 2025/07/30 16:05:23 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,22 @@ void	ft_free_split(char **arr)
 	while (arr && arr[i])
 		free(arr[i++]);
 	free(arr);
+}
+
+int ft_count_occ(char *str, char c)
+{
+	int count;
+	int i;
+
+	if (!str)
+		return (0);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
 }

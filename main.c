@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:52:48 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:59:48 by kali             ###   ########.fr       */
+/*   Updated: 2025/08/05 17:36:31 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int	main(int ac, char **av)
 {
 	t_game_data	data;
 
-	if (!parse_args(ac, av, &data))
-		return (1);
+	parse_args(ac, av, &data);
 	print_game_data(&data);
 	free_game_data(&data);
 	return (0);

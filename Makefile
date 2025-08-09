@@ -16,7 +16,8 @@ SRC		=       main.c \
 				src/parsing/parse_loader.c \
 				src/parsing/parse.c \
 				src/parsing/parse_utils.c \
-				src/parsing/parse_map.c
+				src/parsing/parse_map.c \
+				garbage_collector/garbage.c
 OBJ		=       ${SRC:%.c=$(OBJ_D)/%.o}
 OBJ_D		=	obj
 

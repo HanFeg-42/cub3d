@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:43:30 by kali              #+#    #+#             */
-/*   Updated: 2025/07/30 01:00:16 by kali             ###   ########.fr       */
+/*   Updated: 2025/08/04 22:36:09 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,39 @@ static int	parse_color(char *nbr)
 	int	n;
 
 	if (!is_numeric(nbr))
+	{
+		printf("Error: Invalid color value '%s'\n", nbr);
 		clean_and_exit("unvalid map format");
+	}
 	n = ft_atoi(nbr);
 	return (n);
 }
 
-static int	get_rgb_color(char *color)
+static int	get_rgb_color(char *color, char **info, t_game_data *data, char *line)
 {
 	char	**split_rgb;
 	int		parsed_rgb[3];
 	int		rgb;
 
+	if (ft_count_occ(color, ',') != 2)
+	{
+		free(color);
+		ft_free_split(info);
+		free_game_data(data);
+		free(line);
+		get_next_line(data->fd, 1);
+		printf("test!\n");
+		clean_and_exit("Unvalid map format!");
+	}
 	split_rgb = ft_split(color, ',');// should not be splitted
 	free(color); 
 	if (!(split_rgb[0] && split_rgb[1] && split_rgb[2] && split_rgb[3] == NULL))
-		clean_and_exit("mochkiil");
+	{
+		ft_free_split(info);
+		free_game_data(data);
+		get_next_line(data->fd, 1);
+		clean_and_exit("Unvalid map format!");
+	}
 	parsed_rgb[0] = parse_color(split_rgb[0]);
 	parsed_rgb[1] = parse_color(split_rgb[1]);
 	parsed_rgb[2] = parse_color(split_rgb[2]);
@@ -66,9 +84,9 @@ static void	detect_identifier(char *line, t_game_data *data)
 	else if (ft_strcmp(info[0], "EA") == 0 && data->ea_path == NULL)
 		data->ea_path = trimmed_line;
 	else if (ft_strcmp(info[0], "F") == 0)
-		data->f_rgb = get_rgb_color(trimmed_line);
+		data->f_rgb = get_rgb_color(trimmed_line, info, data, line);
 	else if (ft_strcmp(info[0], "C") == 0)
-		data->c_rgb = get_rgb_color(trimmed_line);
+		data->c_rgb = get_rgb_color(trimmed_line, info, data, line);
 	else
 	{
 		free(trimmed_line);

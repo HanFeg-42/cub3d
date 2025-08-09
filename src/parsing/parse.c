@@ -6,7 +6,7 @@
 /*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:48:32 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:50:19 by kali             ###   ########.fr       */
+/*   Updated: 2025/08/09 19:19:10 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	parse_args(int ac, char **av, t_game_data *data)
 	if (ac != 2)
 	{
 		printf("Error\nUsage: ./cub3D path_to_map.cub\n");
-		return (1);
+		clean_and_exit("Invalid number of arguments");
 	}
 	open_file(av[1], data);
 	read_file(data);
