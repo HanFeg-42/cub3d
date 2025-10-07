@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:42:30 by kali             ###   ########.fr       */
+/*   Updated: 2025/10/06 20:34:33 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
+# define SCALE 50
 
 # define BUFFER_SIZE 32
+# define NX 0
+# define NY -1
+# define SX 0
+# define SY 1
+# define EX 1
+# define EY 0
+# define WX -1
+# define WY 0
 
 typedef struct s_game_data
 {
