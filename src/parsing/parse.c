@@ -18,8 +18,10 @@
 
 static void	init_game_data(t_game_data *data)
 {
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
+	ft_bzero(data, sizeof(t_game_data));
+	ft_bzero(&data->player, sizeof(t_player));
+	data->mlx = NULL;
+	data->win = NULL;
 	data->map_path = NULL;
 	data->join = NULL;
 	data->map = NULL;

@@ -17,10 +17,11 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/keysym.h>
 # include <stdbool.h>
+# include <math.h>
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
-# define SCALE 50
+# define SCALE 64
 
 # define BUFFER_SIZE 32
 # define NX 0
@@ -32,10 +33,33 @@
 # define WX -1
 # define WY 0
 
+# define SPEED 5
+
+# define _USE_MATH_DEFINES
+
+
+typedef struct	s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_img;
+
+typedef struct s_player
+{
+	int	x;
+	int	y;
+	int	angle;
+}	t_player;
+
+
 typedef struct s_game_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
+	void	*mlx;
+	void	*win;
 	char	*map_path;
 	char	*join;
 	char	**map; // 2D array of strings representing the map
@@ -46,6 +70,10 @@ typedef struct s_game_data
 	char	*ea_path;
 	int		f_rgb;
 	int		c_rgb;
+	int		width;
+	int		height;
+	t_img	img;
+	t_player	player;
 }			t_game_data;
 
 bool	parse_args(int ac, char **av, t_game_data *data);
