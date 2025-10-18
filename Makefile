@@ -3,15 +3,14 @@ CC		=	cc
 RM		=	rm -f
 CFLAGS		=	-Wall -Wextra -Werror -g3 -MMD -MP -I$(INC_D)
 MLXFLAGS	=	-lXext -lX11 -lm
-HEADER		=	cub3D.h
 LIBMLX_D	=	minilibx-linux
 LIBMLX_LINUX	=	$(LIBMLX_D)/libmlx_Linux.a
 LIBFT_D		=	libft
-INC_D		=	include
+INC_D		=	includes
 LIBFT		=	$(LIBFT_D)/libft.a
 OBJ_D		=	obj
 
-SRC		=	$(shell find src/ -name "*.c") main.c
+SRC		=	$(shell find src/ -name "*.c")
 OBJ		=	$(SRC:%.c=$(OBJ_D)/%.o)
 DEP		=	$(OBJ:.o=.d)
 
@@ -38,7 +37,8 @@ fclean: clean
 	@$(MAKE) fclean -s -C $(LIBFT_D)
 	@$(RM) $(NAME)
 
-re: fclean all
+re: fclean
+	@$(MAKE) all -s
 
 .PHONY: all bonus clean fclean re
 -include $(DEP)

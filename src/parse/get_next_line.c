@@ -6,11 +6,11 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 11:39:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/03/13 20:01:32 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/17 14:35:40 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "cub3d.h"
 
 static char	*ft_strjoin_(char *s1, char *s2)
 {
@@ -80,7 +80,7 @@ static char	*read_line(char **save, ssize_t rd)
 	return (NULL);
 }
 
-char	*get_next_line(int fd, int f)
+char	*get_next_line(int fd)
 {
 	static char	*save;
 	char		*buff;
@@ -88,12 +88,12 @@ char	*get_next_line(int fd, int f)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (f)
-	{
-		free(save);
-		save = NULL;
-		return (NULL);
-	}
+	// if (f)
+	// {
+	// 	free(save);
+	// 	save = NULL;
+	// 	return (NULL);
+	// }
 	buff = malloc((BUFFER_SIZE * sizeof(char)) + 1);
 	if (!buff)
 		return (NULL);
