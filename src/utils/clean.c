@@ -28,14 +28,18 @@ void exit_game(t_game *game, char *msg)
 		ft_putendl_fd(msg, 2);
     if (game)
     {
-    mlx_destroy_window(game->mlx, game->win);
-	//clean_up(game->map);
-	//destroy textures
-	mlx_destroy_image(game->mlx, game->img.img);
-	mlx_destroy_display(game->mlx);
-	free(game->mlx);
-    free_2d_table(game->map);
-    free(game);
+		if (game->mlx)
+		{
+			mlx_destroy_window(game->mlx, game->win);
+			//clean_up(game->map);
+			//destroy textures
+			mlx_destroy_image(game->mlx, game->img.img);
+			mlx_destroy_display(game->mlx);
+			free(game->mlx);
+		}
+
+		free_2d_table(game->map);
+		free(game);
     }
 	exit(1);
 }

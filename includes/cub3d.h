@@ -25,7 +25,8 @@
 
 # define BUFFER_SIZE 32
 
-# define SPEED 5
+# define MOVE_SPEED 1
+# define ROTATION_SPEED 2
 
 # define _USE_MATH_DEFINES
 
@@ -40,9 +41,12 @@ typedef struct	s_img
 
 typedef struct s_player
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 	int	angle;
+	int	turn_dir;
+	int	x_dir;
+	int	y_dir;
 }	t_player;
 
 typedef struct s_config
@@ -72,7 +76,7 @@ typedef struct s_game
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
-void exit_game(t_game *game, char *msg);
+void	exit_game(t_game *game, char *msg);
 void    initialize_mlx(t_game *game);
 void    get_game(t_game *game);
 t_game	*init_game(void);
@@ -81,4 +85,6 @@ void    init_player(t_game *game);
 void	move_player(char m, t_game *data);
 void	rotate_player(char r, t_game *data);
 int	key_press(int key, t_game *data);
+int	key_release(int key, t_game *data);
+int	render_map(t_game *game);
 #endif

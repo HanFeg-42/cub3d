@@ -15,13 +15,13 @@
 static int player_angle(int c)
 {
 	if (c == 'N')
-        return (270);
+                return (270);
 	else if (c == 'S')
-        return (90);
+                return (90);
 	else if (c == 'E')
-        return (0);
+                return (0);
 	else
-        return (180);
+                return (180);
 }
 
 void    init_player(t_game *game)
@@ -29,19 +29,20 @@ void    init_player(t_game *game)
     int x;
     int y;
 
+    ft_bzero(&game->player, sizeof(t_player));
     y = 0;
     while (game->map[y])
     {
         x = 0;
         while (game->map[y][x])
         {
-			if (ft_strchr("NWSE", game->map[y][x]))
-			{
-				game->player.x = x * SCALE + SCALE / 2;
-				game->player.y = y * SCALE + SCALE / 2;
-				game->player.angle = player_angle(game->map[y][x]);
-			}
-            x++;
+                if (ft_strchr("NWSE", game->map[y][x]))
+                {
+                        game->player.x = x * SCALE + SCALE / 2;
+                        game->player.y = y * SCALE + SCALE / 2;
+                        game->player.angle = player_angle(game->map[y][x]);
+                }
+                x++;
         }
         y++;
     }

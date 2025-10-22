@@ -15,13 +15,13 @@
 void	move_player(char m, t_game *data)
 {
 	if (m == 'U')
-		data->player.y -= SPEED;
+		data->player.y -= MOVE_SPEED;
 	if (m == 'D')
-		data->player.y += SPEED;
+		data->player.y += MOVE_SPEED;
 	if (m == 'L')
-		data->player.x -= SPEED;
+		data->player.x -= MOVE_SPEED;
 	if (m == 'R')
-		data->player.x += SPEED;
+		data->player.x += MOVE_SPEED;
 }
 
 void	rotate_player(char r, t_game *data)
@@ -33,21 +33,78 @@ void	rotate_player(char r, t_game *data)
 }
 
 
+// int	key_press(int key, t_game *data)
+// {
+// 	if (key == XK_w)
+// 		move_player('U', data);
+// 	else if (key == XK_s)
+// 		move_player('D', data);// update only player.dir
+// 	else if (key == XK_d)
+// 		move_player('R', data);
+// 	else if (key == XK_a)
+// 		move_player('L', data);
+// 	else if (key == XK_Left)
+// 		rotate_player('L', data);
+// 	else if (key == XK_Right)
+// 		rotate_player('R', data);
+// 	else if (key == XK_Escape)
+// 		mlx_loop_end(data->mlx);
+// 	return (0);
+// }
+
 int	key_press(int key, t_game *data)
 {
 	if (key == XK_w)
-		move_player('U', data);
+		data->player.y_dir = 1;// -1
 	else if (key == XK_s)
-		move_player('D', data);
+		data->player.y_dir = -1;
 	else if (key == XK_d)
-		move_player('R', data);
+		data->player.x_dir = 1;
 	else if (key == XK_a)
-		move_player('L', data);
+		data->player.x_dir = -1;
 	else if (key == XK_Left)
-		rotate_player('L', data);
+		data->player.turn_dir = -1;
 	else if (key == XK_Right)
-		rotate_player('R', data);
+		data->player.turn_dir = 1;
 	else if (key == XK_Escape)
 		mlx_loop_end(data->mlx);
 	return (0);
 }
+
+int	key_release(int key, t_game *data)
+{
+	if (key == XK_w)
+		data->player.y_dir = 0;
+	else if (key == XK_s)
+		data->player.y_dir = 0;
+	else if (key ==XK_d)
+		data->player.x_dir = 0;
+	else if (key == XK_a)
+		data->player.x_dir = 0;
+	else if (key == XK_Left)
+		data->player.turn_dir = 0;
+	else if (key == XK_Right)
+		data->player.turn_dir = 0;
+	else if (key == XK_Escape)
+		mlx_loop_end(data->mlx);
+	return (0);
+}
+
+// int	key_release(int key, t_game *data)
+// {
+// 	if (key == XK_w)
+// 		move_player('U', data);
+// 	else if (key == XK_s)
+// 		move_player('D', data);
+// 	else if (key == XK_d)
+// 		move_player('R', data);
+// 	else if (key == XK_a)
+// 		move_player('L', data);
+// 	else if (key == XK_Left)
+// 		rotate_player('L', data);
+// 	else if (key == XK_Right)
+// 		rotate_player('R', data);
+// 	else if (key == XK_Escape)
+// 		mlx_loop_end(data->mlx);
+// 	return (0);
+// }
