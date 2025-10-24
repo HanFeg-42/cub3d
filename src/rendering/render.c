@@ -6,7 +6,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_disk(t_img *img, int xc, int yc, int r, int color)
+void	draw_disk(t_img *img, double xc, double yc, double r, int color)
 {
 	for (int y = yc - r; y <= yc + r; y++)
 		for (int x = xc - r; x <= xc + r; x++)
@@ -19,14 +19,14 @@ double rad(double deg)
 	return (deg * M_PI / 180);
 }
 
-void	draw_line(t_img *img, double x, double y, int deg, int color)
+void	draw_line(t_img *img, double x, double y, double deg, int color)
 {
 	double dx = cos(rad(deg));
 	double dy = sin(rad(deg));
 	double line_x = x;
 	double line_y = y;
 
-	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y)) <= 30)
+	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y)) <= 50)
 	{
 		line_x += dx;
 		line_y += dy;
@@ -34,7 +34,7 @@ void	draw_line(t_img *img, double x, double y, int deg, int color)
 	}
 }
 
-void	draw_square(t_img *img, int x, int y, int color)
+void	draw_square(t_img *img, double x, double y, int color)
 {
 	int i;
 	int j;
@@ -71,6 +71,23 @@ void    update_player(t_game *game)
     }
 }
 
+void	draw_rays(t_game *game)
+{
+	double	angle;
+	int		i;
+
+	angle = game->player.angle - FOV / 2;
+	// printf("ray angle = %f\n", angle);
+	i = 0;
+	while (i < NUM_RAYS)
+	{
+		draw_line(&game->img, game->player.x, game->player.y, angle, 0xFF0000);
+		angle += (double)FOV / NUM_RAYS;
+		i++;
+		// printf("ray number: %d & angle = %f\n", i, angle);
+	}
+}
+
 int	render_map(t_game *game)
 {
     update_player(game);
@@ -84,7 +101,8 @@ int	render_map(t_game *game)
 				draw_square(&game->img, j * SCALE, i * SCALE, 0xFFFFFF);
 		}
 	draw_disk(&game->img, game->player.x, game->player.y, 5, 0xFF0000);
-	draw_line(&game->img, game->player.x, game->player.y, game->player.angle, 0xFF0000);
+	draw_rays(game);
+	draw_line(&game->img, game->player.x, game->player.y, game->player.angle, 0xFFFF00);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
 }
