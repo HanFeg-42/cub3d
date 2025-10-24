@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/24 09:29:13 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/24 13:17:04 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define BUFFER_SIZE 32
 
 # define MOVE_SPEED 1
-# define ROTATION_SPEED 1
+# define ROTATION_SPEED 0.25
 
 # define _USE_MATH_DEFINES
 

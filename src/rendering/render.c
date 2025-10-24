@@ -52,6 +52,15 @@ void	draw_square(t_img *img, double x, double y, int color)
 	}
 }
 
+void	normalize_angle(t_game *game)
+{
+    game->player.angle += game->player.turn_dir * ROTATION_SPEED;
+	if (game->player.angle < 0)
+		game->player.angle += 360;
+	if (game->player.angle > 360)
+		game->player.angle -=360;
+}
+
 void    update_player(t_game *game)
 {
     double x;
@@ -59,7 +68,7 @@ void    update_player(t_game *game)
     int x_step;
     int y_step;
 
-    game->player.angle += game->player.turn_dir * ROTATION_SPEED;
+	normalize_angle(game);
     x_step = game->player.x_dir * MOVE_SPEED;
     y_step = game->player.y_dir * MOVE_SPEED;
     x = game->player.x + cos(rad(game->player.angle)) * y_step + x_step;// next player position
@@ -77,14 +86,12 @@ void	draw_rays(t_game *game)
 	int		i;
 
 	angle = game->player.angle - FOV / 2;
-	// printf("ray angle = %f\n", angle);
 	i = 0;
 	while (i < NUM_RAYS)
 	{
 		draw_line(&game->img, game->player.x, game->player.y, angle, 0xFF0000);
 		angle += (double)FOV / NUM_RAYS;
 		i++;
-		// printf("ray number: %d & angle = %f\n", i, angle);
 	}
 }
 
