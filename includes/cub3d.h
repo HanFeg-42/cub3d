@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/24 13:17:04 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/27 20:19:10 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define ROTATION_SPEED 0.25
 
 # define _USE_MATH_DEFINES
+# define MAX(a, b) ((a) > (b) ? (a) : (b))
+
 
 typedef struct	s_img
 {
@@ -72,8 +74,20 @@ typedef struct s_game
 	int			height;
 	t_img		img;
 	t_player	player;
-	t_config		config;
+	t_config	config;
 }			t_game;
+
+typedef struct s_ray
+{
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	xintercept;
+	double	yintercept;
+	double	x_step;
+	double	y_step;
+	double	distance;
+}		t_ray;
+
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
