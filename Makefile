@@ -42,4 +42,4 @@ re: fclean
 
 .PHONY: all bonus clean fclean re
 -include $(DEP)
-.SECONDARY:
+#.SECONDARY:

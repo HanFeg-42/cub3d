@@ -9,7 +9,7 @@
 /*   Updated: 2025/10/24 08:54:12 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+ 
 #include "cub3d.h"
 // TODO: fix the right and left movement
 
