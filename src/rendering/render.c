@@ -55,30 +55,65 @@ void	draw_square(t_img *img, double x, double y, int color)
 void	init_angle(t_game *game)
 {
     game->player.angle += game->player.turn_dir * ROTATION_SPEED;
-	if (game->player.angle < 0)
+	while (game->player.angle < 0)
 		game->player.angle += 360;
-	if (game->player.angle > 360)
+	while (game->player.angle >= 360)
 		game->player.angle -=360;
+}
+
+void check_move_valid(t_game *game, double new_x, double new_y)
+{
+    int map_x = (int)(new_x / SCALE);
+    int map_y = (int)(new_y / SCALE);
+    if (game->map[map_y][map_x] != '1')
+    {
+        game->player.x = new_x;
+        game->player.y = new_y;
+    }
 }
 
 void    update_player(t_game *game)
 {
-    double x;
-    double y;
-    int x_step;
-    int y_step;
+    double new_x;
+    double new_y;
+    double y_step;
 
-	init_angle(game);
-    x_step = game->player.x_dir * MOVE_SPEED;
+    init_angle(game);
     y_step = game->player.y_dir * MOVE_SPEED;
-    x = game->player.x + cos(rad(game->player.angle)) * y_step + x_step;// next player position
-    y = game->player.y + sin(rad(game->player.angle)) * y_step;//
-    if (game->map[(int)y / SCALE][(int)x / SCALE] != '1')
+
+    if (game->player.y_dir !=  0)
     {
-        game->player.x = x;
-        game->player.y = y;
+        new_x = game->player.x + y_step * cos(rad(game->player.angle));
+        new_y = game->player.y + y_step * sin(rad(game->player.angle));
     }
+    else if (game->player.x_dir != 0)
+    {
+        new_x = game->player.x + cos(rad(game->player.angle +
+            game->player.x_dir * 90)) * MOVE_SPEED;
+        new_y = game->player.y + sin(rad(game->player.angle +
+            game->player.x_dir * 90)) * MOVE_SPEED;
+    }
+    else
+        return;
+    check_move_valid(game, new_x, new_y);
 }
+// {
+//     double x;
+//     double y;
+//     int x_step;
+//     int y_step;
+
+// 	init_angle(game);
+//     x_step = game->player.x_dir * MOVE_SPEED;
+//     y_step = game->player.y_dir * MOVE_SPEED;
+//     x = game->player.x + cos(rad(game->player.angle)) * y_step + x_step;// next player position
+//     y = game->player.y + sin(rad(game->player.angle)) * y_step;//
+//     if (game->map[(int)y / SCALE][(int)x / SCALE] != '1')
+//     {
+//         game->player.x = x;
+//         game->player.y = y;
+//     }
+// }
 
 void	draw_rays(t_game *game)
 {

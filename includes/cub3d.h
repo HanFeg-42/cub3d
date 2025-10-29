@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/29 11:09:14 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:33:09 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # define WINDOW_HEIGHT 600
 # define SCALE 64
 # define FOV 60
-# define NUM_RAYS 32
+# define NUM_RAYS 320
 # define BUFFER_SIZE 32
 
-# define MOVE_SPEED 1
+# define MOVE_SPEED 0.5
 # define ROTATION_SPEED 0.25
 
 # define _USE_MATH_DEFINES
@@ -48,8 +48,8 @@ typedef struct s_player
 	double	y;
 	double	angle;
 	int	turn_dir;
-	int	x_dir;
-	int	y_dir;
+	double	x_dir;
+	double	y_dir;
 }	t_player;
 
 typedef struct s_config

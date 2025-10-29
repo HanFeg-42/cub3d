@@ -6,31 +6,11 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/10/29 09:06:48 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/29 14:23:03 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	move_player(char m, t_game *data)
-{
-	if (m == 'U')
-		data->player.y -= MOVE_SPEED;
-	if (m == 'D')
-		data->player.y += MOVE_SPEED;
-	if (m == 'L')
-		data->player.x -= MOVE_SPEED;
-	if (m == 'R')
-		data->player.x += MOVE_SPEED;
-}
-
-void	rotate_player(char r, t_game *data)
-{
-	if (r == 'L')
-		data->player.angle -= 1;
-	if (r == 'R')
-		data->player.angle += 1;
-}
 
 int	key_press(int key, t_game *data)
 {
