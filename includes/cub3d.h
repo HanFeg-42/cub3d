@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/27 20:19:10 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/29 11:09:14 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,8 @@ void	rotate_player(char r, t_game *data);
 int	key_press(int key, t_game *data);
 int	key_release(int key, t_game *data);
 int	render_map(t_game *game);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+double rad(double deg);
+void	draw_line(t_img *img, double x, double y, double deg, int color);
+void	ray_cast(t_game *game);
 #endif
