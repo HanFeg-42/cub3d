@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/30 20:51:56 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/10/31 20:38:45 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # define _USE_MATH_DEFINES
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define HORZ 1
+# define VERT 0
 
 
 typedef struct	s_img
@@ -89,7 +91,7 @@ typedef struct s_ray
 	double	distance;
 	int		is_horz;
 	int		is_facing_up;
-	int		is_facing_right;
+	int		is_facing_left;
 }		t_ray;
 
 
@@ -111,11 +113,12 @@ void	ray_cast(t_game *game);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y);
-void    init_ray(t_ray *ray, double angle);
+void    init_ray(t_ray *ray, double angle, int is_horz);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 double rad(double deg);
 void	draw_rays(t_game *game);
 void	draw_square(t_img *img, double x, double y, int color);
 void	draw_line(t_img *img, double x, double y, double deg, int color);
 void	draw_disk(t_img *img, double xc, double yc, double r, int color);
+
 #endif

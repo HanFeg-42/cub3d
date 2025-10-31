@@ -27,13 +27,11 @@ t_ray   horz_wall_intersection(t_game *game, double angle)
     double	next_horz_x;
 	double	next_horz_y;
 
-    init_ray(&ray, angle);
+    init_ray(&ray, angle, HORZ);
     init_first_horz_intercept(game, &ray, angle);
     init_horz_step(&ray, angle);
     next_horz_x = ray.xintercept;
     next_horz_y = ray.yintercept;
-    if (sin(rad(angle)) < 0)// ray facing up
-        next_horz_y--;
     init_wall_hit_intersection(game, &ray, next_horz_x, next_horz_y);
     return (ray);
 }
@@ -65,13 +63,11 @@ t_ray   vert_wall_intersection(t_game *game, double angle)
     double	next_vert_x;
 	double	next_vert_y;
 
-    init_ray(&ray, angle);
+    init_ray(&ray, angle, VERT);
     init_first_vert_intercept(game, &ray, angle);
     init_vert_step(&ray, angle);
     next_vert_x = ray.xintercept;
     next_vert_y = ray.yintercept;
-    if (cos(rad(angle)) < 0)// ray facing up
-        next_vert_x--;
     init_wall_hit_intersection(game, &ray, next_vert_x, next_vert_y);
     return (ray);
 }
