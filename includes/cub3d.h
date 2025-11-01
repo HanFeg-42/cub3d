@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/10/31 20:38:45 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/01 17:34:26 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@
 # include <stdbool.h>
 # include <math.h>
 
-# define WINDOW_WIDTH 320
+# define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 # define SCALE 64
 # define FOV 60
 # define NUM_RAYS 320
 # define BUFFER_SIZE 32
 
-# define MOVE_SPEED 0.5
-# define ROTATION_SPEED 0.25
+# define MOVE_SPEED 1
+# define ROTATION_SPEED 0.5
 
 # define _USE_MATH_DEFINES
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define HORZ 1
 # define VERT 0
-
+# define MINIMAP_SCALE_FACTOR 0.2
+# define WALL_STRIP_WIDTH 1
 
 typedef struct	s_img
 {
@@ -67,18 +68,6 @@ typedef struct s_config
 	char	*join;
 }       t_config;
 
-typedef struct s_game
-{
-	void		*mlx;
-	void		*win;
-	char		**map;
-	int			width;
-	int			height;
-	t_img		img;
-	t_player	player;
-	t_config	config;
-}			t_game;
-
 typedef struct s_ray
 {
 	double	angle;
@@ -94,6 +83,18 @@ typedef struct s_ray
 	int		is_facing_left;
 }		t_ray;
 
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	char		**map;
+	int			width;
+	int			height;
+	t_img		img;
+	t_player	player;
+	t_config	config;
+	t_ray		ray[320];
+}			t_game;
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
@@ -105,7 +106,8 @@ void    init_config(t_game *game);
 void    init_player(t_game *game);
 int		key_press(int key, t_game *data);
 int		key_release(int key, t_game *data);
-int		render_map(t_game *game);
+int		render_game(t_game *game);
+void	render_minimap(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 double	rad(double deg);
 void	draw_line(t_img *img, double x, double y, double deg, int color);
@@ -120,5 +122,6 @@ void	draw_rays(t_game *game);
 void	draw_square(t_img *img, double x, double y, int color);
 void	draw_line(t_img *img, double x, double y, double deg, int color);
 void	draw_disk(t_img *img, double xc, double yc, double r, int color);
+void	draw_rect(t_img *img, double x, double y, double len);
 
 #endif

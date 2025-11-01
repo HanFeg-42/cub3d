@@ -74,7 +74,7 @@ t_ray   vert_wall_intersection(t_game *game, double angle)
 
 void	ray_cast(t_game *game)
 {
-	t_ray ray[320];
+	// t_ray ray[320];
 	t_ray horz_ray;
 	t_ray vert_ray;
 	double	angle;
@@ -88,10 +88,16 @@ void	ray_cast(t_game *game)
 		angle = normalize_angle(angle);
         horz_ray = horz_wall_intersection(game, angle);
         vert_ray = vert_wall_intersection(game, angle);
-        ray[i] = vert_ray;
+        game->ray[i] = vert_ray;
         if (horz_ray.distance < vert_ray.distance)
-            ray[i] = horz_ray;
-        line(&game->img, game->player.x, game->player.y, ray[i].wall_hit_x, ray[i].wall_hit_y);
+            game->ray[i] = horz_ray;
+        line(
+            &game->img,
+            game->player.x * MINIMAP_SCALE_FACTOR,
+            game->player.y * MINIMAP_SCALE_FACTOR,
+            game->ray[i].wall_hit_x * MINIMAP_SCALE_FACTOR,
+            game->ray[i].wall_hit_y * MINIMAP_SCALE_FACTOR
+        );
         angle += (double)FOV / NUM_RAYS;
 		i++;
 	}
