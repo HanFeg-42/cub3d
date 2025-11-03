@@ -1,22 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/03 15:57:42 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/11/03 15:57:43 by hfegrach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-void	line(t_img *img, double x1, double y1, double x2, double y2)
-{
-	double	dx = x2 - x1;
-	double	dy = y2 - y1;
-	double	steps = MAX(fabs(dx), fabs(dy));
-	double	x_inc = dx / steps;
-	double	y_inc = dy / steps;
-	int		i = 0;
-
-	while (i < steps)
-	{
-		my_mlx_pixel_put(img, (int)round(x1), (int)round(y1), 0xFF0000);
-		x1 += x_inc;
-		y1 += y_inc;
-		i++;
-	}
-}
 
 double	normalize_angle(double angle)
 {
@@ -35,49 +29,36 @@ double  get_ray_distance(t_player player, t_ray ray)
     if (ray.wall_hit_x && ray.wall_hit_y)
         return (sqrt((ray.wall_hit_x - player.x) * (ray.wall_hit_x - player.x)
             + (ray.wall_hit_y - player.y) * (ray.wall_hit_y - player.y)));
-    return (10000); // m sorry
+    return (INT_MAX); // m sorry
 }
-
-// int has_wall_at(t_game *game, t_ray *ray, double next_x, double next_y)
-// {
-//     int map_x;
-//     int map_y;
-
-//     map_x = (int)(next_x / SCALE);
-//     map_y = (int)(next_y / SCALE);
-
-//     if (ray->is_horz && ray->is_facing_up)
-//     {
-//         map_y = (int)(next_y-- / SCALE);
-//     }
-//     else if (!ray->is_horz && ray->is_facing_left)
-//     {
-//         map_x = (int)(next_x-- / SCALE);
-//     }
-//     return (game->map[map_y][map_x] == 1);
-// }
 
 int has_wall_at(t_game *game, t_ray *ray, double next_x, double next_y)
 {
     int map_x;
     int map_y;
 
-    // adjust the checking position depending on ray direction
     if (ray->is_horz && ray->is_facing_up)
         map_y = (int)((next_y - 1) / SCALE);
     else
         map_y = (int)(next_y / SCALE);
-
     if (!ray->is_horz && ray->is_facing_left)
         map_x = (int)((next_x - 1) / SCALE);
     else
         map_x = (int)(next_x / SCALE);
-
-    // protect against out-of-bounds access
     if (map_x < 0 || map_x >= game->width || map_y < 0 || map_y >= game->height)
-        return (1); // treat out of bounds as wall
-
+        return (1);
     return (game->map[map_y][map_x] == '1');
+}
+
+void    init_ray(t_ray *ray, double angle, int is_horz)
+{
+    ft_bzero(ray, sizeof(t_ray));
+    ray->angle = angle;
+    ray->is_horz = is_horz;
+    if (angle > 180)
+    ray->is_facing_up = 1;
+    if (angle > 90 && angle < 270)
+    ray->is_facing_left = 1;
 }
 
 void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y)
@@ -85,7 +66,6 @@ void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, doub
     while (next_x / SCALE  >= 0 && next_x / SCALE < game->width
         && next_y / SCALE >= 0 && next_y / SCALE  < game->height)
     {
-        // if (game->map[(int)(next_y / SCALE)][(int)(next_x / SCALE)] == '1')
         if (has_wall_at(game, ray, next_x, next_y))
         {
             ray->wall_hit_x = next_x;
@@ -99,15 +79,4 @@ void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, doub
         }
     }
     ray->distance = get_ray_distance(game->player, *ray);
-}
-
-void    init_ray(t_ray *ray, double angle, int is_horz)
-{
-    ft_bzero(ray, sizeof(t_ray));
-    ray->angle = angle;
-    ray->is_horz = is_horz;
-    if (angle > 180)
-        ray->is_facing_up = 1;
-    if (angle > 90 && angle < 270)
-        ray->is_facing_left = 1;
 }

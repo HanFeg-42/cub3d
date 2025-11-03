@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:23 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/10/17 20:44:35 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/03 14:14:02 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static int player_angle(int c)
 {
 	if (c == 'N')
-                return (270);
+        return (270);
 	else if (c == 'S')
-                return (90);
+        return (90);
 	else if (c == 'E')
-                return (0);
+        return (0);
 	else
-                return (180);
+        return (180);
 }
 
 void    init_player(t_game *game)

@@ -1,19 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shapes.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/11/03 15:56:54 by hfegrach         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-
-void	draw_rays(t_game *game)
-{
-	double	angle;
-	int		i;
-
-	angle = game->player.angle - FOV / 2;
-	i = 0;
-	while (i < NUM_RAYS)
-	{
-		draw_line(&game->img, game->player.x, game->player.y, angle, 0xFF0000);
-		angle += (double)FOV / NUM_RAYS;
-		i++;
-	}
-}
 
 void	draw_square(t_img *img, double x, double y, int color)
 {
@@ -33,7 +30,6 @@ void	draw_square(t_img *img, double x, double y, int color)
 	}
 }
 
-
 void	draw_rect(t_img *img, double x, double y, double len)
 {
 	int i;
@@ -52,10 +48,10 @@ void	draw_rect(t_img *img, double x, double y, double len)
 	}
 }
 
-void	draw_line(t_img *img, double x, double y, double deg, int color)
+void	draw_line(t_img *img, double x, double y, double deg)
 {
-	double dx = cos(rad(deg));
-	double dy = sin(rad(deg));
+	double dx = cos(RAD(deg));
+	double dy = sin(RAD(deg));
 	double line_x = x;
 	double line_y = y;
 
@@ -63,14 +59,43 @@ void	draw_line(t_img *img, double x, double y, double deg, int color)
 	{
 		line_x += dx;
 		line_y += dy;
-		my_mlx_pixel_put(img, line_x, line_y, color);
+		my_mlx_pixel_put(img, line_x, line_y, RED);
 	}
 }
 
-void	draw_disk(t_img *img, double xc, double yc, double r, int color)
+void	draw_disk(t_img *img, double xc, double yc, double r)
 {
-	for (int y = yc - r; y <= yc + r; y++)
-		for (int x = xc - r; x <= xc + r; x++)
-			if ((x - xc)*(x - xc) + (y - yc)*(y - yc) <= r*r)
-				my_mlx_pixel_put(img, x, y, color);
+	int	y;
+	int	x;
+
+	y = yc - r;
+	while (y <= yc + r)
+	{
+		x = xc - r;
+		while (x <= xc + r)
+		{
+			if ((x - xc) * (x - xc) + (y - yc) * (y - yc) <= r * r)
+				my_mlx_pixel_put(img, x, y, RED);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	line(t_img *img, double x1, double y1, double x2, double y2)
+{
+	double	dx = x2 - x1;
+	double	dy = y2 - y1;
+	double	steps = max(fabs(dx), fabs(dy));
+	double	x_inc = dx / steps;
+	double	y_inc = dy / steps;
+	int		i = 0;
+
+	while (i < steps)
+	{
+		my_mlx_pixel_put(img, (int)round(x1), (int)round(y1), 0xFF0000);
+		x1 += x_inc;
+		y1 += y_inc;
+		i++;
+	}
 }

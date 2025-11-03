@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/01 17:34:26 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/03 15:57:01 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,21 @@
 # define WINDOW_HEIGHT 600
 # define SCALE 64
 # define FOV 60
-# define NUM_RAYS 320
+# define NUM_RAYS WINDOW_WIDTH
 # define BUFFER_SIZE 32
+
+# define RED     0xFF0000
+# define GREEN   0x00FF00
+# define BLUE    0x0000FF
+# define WHITE   0xFFFFFF
+# define BLACK   0x000000
 
 # define MOVE_SPEED 1
 # define ROTATION_SPEED 0.5
 
 # define _USE_MATH_DEFINES
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
+# define RAD(x) ((x) * M_PI / 180)
 # define HORZ 1
 # define VERT 0
 # define MINIMAP_SCALE_FACTOR 0.2
@@ -93,7 +100,7 @@ typedef struct s_game
 	t_img		img;
 	t_player	player;
 	t_config	config;
-	t_ray		ray[320];
+	t_ray		ray[NUM_RAYS];
 }			t_game;
 
 char	*get_next_line(int fd);
@@ -109,19 +116,20 @@ int		key_release(int key, t_game *data);
 int		render_game(t_game *game);
 void	render_minimap(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-double	rad(double deg);
-void	draw_line(t_img *img, double x, double y, double deg, int color);
 void	ray_cast(t_game *game);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y);
 void    init_ray(t_ray *ray, double angle, int is_horz);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-double rad(double deg);
-void	draw_rays(t_game *game);
 void	draw_square(t_img *img, double x, double y, int color);
-void	draw_line(t_img *img, double x, double y, double deg, int color);
-void	draw_disk(t_img *img, double xc, double yc, double r, int color);
+void	draw_line(t_img *img, double x, double y, double deg);
+void	draw_disk(t_img *img, double xc, double yc, double r);
 void	draw_rect(t_img *img, double x, double y, double len);
+double	max(double a, double b);
+void	update_angle(t_game *game);
+void    update_player(t_game *game);
+t_ray   vert_wall_intersection(t_game *game, double angle);
+t_ray   horz_wall_intersection(t_game *game, double angle);
+void	line(t_img *img, double x1, double y1, double x2, double y2);
 
 #endif
