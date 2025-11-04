@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/03 15:57:01 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/03 16:50:09 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@
 # define BLUE    0x0000FF
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
+
+#define CEILING_COLOR  0x87CEEB  // light sky blue
+#define FLOOR_COLOR    0x3E2C1C  // dark brown
+#define CEILING_COLOR  0xC0E8FF  // pale blue
+#define FLOOR_COLOR    0x705438  // medium brown
+#define CEILING_COLOR  0xA9A9A9  // gray ceiling
+#define FLOOR_COLOR    0x444444  // dark gray floor
 
 # define MOVE_SPEED 1
 # define ROTATION_SPEED 0.5
