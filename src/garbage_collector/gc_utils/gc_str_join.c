@@ -6,14 +6,14 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:38:57 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/07 16:14:16 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:47:54 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
 
-char	*ft_str_join(char *s1, char *s2)
+char	*gc_str_join(char *s1, char *s2)
 {
 	char	*res;
 	size_t	i;
@@ -34,6 +34,6 @@ char	*ft_str_join(char *s1, char *s2)
 	while (s2 && s2[j])
 		res[i++] = s2[j++];
 	res[i] = '\0';
-	free(s1);
+	free_one(s1);
 	return (res);
 }

@@ -20,7 +20,8 @@ static t_gc	*gc_new(void *content)
 	if (!new)
 	{
 		perror("malloc");
-		clean_and_exit(1);
+		free_all();
+		exit(EXIT_FAILURE);
 	}
 	new->addr = content;
 	new->next = NULL;
@@ -63,7 +64,8 @@ void	*gc_alloc(size_t size)
 	if (!ret)
 	{
 		perror("malloc");
-		clean_and_exit(1);
+		free_all();
+		exit(EXIT_FAILURE);
 	}
 	gc_addback(gc_new(ret));
 	return (ret);

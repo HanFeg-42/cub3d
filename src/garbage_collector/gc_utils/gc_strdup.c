@@ -6,14 +6,14 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 00:38:51 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/07 16:14:20 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:48:00 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
 
-char	*ft_strdup(const char *str)
+char	*gc_strdup(const char *str)
 {
 	char	*ret;
 	int		i;

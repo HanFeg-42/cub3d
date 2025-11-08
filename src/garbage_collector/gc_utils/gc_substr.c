@@ -6,14 +6,14 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:19:50 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/07 16:14:25 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:48:10 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*gc_substr(char const *s, unsigned int start, size_t len)
 {
 	char			*ret;
 	unsigned int	i;

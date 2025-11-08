@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_free_all.c                                      :+:      :+:    :+:   */
+/*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/13 20:18:52 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/08 13:10:34 by hfegrach         ###   ########.fr       */
+/*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/11/08 20:32:55 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gc.h"
+#include "parse.h"
 
-void	free_all(void)
+void    parse_color(t_game *game, t_parse *parser)
 {
-	t_gc	**head;
-	t_gc	*curr;
-	t_gc	*next;
-
-	head = get_gc_head();
-	if (!head || !(*head))
-		return ;
-	curr = *head;
-	while (curr)
-	{
-		next = curr->next;
-		if (curr->addr)
-			free(curr->addr);
-		free(curr);
-		curr = next;
-	}
-	*head = NULL;
+    return ;
 }

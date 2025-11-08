@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:20 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/10/17 20:10:21 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 18:46:13 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    get_map(t_game *game, int ac, char **av)
     int     fd;
 
     if (ac != 2)
-        exit_game(game, "Error\nUsage: ./cub3D path_to_map.cub");
+        exit_game(game, "Error\nUsage: ./cub3D path_to_map.cub", EXIT_FAILURE);
     fd = open(av[1], O_RDONLY);
 
     line = get_next_line(fd);
@@ -27,9 +27,9 @@ void    get_map(t_game *game, int ac, char **av)
     while (line)
     {
         join = ft_str_join(join, line);
-        free(line);
+        free_one(line);
         line = get_next_line(fd);
     }
     game->map = ft_split(join, '\n');
-    free(join);
+    // free(join);
 }

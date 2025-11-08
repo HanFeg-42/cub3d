@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/10/17 20:10:29 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 18:45:35 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_game	*init_game(void)
 
 	game = malloc(sizeof(t_game));
 	if (!game)
-		exit_game(NULL, "malloc failded!");
+		exit_game(NULL, "malloc failded!", EXIT_FAILURE);
 	ft_bzero(game, sizeof(t_game));
 	return (game);
 }

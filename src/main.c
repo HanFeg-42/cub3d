@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:13 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/03 13:54:58 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:07:56 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int main(int ac, char **av)
 	t_game	*game;
 
 	game = init_game();
-	get_map(game, ac, av);
+	parse_input(game, ac, av);
+	// get_map(game, ac, av);
 	get_game(game);
 	mlx_hook(game->win, 17, 0, close_window, game);
 	mlx_hook(game->win, 2, (1L << 0), key_press, game);
 	mlx_hook(game->win, 3, (1L << 1), key_release, game);
 	mlx_loop_hook(game->mlx, render_game, game);
 	mlx_loop(game->mlx);
-	exit_game(game, NULL);
+	exit_game(game, NULL, EXIT_SUCCESS);
 	return (0);
 }

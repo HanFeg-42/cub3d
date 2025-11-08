@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:22:18 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/07 16:14:14 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:47:43 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**ft_slices(char **ret, char const *s, char c, int a)
 	return (ret);
 }
 
-char	**ft_split(char const *s, char c)
+char	**gc_split(char const *s, char c)
 {
 	char	**ret;
 	int		a;

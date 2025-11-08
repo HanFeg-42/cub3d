@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/07 16:22:39 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 13:09:06 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <X11/keysym.h>
 # include <stdbool.h>
 # include <math.h>
+# include "gc.h"
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
@@ -109,7 +110,7 @@ typedef struct s_game
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
-void	exit_game(t_game *game, char *msg);
+void	exit_game(t_game *game, char *msg, int status);
 void    initialize_mlx(t_game *game);
 void    get_game(t_game *game);
 t_game	*init_game(void);
@@ -135,5 +136,6 @@ void    update_player(t_game *game);
 t_ray   vert_wall_intersection(t_game *game, double angle);
 t_ray   horz_wall_intersection(t_game *game, double angle);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
+void    parse_input(t_game *game, int ac, char **av);
 
 #endif

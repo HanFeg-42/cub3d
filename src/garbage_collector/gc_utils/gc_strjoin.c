@@ -6,23 +6,23 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:19:47 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/07 16:14:22 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 20:10:25 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gc_strjoin(char const *s1, char const *s2)
 {
 	char			*join;
 	unsigned int	i;
 	unsigned int	j;
 
 	if (!s1 && s2)
-		return (ft_strdup(s2));
+		return (gc_strdup(s2));
 	else if (!s2 && s1)
-		return (ft_strdup(s1));
+		return (gc_strdup(s1));
 	else if (!s1 && !s2)
 		return (NULL);
 	join = (char *)gc_alloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));

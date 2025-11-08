@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/07 16:22:49 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/08 18:45:06 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_2d_table(char **arr)
 	free(arr);
 }
 
-void exit_game(t_game *game, char *msg)
+void exit_game(t_game *game, char *msg, int status)
 {
 	if (msg)
 		ft_putendl_fd(msg, 2);
@@ -31,15 +31,13 @@ void exit_game(t_game *game, char *msg)
 		if (game->mlx)
 		{
 			mlx_destroy_window(game->mlx, game->win);
-			//clean_up(game->map);
 			//destroy textures
 			mlx_destroy_image(game->mlx, game->img.img);
 			mlx_destroy_display(game->mlx);
 			free(game->mlx);
 		}
-
-		free_2d_table(game->map);
 		free(game);
     }
-	exit(1);
+	free_all();
+	exit(status);
 }
