@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:22:18 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/08 13:47:43 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/09 12:49:37 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static char	**ft_freeme(char **s, int index)
 {
 	while (index >= 0)
 	{
-		free(s[index]);
+		free_one(s[index]);
 		index--;
 	}
-	free(s);
+	free_one(s);
 	return (NULL);
 }
 
@@ -64,7 +64,7 @@ static char	**ft_slices(char **ret, char const *s, char c, int a)
 			len = 0;
 			while (s[i + len] && s[i + len] != c)
 				len++;
-			ret[a] = ft_substr(s, i, len);
+			ret[a] = gc_substr(s, i, len);
 			if (!ret[a])
 				return (ft_freeme(ret, a));
 			a++;

@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 11:39:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/07 16:13:53 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/09 12:42:43 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static void	store_line(char **temp, char **line, char *newline_pos)
 {
 	if (newline_pos)
 	{
-		*line = ft_substr(*temp, 0, newline_pos - *temp + 1);
-		*temp = ft_strdup(newline_pos + 1);
+		*line = gc_substr(*temp, 0, newline_pos - *temp + 1);
+		*temp = gc_strdup(newline_pos + 1);
 		if (!**temp)
 			*temp = NULL;
 	}
 	else
 	{
-		*line = ft_strdup(*temp);
+		*line = gc_strdup(*temp);
 		*temp = NULL;
 	}
 }
