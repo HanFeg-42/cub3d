@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 12:58:42 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:17:50 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,10 @@ int get_parsed_rgb(t_game *game, char *color)
 
 void    parse_color(t_game *game, char *color)
 {
-    if (color[0] == 'C')
+    if (color[0] == 'C' && game->config.c_rgb == -1)
         game->config.c_rgb = get_parsed_rgb(game, color + 1);
-    else
+    else if (color[0] == 'F' && game->config.f_rgb == -1)
         game->config.f_rgb = get_parsed_rgb(game, color + 1);
+	else
+		exit_game(game, UNVALID_COLOR, EXIT_FAILURE);
 }

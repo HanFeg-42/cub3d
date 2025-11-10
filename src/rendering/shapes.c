@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 10:12:19 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:19:40 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_line(t_img *img, double x, double y, t_ray *ray)
 	{
 		line_x += dx;
 		line_y += dy;
-		my_mlx_pixel_put(img, line_x, line_y, RED);
+		my_mlx_pixel_put(img, (int)round(line_x), (int)round(line_y), RED);
 	}
 }
 
