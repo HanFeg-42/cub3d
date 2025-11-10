@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/03 15:56:54 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 09:51:12 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,29 @@ void	draw_square(t_img *img, double x, double y, int color)
 	}
 }
 
-void	draw_rect(t_img *img, double x, double y, double len)
+int	get_color(t_game *game, double y, double len)
+{
+	if (y == 0 && len < WINDOW_HEIGHT)
+		return (game->config.c_rgb);
+	if (y > WINDOW_HEIGHT / 2)
+		return (game->config.f_rgb);
+	return (WHITE);
+}
+
+void	draw_rect(t_game *game, double x, double y, double len)
 {
 	int i;
 	int j;
+	int	color;
 
+	color = get_color(game, y, len);
 	i = y;
 	while (i < y + (int)len)
 	{
 		j = x;
 		while (j < x + WALL_STRIP_WIDTH)
 		{
-			my_mlx_pixel_put(img, j, i, 0xFFFFFF);
+			my_mlx_pixel_put(&game->img, j, i, color);
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/08 13:09:06 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 09:36:39 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ typedef struct	s_img
 	int		line_length;
 	int		endian;
 }				t_img;
+
+typedef struct s_tuple
+{
+	double x;
+	double y;
+}	t_tuple;
+
 
 typedef struct s_player
 {
@@ -129,7 +136,7 @@ void    init_ray(t_ray *ray, double angle, int is_horz);
 void	draw_square(t_img *img, double x, double y, int color);
 void	draw_line(t_img *img, double x, double y, double deg);
 void	draw_disk(t_img *img, double xc, double yc, double r);
-void	draw_rect(t_img *img, double x, double y, double len);
+void	draw_rect(t_game *game, double x, double y, double len);
 double	max(double a, double b);
 void	update_angle(t_game *game);
 void    update_player(t_game *game);

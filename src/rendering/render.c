@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/03 14:21:41 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 09:46:50 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void    render_minimap(t_game *game)
 
 void    render_proj_wall(t_game *game, double wall_height, int i)
 {
-    double x;
-    double y;
+    double  x;
+    double  y;
+    double  len;
 
     x = i * WALL_STRIP_WIDTH;
     if (wall_height > WINDOW_HEIGHT)
@@ -72,7 +73,10 @@ void    render_proj_wall(t_game *game, double wall_height, int i)
     y = (WINDOW_HEIGHT / 2) - (wall_height / 2);
     if (y < 0)
         y = 0;
-    draw_rect(&game->img, x, y, wall_height);
+    draw_rect(game, x, y, wall_height);
+    len = (WINDOW_HEIGHT - wall_height) / 2;
+    draw_rect(game, x, 0, len); // ceiling color
+    draw_rect(game, x, y + wall_height, len); //  floor color
 }
 
 void    proj_walls(t_game *game)
