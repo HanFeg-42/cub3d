@@ -6,14 +6,17 @@
 # define TRUE 0
 # define FALSE 1
 
-# define UNVALID_EXTENTION "unvlalid extention"
-# define OPEN_FILE "failed to open the file"
+# define UNVALID_EXTENTION "Error\nunvlalid extention"
+# define OPEN_FILE "Error\nfailed to open the file"
 # define UNVALID_ARG "Error\nUsage: ./cub3D path_to_map.cub"
-# define UNVALID_CONFIG "unvalid config param"
-# define UNVALID_COLOR "unvalid color!"
-# define MISSING_TEXTURE "missing texture!"
-# define MISSING_COLOR "missing color!"
-# define XPM_EXT "missed '.xpm'  extension"
+# define UNVALID_CONFIG "Error\nunvalid config param"
+# define UNVALID_COLOR "Error\nunvalid color!"
+# define MISSING_TEXTURE "Error\nmissing texture!"
+# define MISSING_COLOR "Error\nmissing color!"
+# define XPM_EXT "Error\nmissed '.xpm'  extension"
+# define UNVALID_ELEMENT "Error\nunvalid map element"
+# define EMPTY_LINE "Error\nthere is an empty or only spaces in the map"
+# define DOUBLED_PLAYER "Error\nmdouble l player"
 
 typedef struct s_parse
 {
@@ -22,6 +25,7 @@ typedef struct s_parse
 	char *join_map;
 	char **config;
 	char **map;
+	int		is_player;
 }	t_parse;
 
 int is_file_ext_valid(char *filename, char *right_ext);

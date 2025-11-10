@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:20 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/08 18:46:13 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:54:16 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,4 @@ void    get_map(t_game *game, int ac, char **av)
         line = get_next_line(fd);
     }
     game->map = ft_split(join, '\n');
-    // free(join);
 }

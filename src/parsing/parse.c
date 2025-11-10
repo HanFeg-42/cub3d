@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 13:10:34 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 13:31:28 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void    parse_input(t_game *game, int ac, char **av)
 	read_file(&parser);
 	parse_config(game, &parser);
 	parse_map(game, &parser);
+	free_all();
 }

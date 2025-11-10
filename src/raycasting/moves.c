@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/03 14:17:32 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 12:59:09 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void    update_player(t_game *game)
 
     update_angle(game);
     y_step = game->player.y_dir * MOVE_SPEED;
-
     if (game->player.y_dir !=  0)
     {
         new_x = game->player.x + y_step * cos(RAD(game->player.angle));

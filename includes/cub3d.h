@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/10 09:36:39 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:02:42 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@
 # define RAD(x) ((x) * M_PI / 180)
 # define HORZ 1
 # define VERT 0
-# define MINIMAP_SCALE_FACTOR 0.2
+# define MINIMAP_SCALE_FACTOR 0.15
 # define WALL_STRIP_WIDTH 1
+
+# define EXIST 1
 
 typedef struct	s_img
 {
@@ -60,11 +62,11 @@ typedef struct	s_img
 	int		endian;
 }				t_img;
 
-typedef struct s_tuple
+typedef struct s_point
 {
 	double x;
 	double y;
-}	t_tuple;
+}	t_point;
 
 
 typedef struct s_player
@@ -79,10 +81,10 @@ typedef struct s_player
 
 typedef struct s_config
 {
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 	int		f_rgb;
 	int		c_rgb;
 }       t_config;
@@ -134,7 +136,7 @@ double	normalize_angle(double angle);
 void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y);
 void    init_ray(t_ray *ray, double angle, int is_horz);
 void	draw_square(t_img *img, double x, double y, int color);
-void	draw_line(t_img *img, double x, double y, double deg);
+void	draw_line(t_img *img, double x, double y, t_ray *ray);
 void	draw_disk(t_img *img, double xc, double yc, double r);
 void	draw_rect(t_game *game, double x, double y, double len);
 double	max(double a, double b);

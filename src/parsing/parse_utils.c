@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 13:03:52 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:56:23 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void    is_all_config_loaded(t_game *game)
 {
     if (
-        !game->config.ea_path
-        || !game->config.no_path
-        || !game->config.so_path
-        || !game->config.we_path
+        !game->config.ea
+        || !game->config.no
+        || !game->config.so
+        || !game->config.we
     )
         exit_game(game, MISSING_TEXTURE, EXIT_FAILURE);
     if (game->config.c_rgb == -1 || game->config.f_rgb == -1)

@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 09:46:50 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:02:12 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	draw_minimap(t_game *game)
 					j * SCALE * MINIMAP_SCALE_FACTOR,
 					i * SCALE * MINIMAP_SCALE_FACTOR,
 					0x0000FF);
-			else
-				draw_square(&game->img,
-					j * SCALE * MINIMAP_SCALE_FACTOR,
-					i * SCALE * MINIMAP_SCALE_FACTOR,
-					0xFFFFFF);
+			// else
+			// 	draw_square(&game->img,
+			// 		j * SCALE * MINIMAP_SCALE_FACTOR,
+			// 		i * SCALE * MINIMAP_SCALE_FACTOR,
+			// 		0xFFFFFF);
 			j++;
 		}
 		i++;
@@ -50,6 +50,12 @@ void    render_minimap(t_game *game)
         game->player.y * MINIMAP_SCALE_FACTOR, 3);
     while (i < NUM_RAYS)
     {
+        // draw_line(
+        //     &game->img,
+        //     game->player.x * MINIMAP_SCALE_FACTOR,
+        //     game->player.y * MINIMAP_SCALE_FACTOR,
+        //     &game->ray[i]
+        // );
         line(
             &game->img,
             game->player.x * MINIMAP_SCALE_FACTOR,

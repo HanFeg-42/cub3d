@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 09:51:12 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 10:12:19 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,15 @@ void	draw_rect(t_game *game, double x, double y, double len)
 	}
 }
 
-void	draw_line(t_img *img, double x, double y, double deg)
+void	draw_line(t_img *img, double x, double y, t_ray *ray)
 {
-	double dx = cos(RAD(deg));
-	double dy = sin(RAD(deg));
+	double dx = cos(RAD(ray->angle));
+	double dy = sin(RAD(ray->angle));
 	double line_x = x;
 	double line_y = y;
 
-	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y)) <= 50)
+	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y))
+		<= ray->distance * MINIMAP_SCALE_FACTOR)
 	{
 		line_x += dx;
 		line_y += dy;
