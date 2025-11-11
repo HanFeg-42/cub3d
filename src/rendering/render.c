@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 17:21:06 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 20:50:34 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_minimap(t_game *game)
 				draw_square(&game->img,
 					j * SCALE * MINIMAP_SCALE_FACTOR,
 					i * SCALE * MINIMAP_SCALE_FACTOR,
-					0x0000FF);
+					BLACK);
 			// else
 			// 	draw_square(&game->img,
 			// 		j * SCALE * MINIMAP_SCALE_FACTOR,

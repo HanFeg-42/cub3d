@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/10 17:02:42 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/11 08:07:35 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include <math.h>
 # include "gc.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+//---MAC----
+// # define WINDOW_WIDTH 3000
+// # define WINDOW_HEIGHT 2000
+//---LINUX---
+# define WINDOW_WIDTH 1500
+# define WINDOW_HEIGHT 1000
 # define SCALE 64
 # define FOV 60
 # define NUM_RAYS WINDOW_WIDTH
@@ -32,6 +36,7 @@
 # define BLUE    0x0000FF
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
+# define GRAY	 0x505050
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue
 // #define FLOOR_COLOR    0x3E2C1C  // dark brown
@@ -40,15 +45,15 @@
 // #define CEILING_COLOR  0xA9A9A9  // gray ceiling
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
-# define MOVE_SPEED 1
-# define ROTATION_SPEED 0.5
+# define MOVE_SPEED 20
+# define ROTATION_SPEED 5
 
 # define _USE_MATH_DEFINES
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define RAD(x) ((x) * M_PI / 180)
 # define HORZ 1
 # define VERT 0
-# define MINIMAP_SCALE_FACTOR 0.15
+# define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1
 
 # define EXIST 1

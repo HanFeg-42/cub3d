@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 17:19:40 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 21:34:13 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_color(t_game *game, double y, double len)
 		return (game->config.c_rgb);
 	if (y > WINDOW_HEIGHT / 2)
 		return (game->config.f_rgb);
-	return (WHITE);
+	return (GRAY);
 }
 
 void	draw_rect(t_game *game, double x, double y, double len)

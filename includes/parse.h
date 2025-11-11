@@ -14,9 +14,11 @@
 # define MISSING_TEXTURE "Error\nmissing texture!"
 # define MISSING_COLOR "Error\nmissing color!"
 # define XPM_EXT "Error\nmissed '.xpm'  extension"
-# define UNVALID_ELEMENT "Error\nunvalid map element"
+# define UNVALID_ELEMENT "Error\nunvalid map element unknown char"
 # define EMPTY_LINE "Error\nthere is an empty or only spaces in the map"
 # define DOUBLED_PLAYER "Error\nmdouble l player"
+# define NO_PLAYER "Error\nwa lplayer makaynch"
+# define UNVALID_MAP "Error\nlmap mahyach"
 
 typedef struct s_parse
 {

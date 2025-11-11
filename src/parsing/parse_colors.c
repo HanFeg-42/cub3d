@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 17:17:50 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 22:16:49 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,16 @@ int count_occ(char *str, char c)
 int	is_numeric(const char *a)
 {
 	int		i;
-	int		sign;
 	long	res;
 
 	i = 0;
-	sign = 1;
 	res = 0;
-	if (a[i] == '-' || a[i] == '+')
-	{
-		if (a[i] == '-')
-			sign *= -1;
-		i++;
-	}
 	if (!(a[i] >= '0' && a[i] <= '9'))
 		return (false);
 	while (a[i] >= '0' && a[i] <= '9')
 	{
 		res = res * 10 + a[i] - '0';
-		if (res > 255 || res * sign < 0)
+		if (res > 255)
 			return (false);
 		i++;
 	}
