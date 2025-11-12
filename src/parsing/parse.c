@@ -6,13 +6,13 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 13:31:28 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:33:06 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int is_file_ext_valid(char *filename, char *right_ext)
+static int	is_file_ext_valid(char *filename, char *right_ext)
 {
 	char	*ext;
 
@@ -49,10 +49,10 @@ static void	read_file(t_parse *parser)
 	return ;
 }
 
-void	parse_config(t_game *game, t_parse *parser)
+static void	parse_config(t_game *game, t_parse *parser)
 {
-	int i;
-	char *trim;
+	int		i;
+	char	*trim;
 
 	parser->config = gc_split(parser->join_config, '\n');
 	if (!parser->config)
@@ -72,9 +72,9 @@ void	parse_config(t_game *game, t_parse *parser)
 	is_all_config_loaded(game);
 }
 
-void    parse_input(t_game *game, int ac, char **av)
+void	parse_input(t_game *game, int ac, char **av)
 {
-	t_parse parser;
+	t_parse	parser;
 
 	if (ac != 2)
 		exit_game(game, UNVALID_ARG, EXIT_FAILURE);

@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_config.c                                      :+:      :+:    :+:   */
+/*   gc_strtrim_all.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 20:10:31 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:24:04 by hfegrach         ###   ########.fr       */
+/*   Created: 2025/11/12 16:35:26 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/11/12 16:35:42 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "parse.h"
 
-void	init_config(t_game *game)
+char	*gc_strtrim_all(char const *s1, char const *set)
 {
-	int	len;
+	char	*res;
+	int		i;
+	int		j;
 
-	while (game->map[game->height])
+	if (!s1 || !set)
+		return (NULL);
+	res = gc_alloc(ft_strlen(s1) + 1);
+	if (!res)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
 	{
-		len = ft_strlen(game->map[game->height]);
-		if (game->width < len)
-			game->width = len;
-		game->height++;
+		if (!ft_strchr(set, s1[i]))
+			res[j++] = s1[i];
+		i++;
 	}
+	res[j] = '\0';
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 21:34:13 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:13:43 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	draw_square(t_img *img, double x, double y, int color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = y;
 	while (i < y + SCALE * MINIMAP_SCALE_FACTOR)
@@ -41,8 +41,8 @@ int	get_color(t_game *game, double y, double len)
 
 void	draw_rect(t_game *game, double x, double y, double len)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	color;
 
 	color = get_color(game, y, len);
@@ -59,21 +59,25 @@ void	draw_rect(t_game *game, double x, double y, double len)
 	}
 }
 
-void	draw_line(t_img *img, double x, double y, t_ray *ray)
-{
-	double dx = cos(RAD(ray->angle));
-	double dy = sin(RAD(ray->angle));
-	double line_x = x;
-	double line_y = y;
+// void	draw_line(t_img *img, double x, double y, t_ray *ray)
+// {
+// 	double	dx;
+// 	double	dy;
+// 	double	line_x;
+// 	double	line_y;
 
-	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y))
-		<= ray->distance * MINIMAP_SCALE_FACTOR)
-	{
-		line_x += dx;
-		line_y += dy;
-		my_mlx_pixel_put(img, (int)round(line_x), (int)round(line_y), RED);
-	}
-}
+// 	dx = cos(RAD(ray->angle));
+// 	dy = sin(RAD(ray->angle));
+// 	line_x = x;
+// 	line_y = y;
+// 	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y))
+// 		<= ray->distance * MINIMAP_SCALE_FACTOR)
+// 	{
+// 		line_x += dx;
+// 		line_y += dy;
+// 		my_mlx_pixel_put(img, (int)round(line_x), (int)round(line_y), RED);
+// 	}
+// }
 
 void	draw_disk(t_img *img, double xc, double yc, double r)
 {

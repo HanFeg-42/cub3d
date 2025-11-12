@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/11 08:07:35 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:17:56 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 //---LINUX---
 # define WINDOW_WIDTH 1500
 # define WINDOW_HEIGHT 1000
-# define SCALE 64
+# define SCALE 32
 # define FOV 60
 # define NUM_RAYS WINDOW_WIDTH
 # define BUFFER_SIZE 32
@@ -45,8 +45,8 @@
 // #define CEILING_COLOR  0xA9A9A9  // gray ceiling
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
-# define MOVE_SPEED 20
-# define ROTATION_SPEED 5
+# define MOVE_SPEED 1
+# define ROTATION_SPEED 2
 
 # define _USE_MATH_DEFINES
 # define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -54,6 +54,7 @@
 # define HORZ 1
 # define VERT 0
 # define MINIMAP_SCALE_FACTOR 0.2
+# define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 
 # define EXIST 1
@@ -138,7 +139,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	ray_cast(t_game *game);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
-void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y);
+void    init_hit_intersect(t_game *game, t_ray *ray, double next_x, double next_y);
 void    init_ray(t_ray *ray, double angle, int is_horz);
 void	draw_square(t_img *img, double x, double y, int color);
 void	draw_line(t_img *img, double x, double y, t_ray *ray);

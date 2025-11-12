@@ -6,22 +6,22 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 12:03:16 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:26:47 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    get_game(t_game *game)
+void	get_game(t_game *game)
 {
-    init_config(game);
-    init_player(game);
-    initialize_mlx(game);
+	init_config(game);
+	init_player(game);
+	initialize_mlx(game);
 }
 
 t_game	*init_game(void)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	if (!game)

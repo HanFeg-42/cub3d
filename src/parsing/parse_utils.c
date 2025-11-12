@@ -6,44 +6,34 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 16:56:23 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 16:36:53 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-void    is_all_config_loaded(t_game *game)
+void	is_all_config_loaded(t_game *game)
 {
-    if (
-        !game->config.ea
-        || !game->config.no
-        || !game->config.so
-        || !game->config.we
-    )
-        exit_game(game, MISSING_TEXTURE, EXIT_FAILURE);
-    if (game->config.c_rgb == -1 || game->config.f_rgb == -1)
-        exit_game(game, MISSING_COLOR, EXIT_FAILURE);
+	if (
+		!game->config.ea
+		|| !game->config.no
+		|| !game->config.so
+		|| !game->config.we
+	)
+		exit_game(game, MISSING_TEXTURE, EXIT_FAILURE);
+	if (game->config.c_rgb == -1 || game->config.f_rgb == -1)
+		exit_game(game, MISSING_COLOR, EXIT_FAILURE);
 }
 
-char	*gc_strtrim_all(char const *s1, char const *set)
+int	has_adjacent_space(t_parse *parser, int x, int y)
 {
-	char	*res;
-	int		i;
-	int		j;
-
-	if (!s1 || !set)
-		return (NULL);
-	res = gc_alloc(ft_strlen(s1) + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		if (!ft_strchr(set, s1[i]))
-			res[j++] = s1[i];
-		i++;
-	}
-	res[j] = '\0';
-	return (res);
+	if (!parser->map[y - 1][x] || !parser->map[y + 1][x]
+			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
+		return (1);
+	if (parser->map[y - 1][x] == ' '
+			|| parser->map[y + 1][x] == ' '
+			|| parser->map[y][x - 1] == ' '
+			|| parser->map[y][x + 1] == ' ')
+		return (1);
+	return (0);
 }

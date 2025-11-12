@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 16:56:23 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:15:35 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void exit_game(t_game *game, char *msg, int status)
 		if (game->mlx)
 		{
 			mlx_destroy_window(game->mlx, game->win);
-			//destroy textures
 			mlx_destroy_image(game->mlx, game->img.img);
 			mlx_destroy_display(game->mlx);
 			free(game->mlx);

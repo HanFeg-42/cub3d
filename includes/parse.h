@@ -30,11 +30,11 @@ typedef struct s_parse
 	int		is_player;
 }	t_parse;
 
-int is_file_ext_valid(char *filename, char *right_ext);
 void    is_all_config_loaded(t_game *game);
 void    parse_color(t_game *game, char *color_line);
 void    parse_texture(t_game *game, char *texture);
 void    parse_map(t_game *game, t_parse *parser);
 char	*gc_strtrim_all(char const *s1, char const *set);
+int	has_adjacent_space(t_parse *parser, int x, int y);
 
 #endif
