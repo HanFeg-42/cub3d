@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "minilibx-linux",
+			"path": "../../../mycub/minilibx-linux"
+		},
+		{
+			"name": "cube",
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

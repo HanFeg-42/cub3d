@@ -19,7 +19,7 @@ void    get_map(t_game *game, int ac, char **av)
     int     fd;
 
     if (ac != 2)
-        exit_game(game, "Error\nUsage: ./cub3D path_to_map.cub");
+        clean_and_exit(game, "Error\nUsage: ./cub3D path_to_map.cub");
     fd = open(av[1], O_RDONLY);
 
     line = get_next_line(fd);

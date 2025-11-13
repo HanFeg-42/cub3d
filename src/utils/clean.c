@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ghita <ghita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/10/17 20:10:17 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/10 12:11:28 by ghita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@ void	free_2d_table(char **arr)
 	free(arr);
 }
 
-void exit_game(t_game *game, char *msg)
+void clean_textures(t_game *game)
+{
+	int i;
+
+	i = 0;
+	while(i < NUM_TEXTURES)
+	{
+		if(game->texture[i].img)
+			mlx_destroy_image(game->mlx, game->texture[i].img);
+		i++;
+	}
+}
+
+void clean_and_exit(t_game *game, char *msg)
 {
 	if (msg)
 		ft_putendl_fd(msg, 2);
@@ -30,6 +43,7 @@ void exit_game(t_game *game, char *msg)
     {
 		if (game->mlx)
 		{
+			clean_textures(game);
 			mlx_destroy_window(game->mlx, game->win);
 			//clean_up(game->map);
 			//destroy textures

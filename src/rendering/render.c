@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/03 14:21:41 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 00:25:36 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,16 @@ void    render_minimap(t_game *game)
 
 void    render_proj_wall(t_game *game, double wall_height, int i)
 {
+    double draw_start;
     double x;
-    double y;
 
-    x = i * WALL_STRIP_WIDTH;
+    x = i * WALL_STRIP_WIDTH ;
     if (wall_height > WINDOW_HEIGHT)
         wall_height = WINDOW_HEIGHT;
-    y = (WINDOW_HEIGHT / 2) - (wall_height / 2);
-    if (y < 0)
-        y = 0;
-    draw_rect(&game->img, x, y, wall_height);
+    draw_start = (WINDOW_HEIGHT / 2) - (wall_height / 2);
+    if (draw_start < 0)
+        draw_start = 0;
+    draw_rect(&game->img, x, draw_start, wall_height);
 }
 
 void    proj_walls(t_game *game)
@@ -80,15 +80,15 @@ void    proj_walls(t_game *game)
     int i;
     double  dist_proj_plane;
     double  wall_strip_height;
-    double  correct_wall_dist;
 
     i = 0;
     while (i < NUM_RAYS)
     {
-        correct_wall_dist = game->ray[i].distance
+        game->ray[i].correct_wall_dist = game->ray[i].distance
             * cos(RAD(game->ray[i].angle - game->player.angle));
         dist_proj_plane = (WINDOW_WIDTH / 2) / tan(RAD(FOV / 2));
-        wall_strip_height = (SCALE / correct_wall_dist) * dist_proj_plane;
+        wall_strip_height = (SCALE / game->ray[i].correct_wall_dist) * dist_proj_plane;
+        // texture_mapping_and_draw(game, game->ray[i], i,fabs(wall_strip_height));
         render_proj_wall(game, fabs(wall_strip_height), i);
         i++;
     }
@@ -103,4 +103,14 @@ int	render_game(t_game *game)
     render_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
 	return (0);
+}
+
+
+int mouse_move(int x, int y ,t_game *game)
+{
+    int center_x = WINDOW_WIDTH / 2;
+    int delta_x = x - center_x;
+    
+    // mlx_mouse_move(game->mlx, game->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+    game->player.angle = normalize_angle(game->player.angle + delta_x * SENSITIVITY);
 }

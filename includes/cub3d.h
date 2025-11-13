@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/03 16:50:09 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/13 23:21:31 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
-# define SCALE 64
+# define SCALE 32
 # define FOV 60
 # define NUM_RAYS WINDOW_WIDTH
 # define BUFFER_SIZE 32
+# define SENSITIVITY 0.004
 
 # define RED     0xFF0000
 # define GREEN   0x00FF00
@@ -32,23 +33,26 @@
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
 
-#define CEILING_COLOR  0x87CEEB  // light sky blue
-#define FLOOR_COLOR    0x3E2C1C  // dark brown
-#define CEILING_COLOR  0xC0E8FF  // pale blue
-#define FLOOR_COLOR    0x705438  // medium brown
-#define CEILING_COLOR  0xA9A9A9  // gray ceiling
-#define FLOOR_COLOR    0x444444  // dark gray floor
+// #define CEILING_COLOR  0x87CEEB  // light sky blue
+// #define FLOOR_COLOR    0x3E2C1C  // dark brown
+// #define CEILING_COLOR  0xC0E8FF  // pale blue
+// #define FLOOR_COLOR    0x705438  // medium brown
+// #define CEILING_COLOR  0xA9A9A9  // gray ceiling
+// #define FLOOR_COLOR    0x444444  // dark gray floor
 
 # define MOVE_SPEED 1
 # define ROTATION_SPEED 0.5
-
-# define _USE_MATH_DEFINES
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
 # define RAD(x) ((x) * M_PI / 180)
+# define _USE_MATH_DEFINES
 # define HORZ 1
 # define VERT 0
+#define NORTH 0
+#define EAST 1
+#define SOUTH 2
+#define  WEST 3
 # define MINIMAP_SCALE_FACTOR 0.2
 # define WALL_STRIP_WIDTH 1
+#define NUM_TEXTURES 4
 
 typedef struct	s_img
 {
@@ -57,7 +61,19 @@ typedef struct	s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int 	width;
+	int		height;
 }				t_img;
+
+typedef struct s_tex
+{
+	t_img	*tex_img;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+	int		draw_start;
+	int		draw_end;
+}	t_tex;
 
 typedef struct s_player
 {
@@ -95,6 +111,7 @@ typedef struct s_ray
 	int		is_horz;
 	int		is_facing_up;
 	int		is_facing_left;
+	double  correct_wall_dist;	
 }		t_ray;
 
 typedef struct s_game
@@ -108,11 +125,12 @@ typedef struct s_game
 	t_player	player;
 	t_config	config;
 	t_ray		ray[NUM_RAYS];
+	t_img texture[NUM_TEXTURES];
 }			t_game;
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
-void	exit_game(t_game *game, char *msg);
+void	clean_and_exit(t_game *game, char *msg);
 void    initialize_mlx(t_game *game);
 void    get_game(t_game *game);
 t_game	*init_game(void);
@@ -139,4 +157,12 @@ t_ray   vert_wall_intersection(t_game *game, double angle);
 t_ray   horz_wall_intersection(t_game *game, double angle);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
 
+void			texture_mapping_and_draw(t_game *game, t_ray ray,int i, double line_h);
+void			calculate_horz_map(t_game *g, t_ray ray, t_tex *tex_math);
+void			calculate_vert_map(t_tex *tex, double wall_height);
+void			draw_textured_column(t_game *g, t_tex *tex,int i);
+t_img			*get_correct_texture(t_game *g, t_ray ray);
+int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y);
+int mouse_move(int x, int y ,t_game *game);
+int shade_color(int color, double factor);
 #endif
