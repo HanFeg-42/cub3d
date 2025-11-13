@@ -6,11 +6,19 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:36:53 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:54:02 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int	is_file_ext_valid(char *filename, char *right_ext)
+{
+	char	*ext;
+
+	ext = ft_strrstr(filename, right_ext);
+	return (!ext || ft_strlen(ext) != 4);
+}
 
 void	is_all_config_loaded(t_game *game)
 {

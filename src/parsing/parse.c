@@ -6,19 +6,11 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:33:06 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:53:54 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-static int	is_file_ext_valid(char *filename, char *right_ext)
-{
-	char	*ext;
-
-	ext = ft_strrstr(filename, right_ext);
-	return (!ext || ft_strlen(ext) != 4);
-}
 
 static void	open_file(t_game *game, t_parse *parser, char *filename)
 {

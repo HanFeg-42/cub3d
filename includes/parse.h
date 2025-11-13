@@ -35,6 +35,7 @@ void    parse_color(t_game *game, char *color_line);
 void    parse_texture(t_game *game, char *texture);
 void    parse_map(t_game *game, t_parse *parser);
 char	*gc_strtrim_all(char const *s1, char const *set);
-int	has_adjacent_space(t_parse *parser, int x, int y);
+int		has_adjacent_space(t_parse *parser, int x, int y);
+int		is_file_ext_valid(char *filename, char *right_ext);
 
 #endif
