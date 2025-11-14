@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 14:32:05 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:20:16 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,41 +57,41 @@ void	update_angle(t_game *game)
 			);
 }
 
-void	check_move_valid(t_game *game, double new_x, double new_y)
+void	check_move_valid(t_game *game, t_point new, t_point step)
 {
 	int	map_x;
 	int	map_y;
-
-	map_x = (int)(new_x / SCALE);
-	map_y = (int)(new_y / SCALE);
+	(void)step ;
+	map_x = (int)((new.x + (step.x * DIST)) / SCALE);
+	map_y = (int)((new.y + (step.y * DIST)) / SCALE);
 	if (game->map[map_y][map_x] != '1')
 	{
-		game->player.x = new_x;
-		game->player.y = new_y;
+		game->player.x = new.x;
+		game->player.y = new.y;
 	}
 }
 
 void	update_player(t_game *game)
 {
-	double	new_x;
-	double	new_y;
-	double	y_step;
+	t_point new;
+	t_point step;
 
 	update_angle(game);
-	y_step = game->player.y_dir * MOVE_SPEED;
 	if (game->player.y_dir != 0)
 	{
-		new_x = game->player.x + y_step * cos(RAD(game->player.angle));
-		new_y = game->player.y + y_step * sin(RAD(game->player.angle));
+		step.x = game->player.y_dir * cos(RAD(game->player.angle));
+		step.y = game->player.y_dir * sin(RAD(game->player.angle));
+		new.x = game->player.x + step.x * MOVE_SPEED;
+		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else if (game->player.x_dir != 0)
 	{
-		new_x = game->player.x + cos(RAD(game->player.angle
-					+ game->player.x_dir * 90)) * MOVE_SPEED;
-		new_y = game->player.y + sin(RAD(game->player.angle
-					+ game->player.x_dir * 90)) * MOVE_SPEED;
+		step.x = cos(RAD(game->player.angle + game->player.x_dir * 90));
+		step.y = + sin(RAD(game->player.angle + game->player.x_dir * 90));
+		new.x = game->player.x + step.x * MOVE_SPEED;
+		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else
 		return ;
-	check_move_valid(game, new_x, new_y);
+	check_move_valid(game, new, step);
 }

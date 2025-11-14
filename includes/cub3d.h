@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/14 15:02:53 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 17:20:41 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 // #define CEILING_COLOR  0xA9A9A9  // gray ceiling
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
-# define MOVE_SPEED 1
+# define MOVE_SPEED 3
 # define ROTATION_SPEED 0.5
 # define RAD(x) ((x) * M_PI / 180)
 # define _USE_MATH_DEFINES
@@ -60,6 +60,7 @@
 # define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 #define NUM_TEXTURES 4
+# define DIST 10
 
 # define EXIST 1
 
@@ -83,6 +84,7 @@ typedef struct s_tex
 	int		draw_start;
 	int		draw_end;
 }	t_tex;
+
 typedef struct s_point
 {
 	double x;
