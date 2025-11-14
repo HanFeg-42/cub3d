@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   textures_math.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:08:47 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/12 15:10:21 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/14 15:02:20 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void calculate_horz_map(t_game *game, t_ray ray, t_tex *tex)
+void calculate_horz_map(t_ray ray, t_tex *tex)
 {
     double wall_x_percent;
     double remainder;

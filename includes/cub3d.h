@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/13 23:21:31 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/14 15:02:53 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@
 # include <X11/keysym.h>
 # include <stdbool.h>
 # include <math.h>
+# include "gc.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+//---MAC----
+// # define WINDOW_WIDTH 3000
+// # define WINDOW_HEIGHT 2000
+//---LINUX---
+# define WINDOW_WIDTH 1500
+# define WINDOW_HEIGHT 1000
 # define SCALE 32
 # define FOV 60
 # define NUM_RAYS WINDOW_WIDTH
@@ -32,6 +37,7 @@
 # define BLUE    0x0000FF
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
+# define GRAY	 0x505050
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue
 // #define FLOOR_COLOR    0x3E2C1C  // dark brown
@@ -51,8 +57,11 @@
 #define SOUTH 2
 #define  WEST 3
 # define MINIMAP_SCALE_FACTOR 0.2
+# define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 #define NUM_TEXTURES 4
+
+# define EXIST 1
 
 typedef struct	s_img
 {
@@ -74,6 +83,12 @@ typedef struct s_tex
 	int		draw_start;
 	int		draw_end;
 }	t_tex;
+typedef struct s_point
+{
+	double x;
+	double y;
+}	t_point;
+
 
 typedef struct s_player
 {
@@ -87,15 +102,12 @@ typedef struct s_player
 
 typedef struct s_config
 {
-	int		fd;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 	int		f_rgb;
 	int		c_rgb;
-	char	*map_path;
-	char	*join;
 }       t_config;
 
 typedef struct s_ray
@@ -111,7 +123,7 @@ typedef struct s_ray
 	int		is_horz;
 	int		is_facing_up;
 	int		is_facing_left;
-	double  correct_wall_dist;	
+	double  correct_wall_dist;
 }		t_ray;
 
 typedef struct s_game
@@ -131,6 +143,7 @@ typedef struct s_game
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
 void	clean_and_exit(t_game *game, char *msg);
+void	exit_game(t_game *game, char *msg, int status);
 void    initialize_mlx(t_game *game);
 void    get_game(t_game *game);
 t_game	*init_game(void);
@@ -144,21 +157,22 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	ray_cast(t_game *game);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
-void    init_wall_hit_intersection(t_game *game, t_ray *ray, double next_x, double next_y);
+void    init_hit_intersect(t_game *game, t_ray *ray, double next_x, double next_y);
 void    init_ray(t_ray *ray, double angle, int is_horz);
 void	draw_square(t_img *img, double x, double y, int color);
-void	draw_line(t_img *img, double x, double y, double deg);
+void	draw_line(t_img *img, double x, double y, t_ray *ray);
 void	draw_disk(t_img *img, double xc, double yc, double r);
-void	draw_rect(t_img *img, double x, double y, double len);
+void	draw_rect(t_game *game, double x, double y, double len);
 double	max(double a, double b);
 void	update_angle(t_game *game);
 void    update_player(t_game *game);
 t_ray   vert_wall_intersection(t_game *game, double angle);
 t_ray   horz_wall_intersection(t_game *game, double angle);
 void	line(t_img *img, double x1, double y1, double x2, double y2);
+void    parse_input(t_game *game, int ac, char **av);
 
 void			texture_mapping_and_draw(t_game *game, t_ray ray,int i, double line_h);
-void			calculate_horz_map(t_game *g, t_ray ray, t_tex *tex_math);
+void			calculate_horz_map(t_ray ray, t_tex *tex_math);
 void			calculate_vert_map(t_tex *tex, double wall_height);
 void			draw_textured_column(t_game *g, t_tex *tex,int i);
 t_img			*get_correct_texture(t_game *g, t_ray ray);

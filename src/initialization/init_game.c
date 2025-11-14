@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghita <ghita@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/10 12:00:21 by ghita            ###   ########.fr       */
+/*   Updated: 2025/11/14 14:43:22 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	load_one_texture(t_game *game, t_img *texture, char *path)
 	if (texture->img == NULL)
 	{
 		printf("Error\nFailed to load texture: %s\n", path);
-		clean_and_exit(game, "Texture loading failed.");
+		exit_game(game, "Texture loading failed.", EXIT_FAILURE);
 	}
 	texture->addr = mlx_get_data_addr(texture->img, &texture->bits_per_pixel,
 			&texture->line_length, &texture->endian);
 	if (texture->addr == NULL)
 	{
 		printf("Error\nFailed to get data addr for: %s\n", path);
-		clean_and_exit(game, "mlx_get_data_addr failed.");
+		exit_game(game, "mlx_get_data_addr failed.", EXIT_FAILURE);
 	}
 }
 
@@ -36,19 +36,22 @@ void    get_game(t_game *game)
     init_config(game);
     init_player(game);
     initialize_mlx(game);
-	load_one_texture(game, &game->texture[NORTH], game->config.no_path);
-	load_one_texture(game, &game->texture[SOUTH], game->config.so_path);
-	load_one_texture(game, &game->texture[EAST], game->config.ea_path);
-	load_one_texture(game, &game->texture[WEST], game->config.we_path);
+	// load_one_texture(game, &game->texture[NORTH], game->config.no);
+	// load_one_texture(game, &game->texture[SOUTH], game->config.so);
+	// load_one_texture(game, &game->texture[EAST], game->config.ea);
+	// load_one_texture(game, &game->texture[WEST], game->config.we);
 }
 
 t_game	*init_game(void)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	if (!game)
-		clean_and_exit(NULL, "malloc failded!");
+		exit_game(NULL, "malloc failded!", EXIT_FAILURE);
 	ft_bzero(game, sizeof(t_game));
+	ft_bzero(&game->config, sizeof(t_config));
+	game->config.c_rgb = -1;
+	game->config.f_rgb = -1;
 	return (game);
 }

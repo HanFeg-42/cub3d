@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:29:38 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/12 15:43:52 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/14 15:01:50 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int main(int ac, char **av)
 	t_game	*game;
 
 	game = init_game();
-	get_map(game, ac, av);
+	parse_input(game, ac, av);
 	get_game(game);
 	render_game(game);
 	mlx_hook(game->win, 17, 0,close_window, game);
 	mlx_mouse_hide(game->mlx, game->win);
-	mlx_hook(game->win, 6, (1L << 6),mouse_move, game);
+	// mlx_hook(game->win, 6, (1L << 6),mouse_move, game);
 	mlx_hook(game->win, 2, (1L << 0),key_press, game);
 	mlx_hook(game->win, 3, (1L << 1),key_release, game);
 	mlx_loop_hook(game->mlx, render_game, game);
 	mlx_loop(game->mlx);
-	clean_and_exit(game, NULL);
+	exit_game(game, NULL, EXIT_SUCCESS);
 	return (0);
 }
