@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:08:47 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/14 15:02:20 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:37:21 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,14 @@ void calculate_horz_map(t_ray ray, t_tex *tex)
 }
 void calculate_vert_map(t_tex *tex, double wall_height)
 {
-	// printf("wall height = %f\n", wall_height);
-    if (wall_height > WINDOW_HEIGHT)
-        wall_height = WINDOW_HEIGHT;
     tex->step = (double)tex->tex_img->height / wall_height;
     tex->draw_start = (WINDOW_HEIGHT / 2) - (wall_height / 2);
+    tex->draw_end = (WINDOW_HEIGHT / 2) + (wall_height / 2);
     if (tex->draw_start < 0)
         tex->draw_start = 0;
-    tex->draw_end = (WINDOW_HEIGHT / 2) + (wall_height / 2);
     if (tex->draw_end >= WINDOW_HEIGHT)
         tex->draw_end = WINDOW_HEIGHT - 1;
     tex->tex_pos = (tex->draw_start - (WINDOW_HEIGHT / 2) + (wall_height / 2)) * tex->step;
-	// printf("tex.pos = %d \n\n\n",tex->tex_pos);
 }
 
 

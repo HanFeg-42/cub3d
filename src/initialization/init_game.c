@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 14:43:22 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:37:45 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void    get_game(t_game *game)
     init_config(game);
     init_player(game);
     initialize_mlx(game);
-	// load_one_texture(game, &game->texture[NORTH], game->config.no);
-	// load_one_texture(game, &game->texture[SOUTH], game->config.so);
-	// load_one_texture(game, &game->texture[EAST], game->config.ea);
-	// load_one_texture(game, &game->texture[WEST], game->config.we);
+	load_one_texture(game, &game->texture[NORTH], game->config.no);
+	load_one_texture(game, &game->texture[SOUTH], game->config.so);
+	load_one_texture(game, &game->texture[EAST], game->config.ea);
+	load_one_texture(game, &game->texture[WEST], game->config.we);
 }
 
 t_game	*init_game(void)

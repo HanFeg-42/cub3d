@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 15:01:37 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:36:49 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	proj_walls(t_game *game)
         game->ray[i].correct_wall_dist = game->ray[i].distance
             * cos(RAD(game->ray[i].angle - game->player.angle));
         wall_strip_height = (SCALE / game->ray[i].correct_wall_dist) * dist_proj_plane;
-        // texture_mapping_and_draw(game, game->ray[i], i,fabs(wall_strip_height));
-        render_proj_wall(game, wall_strip_height, i);
+        texture_mapping_and_draw(game, game->ray[i], i,fabs(wall_strip_height));
+        // render_proj_wall(game, wall_strip_height, i);
         i++;
     }
 }
