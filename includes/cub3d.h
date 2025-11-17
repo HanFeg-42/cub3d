@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/14 15:02:53 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:48:13 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 // #define CEILING_COLOR  0xA9A9A9  // gray ceiling
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
-# define MOVE_SPEED 1
+# define MOVE_SPEED 5
 # define ROTATION_SPEED 0.5
 # define RAD(x) ((x) * M_PI / 180)
 # define _USE_MATH_DEFINES

@@ -1,3 +1,12 @@
+NO textures/Bricks.xpm
+SO textures/Bricks2.xpm
+WE textures/Bricks3.xpm
+EA textures/Bricks4.xpm
+
+F 44,44,44
+C 150, 130, 150
+
+
 111111111
 1000000S1
 101000001

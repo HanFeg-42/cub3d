@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 15:39:40 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/14 15:02:37 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:18:34 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void draw_textured_column(t_game *game, t_tex *tex, int i)
 void draw_floor(t_game *game,t_tex tex, int x)
 {
 	int y;
-	y = tex.draw_end;
+	y = tex.draw_end + 1;
 
-	while ( y < WINDOW_HEIGHT)
+	while ( y < WINDOW_HEIGHT-1)
 	{
 		my_mlx_pixel_put(&game->img,x,y,game->config.f_rgb);
 		y++;
