@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 17:20:16 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/17 16:58:42 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ void	check_move_valid(t_game *game, t_point new, t_point step)
 {
 	int	map_x;
 	int	map_y;
-	(void)step ;
+	t_point map;
+	t_point old;
+
 	map_x = (int)((new.x + (step.x * DIST)) / SCALE);
 	map_y = (int)((new.y + (step.y * DIST)) / SCALE);
+	old.x = (int)((game->player.x + (step.x * DIST)) / SCALE);
+	old.y = (int)((game->player.y + (step.y * DIST)) / SCALE);
 	if (game->map[map_y][map_x] != '1')
 	{
+		if (game->map[(int)(old.x)][map_x] != '1')
 		game->player.x = new.x;
 		game->player.y = new.y;
 	}
