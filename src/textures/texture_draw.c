@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 15:39:40 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/14 16:18:34 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/17 13:34:02 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void draw_ceiling(t_game *game ,t_tex tex, int x)
 	{
 		my_mlx_pixel_put(&game->img,x,y,game->config.c_rgb);
 		y++;
-	}	
+	}
 }
 void texture_mapping_and_draw(t_game *game, t_ray ray, int i, double wall_h)
 {

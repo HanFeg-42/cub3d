@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/14 21:48:13 by gstitou          ###   ########.fr       */
+/*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
+/*   Updated: 2025/11/17 13:33:38 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 #define NUM_TEXTURES 4
+# define DIST 10
 
 # define EXIST 1
 
@@ -83,6 +84,7 @@ typedef struct s_tex
 	int		draw_start;
 	int		draw_end;
 }	t_tex;
+
 typedef struct s_point
 {
 	double x;
