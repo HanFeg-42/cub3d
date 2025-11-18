@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 16:36:49 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:24:28 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_minimap(t_game *game)
 				draw_square(&game->img,
 					j * SCALE * MINIMAP_SCALE_FACTOR,
 					i * SCALE * MINIMAP_SCALE_FACTOR,
-					BLUE);
+					MINIMAP_COLOR);
 			j++;
 		}
 		i++;
@@ -37,24 +37,22 @@ void	draw_minimap(t_game *game)
 
 void	render_minimap(t_game *game)
 {
-	int	i;
+	t_point	start;
+	t_point	end;
+	int		i;
 
-	i = 0;
+	start.x = game->player.x * MINIMAP_SCALE_FACTOR;
+	start.y = game->player.y * MINIMAP_SCALE_FACTOR;
 	draw_minimap(game);
-	draw_disk(&game->img,
-		game->player.x * MINIMAP_SCALE_FACTOR,
-		game->player.y * MINIMAP_SCALE_FACTOR, 3);
+	i = 0;
 	while (i < NUM_RAYS)
 	{
-		line(
-			&game->img,
-			game->player.x * MINIMAP_SCALE_FACTOR,
-			game->player.y * MINIMAP_SCALE_FACTOR,
-			game->ray[i].wall_hit_x * MINIMAP_SCALE_FACTOR,
-			game->ray[i].wall_hit_y * MINIMAP_SCALE_FACTOR
-			);
+		end.x = game->ray[i].wall_hit_x * MINIMAP_SCALE_FACTOR;
+		end.y = game->ray[i].wall_hit_y * MINIMAP_SCALE_FACTOR;
+		line(&game->img, start, end);
 		i++;
 	}
+	draw_disk(&game->img, start, 2);
 }
 
 void	render_proj_wall(t_game *game, double wall_height, int i)
@@ -68,7 +66,6 @@ void	render_proj_wall(t_game *game, double wall_height, int i)
     draw_start = (WINDOW_HEIGHT / 2) - (wall_height / 2);
     if (draw_start < 0)
         draw_start = 0;
-	
     draw_rect(game, x, draw_start, wall_height);
 }
 
@@ -108,8 +105,8 @@ int mouse_move(int x, int y ,t_game *game)
 	(void)y;
     int center_x = WINDOW_WIDTH / 2;
     int delta_x = x - center_x;
-    
-    // mlx_mouse_move(game->mlx, game->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+
+    mlx_mouse_move(game->mlx, game->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
     game->player.angle = normalize_angle(game->player.angle + delta_x * SENSITIVITY);
 	return (0);
 }

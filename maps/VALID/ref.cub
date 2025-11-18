@@ -1,10 +1,10 @@
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO textures/Gray_pink_Briks.xpm
+SO textures/Gray_pink_Briks.xpm
+WE textures/Gray_pink_Briks.xpm
+EA textures/Gray_pink_Briks.xpm
 
-F 180, 130, 140
-C 150, 130, 150
+F 184, 134, 101
+C 129, 141, 153
 
     1111111111111111111111111
     1000000000110000000000001

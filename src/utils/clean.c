@@ -6,10 +6,9 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 14:25:50 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:23:44 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3d.h"
 
@@ -23,20 +22,19 @@ void	free_2d_table(char **arr)
 	free(arr);
 }
 
-void clean_textures(t_game *game)
+void	clean_textures(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < NUM_TEXTURES)
+	while (i < NUM_TEXTURES)
 	{
-		if(game->texture[i].img)
+		if (game->texture[i].img)
 			mlx_destroy_image(game->mlx, game->texture[i].img);
 		i++;
 	}
 }
 
-// void clean_and_exit(t_game *game, char *msg)
 void	destroy_game(t_game *game)
 {
 	if (game->map)
@@ -51,12 +49,12 @@ void	destroy_game(t_game *game)
 		free(game->config.ea);
 }
 
-void exit_game(t_game *game, char *msg, int status)
+void	exit_game(t_game *game, char *msg, int status)
 {
 	if (msg)
 		ft_putendl_fd(msg, 2);
-    if (game)
-    {
+	if (game)
+	{
 		if (game->mlx)
 		{
 			clean_textures(game);
@@ -67,7 +65,7 @@ void exit_game(t_game *game, char *msg, int status)
 		}
 		destroy_game(game);
 		free(game);
-    }
+	}
 	free_all();
 	exit(status);
 }

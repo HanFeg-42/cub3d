@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 17:13:43 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:29:01 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	draw_square(t_img *img, double x, double y, int color)
 	int	i;
 	int	j;
 
-	i = y;
+	i = y + 2;
 	while (i < y + SCALE * MINIMAP_SCALE_FACTOR)
 	{
-		j = x;
+		j = x + 2;
 		while (j < x + SCALE * MINIMAP_SCALE_FACTOR)
 		{
 			my_mlx_pixel_put(img, j, i, color);
@@ -59,59 +59,43 @@ void	draw_rect(t_game *game, double x, double y, double len)
 	}
 }
 
-// void	draw_line(t_img *img, double x, double y, t_ray *ray)
-// {
-// 	double	dx;
-// 	double	dy;
-// 	double	line_x;
-// 	double	line_y;
-
-// 	dx = cos(RAD(ray->angle));
-// 	dy = sin(RAD(ray->angle));
-// 	line_x = x;
-// 	line_y = y;
-// 	while (sqrt((line_x - x) * (line_x - x) + (line_y - y) * (line_y - y))
-// 		<= ray->distance * MINIMAP_SCALE_FACTOR)
-// 	{
-// 		line_x += dx;
-// 		line_y += dy;
-// 		my_mlx_pixel_put(img, (int)round(line_x), (int)round(line_y), RED);
-// 	}
-// }
-
-void	draw_disk(t_img *img, double xc, double yc, double r)
+void	draw_disk(t_img *img, t_point c, double r)
 {
 	int	y;
 	int	x;
 
-	y = yc - r;
-	while (y <= yc + r)
+	y = c.y - r;
+	while (y <= c.y + r)
 	{
-		x = xc - r;
-		while (x <= xc + r)
+		x = c.x - r;
+		while (x <= c.x + r)
 		{
-			if ((x - xc) * (x - xc) + (y - yc) * (y - yc) <= r * r)
-				my_mlx_pixel_put(img, x, y, RED);
+			if ((x - c.x) * (x - c.x) + (y - c.y) * (y - c.y) <= r * r)
+				my_mlx_pixel_put(img, x, y, PLAYER_COLOR);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	line(t_img *img, double x1, double y1, double x2, double y2)
+void	line(t_img *img, t_point start, t_point end)
 {
-	double	dx = x2 - x1;
-	double	dy = y2 - y1;
-	double	steps = max(fabs(dx), fabs(dy));
-	double	x_inc = dx / steps;
-	double	y_inc = dy / steps;
-	int		i = 0;
+	t_point	d;
+	t_point	inc;
+	double	steps;
+	int		i;
 
+	d.x = end.x - start.x;
+	d.y = end.y - start.y;
+	steps = max(fabs(d.x), fabs(d.y));
+	inc.x = d.x / steps;
+	inc.y = d.y / steps;
+	i = 0;
 	while (i < steps)
 	{
-		my_mlx_pixel_put(img, (int)round(x1), (int)round(y1), 0xFF0000);
-		x1 += x_inc;
-		y1 += y_inc;
+		my_mlx_pixel_put(img, (int)(start.x), (int)(start.y), WHITE);
+		start.x += inc.x;
+		start.y += inc.y;
 		i++;
 	}
 }

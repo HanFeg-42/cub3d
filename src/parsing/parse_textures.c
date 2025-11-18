@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:08:28 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:21:55 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	parse_texture(t_game *game, char *texture)
 	elemt = gc_split(texture, ' ');
 	if (elemt[1] == NULL || elemt[2] != NULL)
 		exit_game(game, ERROR_INVALID_CONFIG, EXIT_FAILURE);
-	// if (is_file_ext_valid(elemt[1], ".xpm") == FALSE)
-	// 	exit_game(game, XPM_EXT, EXIT_FAILURE);
 	load_texture(game, elemt[0], elemt[1]);
 	return ;
 }

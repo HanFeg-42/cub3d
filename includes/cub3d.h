@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/14 17:20:41 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 14:36:36 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
 # define GRAY	 0x505050
+# define MINIMAP_COLOR 0xC8C8C8
+# define PLAYER_COLOR 0x64FF64
+
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue
 // #define FLOOR_COLOR    0x3E2C1C  // dark brown
@@ -60,7 +63,7 @@
 # define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 #define NUM_TEXTURES 4
-# define DIST 10
+# define MARGIN 10
 
 # define EXIST 1
 
@@ -157,20 +160,19 @@ int		render_game(t_game *game);
 void	render_minimap(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	ray_cast(t_game *game);
-void	line(t_img *img, double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 void    init_hit_intersect(t_game *game, t_ray *ray, double next_x, double next_y);
 void    init_ray(t_ray *ray, double angle, int is_horz);
 void	draw_square(t_img *img, double x, double y, int color);
 void	draw_line(t_img *img, double x, double y, t_ray *ray);
-void	draw_disk(t_img *img, double xc, double yc, double r);
+void	draw_disk(t_img *img, t_point c, double r);
 void	draw_rect(t_game *game, double x, double y, double len);
 double	max(double a, double b);
 void	update_angle(t_game *game);
 void    update_player(t_game *game);
 t_ray   vert_wall_intersection(t_game *game, double angle);
 t_ray   horz_wall_intersection(t_game *game, double angle);
-void	line(t_img *img, double x1, double y1, double x2, double y2);
+void	line(t_img *img, t_point start, t_point end);
 void    parse_input(t_game *game, int ac, char **av);
 
 void			texture_mapping_and_draw(t_game *game, t_ray ray,int i, double line_h);

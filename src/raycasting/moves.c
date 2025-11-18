@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/17 21:09:30 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:18:45 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,43 +50,50 @@ int	key_release(int key, t_game *data)
 	return (0);
 }
 
-void	update_angle(t_game *game)
+int	is_valid_position(t_game *game, t_point pos)
 {
-	game->player.angle = normalize_angle(
-			game->player.angle + game->player.turn_dir * ROTATION_SPEED
-			);
+	int	y_plus_mar;
+	int	y_minus_mar;
+	int	x_plus_mar;
+	int	x_minus_mar;
+
+	y_plus_mar = (int)((pos.y + MARGIN) / SCALE);
+	y_minus_mar = (int)((pos.y - MARGIN) / SCALE);
+	x_plus_mar = (int)((pos.x + MARGIN) / SCALE);
+	x_minus_mar = (int)((pos.x - MARGIN) / SCALE);
+	if (game->map[y_plus_mar][x_plus_mar] == '1')
+		return (0);
+	if (game->map[y_plus_mar][x_minus_mar] == '1')
+		return (0);
+	if (game->map[y_minus_mar][x_plus_mar] == '1')
+		return (0);
+	if (game->map[y_minus_mar][x_minus_mar] == '1')
+		return (0);
+	return (1);
 }
 
-void	check_move_valid(t_game *game, t_point new, t_point step)
+void	check_move_valid(t_game *game, t_point new)
 {
-	t_point old;
-	int	map_x;
-	int	map_y;
+	t_point	check_x;
+	t_point	check_y;
 
-	map_x = (int)((new.x + (step.x * DIST)) / SCALE);
-	map_y = (int)((new.y + (step.y * DIST)) / SCALE);
-	old.x = (int)(game->player.x / SCALE);
-	old.y = (int)(game->player.y / SCALE);
-	if (game->map[map_y][map_x] == '1')
-	{
-		if (game->map[(int)(old.y)][map_x] == '1' && game->map[map_y][(int)(old.x)] != '1')
-			game->player.y = new.y;
-		else if (game->map[map_y][(int)(old.x)] == '1' && game->map[(int)(old.y)][map_x] != '1')
-			game->player.x = new.x;
-	}
-	else
-	{
+	check_x.x = new.x;
+	check_x.y = game->player.y;
+	check_y.x = game->player.x;
+	check_y.y = new.y;
+	if (is_valid_position(game, check_x))
 		game->player.x = new.x;
+	if (is_valid_position(game, check_y))
 		game->player.y = new.y;
-	}
 }
 
 void	update_player(t_game *game)
 {
-	t_point new;
-	t_point step;
+	t_point	new;
+	t_point	step;
 
-	update_angle(game);
+	game->player.angle = normalize_angle(
+			game->player.angle + game->player.turn_dir * ROTATION_SPEED);
 	if (game->player.y_dir != 0)
 	{
 		step.x = game->player.y_dir * cos(RAD(game->player.angle));
@@ -97,11 +104,11 @@ void	update_player(t_game *game)
 	else if (game->player.x_dir != 0)
 	{
 		step.x = cos(RAD(game->player.angle + game->player.x_dir * 90));
-		step.y = + sin(RAD(game->player.angle + game->player.x_dir * 90));
+		step.y = sin(RAD(game->player.angle + game->player.x_dir * 90));
 		new.x = game->player.x + step.x * MOVE_SPEED;
 		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else
 		return ;
-	check_move_valid(game, new, step);
+	check_move_valid(game, new);
 }
