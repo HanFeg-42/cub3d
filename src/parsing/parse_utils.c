@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/13 15:54:02 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:07:55 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	is_all_config_loaded(t_game *game)
 		|| !game->config.so
 		|| !game->config.we
 	)
-		exit_game(game, MISSING_TEXTURE, EXIT_FAILURE);
+		exit_game(game, ERROR_MISSING_TEXTURE, EXIT_FAILURE);
 	if (game->config.c_rgb == -1 || game->config.f_rgb == -1)
-		exit_game(game, MISSING_COLOR, EXIT_FAILURE);
+		exit_game(game, ERROR_MISSING_COLOR, EXIT_FAILURE);
 }
 
 int	has_adjacent_space(t_parse *parser, int x, int y)

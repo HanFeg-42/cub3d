@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 12:07:24 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:34:22 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:09:19 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	check_map_elements(t_game *game, char *map)
 	while (map[i] && ft_strchr("01NSEW \n", map[i]))
 		i++;
 	if (map[i] != '\0')
-		exit_game(game, UNVALID_ELEMENT, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_ELEMENT, EXIT_FAILURE);
 }
 
 static void	check_map_shape(t_game *game, char *map)
@@ -41,7 +41,7 @@ static void	check_map_shape(t_game *game, char *map)
 		tmp_line = gc_substr(nl_pos, 0, next_nl_pos - nl_pos);
 		tmp_line = gc_strtrim(tmp_line, " \n");
 		if (tmp_line[0] == '\0')
-			exit_game(game, EMPTY_LINE, EXIT_FAILURE);
+			exit_game(game, ERROR_EMPTY_LINE, EXIT_FAILURE);
 		tmp_line = next_nl_pos + 1;
 	}
 }
@@ -62,13 +62,13 @@ static void	check_player(t_game *game, t_parse *parser)
 			if (ptr && !parser->is_player)
 				parser->is_player = EXIST;
 			else if (ptr && parser->is_player == EXIST)
-				exit_game(game, DOUBLED_PLAYER, EXIT_FAILURE);
+				exit_game(game, ERROR_MULTIPLE_PLAYERS, EXIT_FAILURE);
 			x++;
 		}
 		y++;
 	}
 	if (parser->is_player != EXIST)
-		exit_game(game, NO_PLAYER, EXIT_FAILURE);
+		exit_game(game, ERROR_NO_PLAYER, EXIT_FAILURE);
 }
 
 static void	check_map_walls(t_game *game, t_parse *parser)
@@ -84,7 +84,7 @@ static void	check_map_walls(t_game *game, t_parse *parser)
 		{
 			if (ft_strchr("NSWE0", parser->map[y][x])
 					&& has_adjacent_space(parser, x, y))
-				exit_game(game, UNVALID_MAP, EXIT_FAILURE);
+				exit_game(game, ERROR_INVALID_MAP, EXIT_FAILURE);
 			x++;
 		}
 		y++;
