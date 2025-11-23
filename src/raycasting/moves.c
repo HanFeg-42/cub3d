@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 17:20:16 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/23 16:32:12 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ int	key_press(int key, t_game *data)
 		data->player.turn_dir = -1;
 	else if (key == XK_Right)
 		data->player.turn_dir = 1;
+	else if (key == XK_space)
+	{
+    	if (data->player.is_shooting == false)
+    	{
+        	data->player.is_shooting = true;
+        	data->gun.current_frame = 0;
+        	data->gun.anim_timer = 0;
+    	}
+	}
 	else if (key == XK_Escape)
 		mlx_loop_end(data->mlx);
 	return (0);
@@ -33,20 +42,14 @@ int	key_press(int key, t_game *data)
 
 int	key_release(int key, t_game *data)
 {
-	if (key == XK_w)
+	if (key == XK_w || key == XK_s)
 		data->player.y_dir = 0;
-	else if (key == XK_s)
-		data->player.y_dir = 0;
-	else if (key == XK_d)
+	else if (key == XK_d || key == XK_a)
 		data->player.x_dir = 0;
-	else if (key == XK_a)
-		data->player.x_dir = 0;
-	else if (key == XK_Left)
+	else if (key == XK_Left || key == XK_Right)
 		data->player.turn_dir = 0;
-	else if (key == XK_Right)
-		data->player.turn_dir = 0;
-	else if (key == XK_Escape)
-		mlx_loop_end(data->mlx);
+	if(data->player.y_dir == 0 && data->player.x_dir == 0)
+		data->player.is_moving = false;
 	return (0);
 }
 
@@ -68,6 +71,7 @@ void	check_move_valid(t_game *game, t_point new, t_point step)
 	{
 		game->player.x = new.x;
 		game->player.y = new.y;
+		game->player.is_moving = true;
 	}
 }
 
@@ -92,6 +96,6 @@ void	update_player(t_game *game)
 		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else
-		return ;
+		return;
 	check_move_valid(game, new, step);
 }

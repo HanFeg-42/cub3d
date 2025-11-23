@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/17 13:33:38 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 17:08:56 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@
 # define FOV 60
 # define NUM_RAYS WINDOW_WIDTH
 # define BUFFER_SIZE 32
-# define SENSITIVITY 0.004
-
+# define SENSITIVITY 0.008
 # define RED     0xFF0000
 # define GREEN   0x00FF00
 # define BLUE    0x0000FF
 # define WHITE   0xFFFFFF
 # define BLACK   0x000000
 # define GRAY	 0x505050
+# define MAGIC_PINK	0xFF00FF
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue
 // #define FLOOR_COLOR    0x3E2C1C  // dark brown
@@ -47,7 +47,7 @@
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
 # define MOVE_SPEED 5
-# define ROTATION_SPEED 0.5
+# define ROTATION_SPEED 1
 # define RAD(x) ((x) * M_PI / 180)
 # define _USE_MATH_DEFINES
 # define HORZ 1
@@ -60,6 +60,10 @@
 # define WALLSTRIP_SCALE_FACTOR 0.5
 # define WALL_STRIP_WIDTH 1
 #define NUM_TEXTURES 4
+#define NUM_FRAME_SHOT 10
+#define NUM_FRAME_MOVE 22
+#define ANIM_SPEED 10
+#define GUN_SCALE 1
 # define DIST 10
 
 # define EXIST 1
@@ -100,6 +104,8 @@ typedef struct s_player
 	int	turn_dir;
 	double	x_dir;
 	double	y_dir;
+	bool is_moving;
+	bool is_shooting;
 }	t_player;
 
 typedef struct s_config
@@ -128,6 +134,16 @@ typedef struct s_ray
 	double  correct_wall_dist;
 }		t_ray;
 
+typedef struct s_gun
+{
+    t_img   shot[NUM_FRAME_SHOT];
+    t_img   move[NUM_FRAME_MOVE];
+    t_img   idle;
+    int     current_frame;
+    long     anim_timer;
+}   t_gun;
+
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -140,6 +156,7 @@ typedef struct s_game
 	t_config	config;
 	t_ray		ray[NUM_RAYS];
 	t_img texture[NUM_TEXTURES];
+	t_gun gun;
 }			t_game;
 
 char	*get_next_line(int fd);
@@ -178,7 +195,11 @@ void			calculate_horz_map(t_ray ray, t_tex *tex_math);
 void			calculate_vert_map(t_tex *tex, double wall_height);
 void			draw_textured_column(t_game *g, t_tex *tex,int i);
 t_img			*get_correct_texture(t_game *g, t_ray ray);
-int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y);
-int mouse_move(int x, int y ,t_game *game);
-int shade_color(int color, double factor);
+int				get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y);
+int 			mouse_move(int x, int y ,t_game *game);
+int 			shade_color(int color, double factor);
+void			init_wall_textures(t_game *game);
+void			init_anim_textures(t_game *game);
+void 			render_animation(t_game *game);
+void update_animation(t_game *game);
 #endif

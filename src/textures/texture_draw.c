@@ -6,32 +6,30 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 15:39:40 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/17 13:34:02 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 17:25:51 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void draw_textured_column(t_game *game, t_tex *tex, int i)
+void	draw_textured_column(t_game *game, t_tex *tex, int i)
 {
-	int y;
-	int x;
-	int tex_y;
-	int color;
+	int	y;
+	int	x;
+	int	tex_y;
+	int	color;
 
 	y = tex->draw_start;
-
 	while (y < tex->draw_end)
 	{
 		tex_y = (int)tex->tex_pos;
-		if(tex_y < 0)
+		if (tex_y < 0)
 			tex_y = 0;
 		color = get_texture_pixel_color(tex->tex_img, tex->tex_x, tex_y);
 		x = i;
 		while (x < i + WALL_STRIP_WIDTH)
 		{
 			my_mlx_pixel_put(&game->img, x, y, color);
-
 			x++;
 		}
 		tex->tex_pos += tex->step;
@@ -39,38 +37,39 @@ void draw_textured_column(t_game *game, t_tex *tex, int i)
 	}
 }
 
-void draw_floor(t_game *game,t_tex tex, int x)
+void	draw_floor(t_game *game, t_tex tex, int x)
 {
-	int y;
+	int	y;
+
 	y = tex.draw_end + 1;
-
-	while ( y < WINDOW_HEIGHT-1)
+	while (y < WINDOW_HEIGHT - 1)
 	{
-		my_mlx_pixel_put(&game->img,x,y,game->config.f_rgb);
-		y++;
-	}	
-}
-void draw_ceiling(t_game *game ,t_tex tex, int x)
-{
-	int y;
-	y = 0;
-
-	while ( y < tex.draw_start)
-	{
-		my_mlx_pixel_put(&game->img,x,y,game->config.c_rgb);
+		my_mlx_pixel_put(&game->img, x, y, game->config.f_rgb);
 		y++;
 	}
 }
-void texture_mapping_and_draw(t_game *game, t_ray ray, int i, double wall_h)
+
+void	draw_ceiling(t_game *game, t_tex tex, int x)
 {
-	t_tex tex;
+	int	y;
+
+	y = 0;
+	while (y < tex.draw_start)
+	{
+		my_mlx_pixel_put(&game->img, x, y, game->config.c_rgb);
+		y++;
+	}
+}
+
+void	texture_mapping_and_draw(t_game *game, t_ray ray, int i, double wall_h)
+{
+	t_tex		tex;
 
 	ft_bzero(&tex, sizeof(t_tex));
-
 	tex.tex_img = get_correct_texture(game, ray);
 	calculate_horz_map(ray, &tex);
 	calculate_vert_map(&tex, wall_h);
-	draw_ceiling(game,tex,i);
-	draw_floor(game,tex,i);
+	draw_ceiling(game, tex, i);
+	draw_floor(game, tex, i);
 	draw_textured_column(game, &tex, i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:18:59 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 12:22:31 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/20 19:16:42 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void			*gc_alloc(size_t size);
 void			free_one(void *addr);
 void			free_all(void);
 char	*gc_strjoin(char const *s1, char const *s2);
+char	*gc_str_join(char *s1, char *s2);
 char	*gc_strdup(const char *str);
 char	**gc_split(char const *s, char c);
 char	*gc_strtrim(char const *s1, char const *set);
 char	*gc_substr(char const *s, unsigned int start, size_t len);
+char	*gc_itoa(int nbr);
 
 #endif
