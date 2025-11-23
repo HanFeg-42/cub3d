@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:08:44 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/12 14:56:24 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 19:57:07 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y)
 
 t_img	*get_correct_texture(t_game *game, t_ray ray)
 {
+	// if(game->map[(int)ray.wall_hit_x / SCALE ][] == 'D')
+	// 	return (&game->door);
 	if (ray.is_horz)
 	{
 		if (ray.is_facing_up)

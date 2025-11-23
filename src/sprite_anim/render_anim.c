@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 18:49:02 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 17:32:18 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 18:09:48 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	update_animation(t_game *game)
 	game->gun.anim_timer++;
 	if (game->player.is_shooting)
 	{
-		if (game->gun.anim_timer % ANIM_SPEED)
+		if (game->gun.anim_timer % ANIM_SPEED == 0)
 		{
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_SHOT)
@@ -29,7 +29,7 @@ void	update_animation(t_game *game)
 	}
 	else if (game->player.is_moving)
 	{
-		if (game->gun.anim_timer % ANIM_SPEED)
+		if (game->gun.anim_timer % ANIM_SPEED == 0)
 		{
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_MOVE)
@@ -60,7 +60,8 @@ void	draw_anim_texture(t_game *game, t_img *frame, int drawn_height,
 	int	color;
 
 	screen_y = WINDOW_HEIGHT - drawn_height;
-	screen_x = (WINDOW_WIDTH / 2) - (drawn_width / 2);
+	// screen_x = (WINDOW_WIDTH / 2) - (drawn_width / 2);
+	screen_x = 0;
 	y = 0;
 	while (y < drawn_height)
 	{
@@ -69,19 +70,15 @@ void	draw_anim_texture(t_game *game, t_img *frame, int drawn_height,
 		{
 			color = get_texture_pixel_color(frame, x * GUN_SCALE, y
 					* GUN_SCALE);
-			if (color != MAGIC_PINK)
-			{
-				if (screen_x + x >= 0 && screen_x + x < WINDOW_WIDTH &&
-					screen_y + y >= 0 && screen_y + y < WINDOW_HEIGHT)
-					my_mlx_pixel_put(&game->img, screen_x + x, screen_y + y,
-							color);
-			}
+			if (color != MAGIC_PINK && screen_x + x >= 0
+				&& screen_x + x < WINDOW_WIDTH
+				&& screen_y + y >= 0 && screen_y + y < WINDOW_HEIGHT)
+				my_mlx_pixel_put(&game->img, screen_x + x, screen_y + y, color);
 			x++;
 		}
 		y++;
 	}
 }
-
 
 void	render_animation(t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/17 23:45:01 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 17:44:54 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	draw_disk(t_img *img, double xc, double yc, double r)
 		while (x <= xc + r)
 		{
 			if ((x - xc) * (x - xc) + (y - yc) * (y - yc) <= r * r)
-				my_mlx_pixel_put(img, x, y, RED);
+				my_mlx_pixel_put(img, x, y, GRAY);
 			x++;
 		}
 		y++;
@@ -109,7 +109,7 @@ void	line(t_img *img, double x1, double y1, double x2, double y2)
 
 	while (i < steps)
 	{
-		my_mlx_pixel_put(img, (int)round(x1), (int)round(y1), 0xFF0000);
+		my_mlx_pixel_put(img, (int)round(x1), (int)round(y1),GRAY);
 		x1 += x_inc;
 		y1 += y_inc;
 		i++;

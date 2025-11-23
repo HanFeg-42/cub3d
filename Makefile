@@ -1,7 +1,7 @@
 NAME		=	cub3D
 CC		=	cc
 RM		=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror -g3 -MMD -MP -I$(INC_D) -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g3 -MMD -MP -I$(INC_D) #-fsanitize=address
 MLXFLAGS	=	-lXext -lX11 -lm
 LIBMLX_D	=	minilibx-linux
 LIBMLX_LINUX	=	$(LIBMLX_D)/libmlx_Linux.a

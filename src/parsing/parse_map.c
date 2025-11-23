@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 12:07:24 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:34:22 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/23 18:13:06 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	check_map_elements(t_game *game, char *map)
 	int	i;
 
 	i = 0;
-	while (map[i] && ft_strchr("01NSEW \n", map[i]))
+	while (map[i] && ft_strchr("01DNSEW \n", map[i]))
 		i++;
 	if (map[i] != '\0')
 		exit_game(game, UNVALID_ELEMENT, EXIT_FAILURE);

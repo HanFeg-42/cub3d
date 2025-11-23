@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/23 17:05:59 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 17:56:59 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_minimap(t_game *game)
 				draw_square(&game->img,
 					j * SCALE * MINIMAP_SCALE_FACTOR,
 					i * SCALE * MINIMAP_SCALE_FACTOR,
-					BLUE);
+					BLACK);
 			j++;
 		}
 		i++;

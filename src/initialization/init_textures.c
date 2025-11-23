@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/23 17:40:00 by gstitou           #+#    #+#             */
+/*   Updated: 2025/11/23 17:40:01 by gstitou          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	load_one_texture(t_game *game, t_img *texture, char *path)
 {
-	texture->img = mlx_xpm_file_to_image(game->mlx, path,
-			&texture->width, &texture->height);
+	texture->img = mlx_xpm_file_to_image(game->mlx, path, &texture->width,
+			&texture->height);
 	if (texture->img == NULL)
 	{
 		printf("Error\nFailed to load texture: %s\n", path);
@@ -18,36 +30,36 @@ void	load_one_texture(t_game *game, t_img *texture, char *path)
 	}
 }
 
-void init_wall_textures(t_game *game)
+void	init_wall_textures(t_game *game)
 {
-    load_one_texture(game, &game->texture[NORTH], game->config.no);
+	load_one_texture(game, &game->texture[NORTH], game->config.no);
 	load_one_texture(game, &game->texture[SOUTH], game->config.so);
 	load_one_texture(game, &game->texture[EAST], game->config.ea);
 	load_one_texture(game, &game->texture[WEST], game->config.we);
 }
 
-void init_anim_textures(t_game *game)
+void	init_anim_textures(t_game *game)
 {
-    int i;
-    char *path;
+	int		i;
+	char	*path;
 
-    i = 0;
-    load_one_texture(game,&game->gun.idle,"textures/idle/idle.xpm");
-    while (i < NUM_FRAME_SHOT)
-    {
-        path= gc_str_join("textures/shot/shot",gc_itoa(i+1));
-        path= gc_str_join(path,".xpm");
-        load_one_texture(game, &game->gun.shot[i], path);
-        i++;
-    }
-    i = 0;
-    while(i < NUM_FRAME_MOVE)
-    {
-        path= gc_str_join("textures/move/walk",gc_itoa(i+1));
-        path= gc_str_join(path,".xpm");
-        load_one_texture(game, &game->gun.move[i], path);
-        i++;
-    }
-    game->gun.current_frame = 0;
-    game->gun.anim_timer = 0; 
+	i = 0;
+	load_one_texture(game, &game->gun.idle, "textures/idle/idle.xpm");
+	while (i < NUM_FRAME_SHOT)
+	{
+		path = gc_str_join("textures/shot/shot", gc_itoa(i + 1));
+		path = gc_str_join(path, ".xpm");
+		load_one_texture(game, &game->gun.shot[i], path);
+		i++;
+	}
+	i = 0;
+	while (i < NUM_FRAME_MOVE)
+	{
+		path = gc_str_join("textures/move/walk", gc_itoa(i + 1));
+		path = gc_str_join(path, ".xpm");
+		load_one_texture(game, &game->gun.move[i], path);
+		i++;
+	}
+	game->gun.current_frame = 0;
+	game->gun.anim_timer = 0;
 }

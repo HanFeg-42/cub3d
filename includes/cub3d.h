@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 17:08:56 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 18:21:52 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 #define NUM_TEXTURES 4
 #define NUM_FRAME_SHOT 10
 #define NUM_FRAME_MOVE 22
-#define ANIM_SPEED 10
+#define ANIM_SPEED 1
 #define GUN_SCALE 1
 # define DIST 10
 
@@ -156,6 +156,7 @@ typedef struct s_game
 	t_config	config;
 	t_ray		ray[NUM_RAYS];
 	t_img texture[NUM_TEXTURES];
+	t_img door;
 	t_gun gun;
 }			t_game;
 
