@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:08:44 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 19:57:07 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 16:04:04 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,33 @@ int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y)
 	return (*(int *)pixel_address);
 }
 
+static int	has_door_at(t_game *game, t_ray *ray, double next_x, double next_y)
+{
+	int	map_x;
+	int	map_y;
+
+	if (ray->is_horz && ray->is_facing_up)
+		map_y = (int)((next_y - 1) / SCALE);
+	else
+		map_y = (int)(next_y / SCALE);
+	if (!ray->is_horz && ray->is_facing_left)
+		map_x = (int)((next_x - 1) / SCALE);
+	else
+	{
+		map_x = (int)(next_x / SCALE);
+	}
+	if (!game->map[map_y] || map_x >= (int)ft_strlen(game->map[map_y]))
+	{
+		return (1);
+	}
+	return (game->map[map_y][map_x] == 'D');
+}
+
+
 t_img	*get_correct_texture(t_game *game, t_ray ray)
 {
-	// if(game->map[(int)ray.wall_hit_x / SCALE ][] == 'D')
-	// 	return (&game->door);
+	if(has_door_at(game, &ray, ray.wall_hit_x,ray.wall_hit_y))
+		return (&game->door);
 	if (ray.is_horz)
 	{
 		if (ray.is_facing_up)

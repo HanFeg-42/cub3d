@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 17:40:00 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 21:42:08 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 15:35:50 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	init_wall_textures(t_game *game)
 	load_one_texture(game, &game->texture[SOUTH], game->config.so);
 	load_one_texture(game, &game->texture[EAST], game->config.ea);
 	load_one_texture(game, &game->texture[WEST], game->config.we);
+	load_one_texture(game,&game->door,"textures/door/door.xpm");
 }
 
 void	init_anim_textures(t_game *game)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:57:42 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:15:02 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:53:45 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	has_wall_at(t_game *game, t_ray *ray, double next_x, double next_y)
 	{
 		return (1);
 	}
-	return (game->map[map_y][map_x] == '1');
+	return (game->map[map_y][map_x] == '1' || game->map[map_y][map_x] == 'D');
 }
 
 void	init_ray(t_ray *ray, double angle, int is_horz)

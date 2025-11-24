@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:23:44 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:38:33 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ void	clean_textures(t_game *game)
 			mlx_destroy_image(game->mlx, game->texture[i].img);
 		i++;
 	}
+	i = 0;
+	while(i < NUM_FRAME_SHOT)
+	{
+		if(game->gun.shot[i].img)
+			mlx_destroy_image(game->mlx, game->gun.shot[i].img);
+		i++;
+	}
+	i = 0;
+	while(i < NUM_FRAME_MOVE)
+	{
+		if(game->gun.move[i].img)
+			mlx_destroy_image(game->mlx, game->gun.move[i].img);
+		i++;
+	}
+	if(game->door.img)
+			mlx_destroy_image(game->mlx, game->door.img);
 }
 
 void	destroy_game(t_game *game)
