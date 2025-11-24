@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 21:41:58 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 20:57:51 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,10 @@ typedef struct s_gun
     int     current_frame;
 }   t_gun;
 
-
+// typedef struct s_door
+// {
+// 	t_img *door_closed;
+// }
 typedef struct s_game
 {
 	void		*mlx;
@@ -159,6 +162,7 @@ typedef struct s_game
 	t_config	config;
 	t_ray		ray[NUM_RAYS];
 	t_img texture[NUM_TEXTURES];
+	// t_door *door;
 	t_img door;
 	t_gun gun;
 }			t_game;
