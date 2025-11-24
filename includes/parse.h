@@ -6,19 +6,27 @@
 # define TRUE 0
 # define FALSE 1
 
-# define UNVALID_EXTENTION "Error\nunvlalid extention"
-# define OPEN_FILE "Error\nfailed to open the file"
-# define UNVALID_ARG "Error\nUsage: ./cub3D path_to_map.cub"
-# define UNVALID_CONFIG "Error\nunvalid config param"
-# define UNVALID_COLOR "Error\nunvalid color!"
-# define MISSING_TEXTURE "Error\nmissing texture!"
-# define MISSING_COLOR "Error\nmissing color!"
-# define XPM_EXT "Error\nmissed '.xpm'  extension"
-# define UNVALID_ELEMENT "Error\nunvalid map element unknown char"
-# define EMPTY_LINE "Error\nthere is an empty or only spaces in the map"
-# define DOUBLED_PLAYER "Error\nmdouble l player"
-# define NO_PLAYER "Error\nwa lplayer makaynch"
-# define UNVALID_MAP "Error\nlmap mahyach"
+// Error messages for file handling
+#define ERROR_INVALID_EXTENSION "Error\nInvalid file extension"
+#define ERROR_FILE_OPEN_FAILED  "Error\nFailed to open file"
+#define ERROR_EMPTY_FILE        "Error\nFile is empty"
+
+// Error messages for program arguments
+#define ERROR_INVALID_ARGS      "Error\nUsage: ./cub3D path_to_map.cub"
+
+// Error messages for configuration
+#define ERROR_INVALID_CONFIG    "Error\nInvalid configuration parameter"
+#define ERROR_INVALID_COLOR     "Error\nInvalid color format"
+#define ERROR_MISSING_TEXTURE   "Error\nMissing texture path"
+#define ERROR_MISSING_COLOR     "Error\nMissing color definition"
+#define ERROR_MISSING_XPM_EXT   "Error\nTexture must have '.xpm' extension"
+
+// Error messages for map validation
+#define ERROR_INVALID_ELEMENT   "Error\nInvalid map element: unknown character"
+#define ERROR_EMPTY_LINE        "Error\nMap contains empty line or line with only spaces"
+#define ERROR_MULTIPLE_PLAYERS  "Error\nMultiple player spawn positions found"
+#define ERROR_NO_PLAYER         "Error\nNo player spawn position found"
+#define ERROR_INVALID_MAP       "Error\nMap is not properly enclosed by walls"
 
 typedef struct s_parse
 {

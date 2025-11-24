@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:57:42 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/14 15:43:08 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:15:02 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,21 @@ static int	has_wall_at(t_game *game, t_ray *ray, double next_x, double next_y)
 	int	map_x;
 	int	map_y;
 
-    if (ray->is_horz && ray->is_facing_up)
-        map_y = (int)((next_y - 1) / SCALE);
-    else
-        map_y = (int)(next_y / SCALE);
-    if (!ray->is_horz && ray->is_facing_left)
-        map_x = (int)((next_x - 1) / SCALE);
-    else
+	if (ray->is_horz && ray->is_facing_up)
+		map_y = (int)((next_y - 1) / SCALE);
+	else
+		map_y = (int)(next_y / SCALE);
+	if (!ray->is_horz && ray->is_facing_left)
+		map_x = (int)((next_x - 1) / SCALE);
+	else
 	{
-        map_x = (int)(next_x / SCALE);
+		map_x = (int)(next_x / SCALE);
 	}
-
 	if (!game->map[map_y] || map_x >= (int)ft_strlen(game->map[map_y]))
 	{
 		return (1);
 	}
-    return (game->map[map_y][map_x] == '1');
+	return (game->map[map_y][map_x] == '1');
 }
 
 void	init_ray(t_ray *ray, double angle, int is_horz)
@@ -86,58 +85,3 @@ void	init_hit_intersect(t_game *game, t_ray *r, double next_x, double next_y)
 	}
 	r->distance = get_ray_distance(game->player, *r);
 }
-
-// void	init_hit_intersect(t_game *game, t_ray *r, double next_x, double next_y)
-// {
-// 	while (1)
-// 	{
-// 		if (has_wall_at(game, r, next_x, next_y))
-// 		{
-// 			r->wall_hit_x = next_x;
-// 			r->wall_hit_y = next_y;
-// 			break ;
-// 		}
-// 		next_x += r->x_step;
-// 		next_y += r->y_step;
-		
-// 		// Safety check: don't let the ray go infinitely far
-// 		if (fabs(next_x) > game->width * SCALE * 2 || 
-// 		    fabs(next_y) > game->height * SCALE * 2)
-// 			break;
-// 	}
-// 	r->distance = get_ray_distance(game->player, *r);
-// }
-
-// void	init_hit_intersect(t_game *game, t_ray *r, double next_x, double next_y)
-// {
-// 	int	map_x;
-// 	int	map_y;
-	
-// 	while (1)
-// 	{
-// 		// Calculate what the map coordinates WILL BE in has_wall_at
-// 		if (r->is_horz && r->is_facing_up)
-// 			map_y = (int)((next_y - 1) / SCALE);
-// 		else
-// 			map_y = (int)(next_y / SCALE);
-// 		if (!r->is_horz && r->is_facing_left)
-// 			map_x = (int)((next_x - 1) / SCALE);
-// 		else
-// 			map_x = (int)(next_x / SCALE);
-		
-// 		// Check these calculated bounds
-// 		if (map_x < 0 || map_x >= game->width || 
-// 		    map_y < 0 || map_y >= game->height)
-// 			break;
-		
-// 		if (has_wall_at(game, r, next_x, next_y))
-// 		{
-// 			r->wall_hit_x = next_x;
-// 			r->wall_hit_y = next_y;
-// 			break ;
-// 		}
-// 		next_x += r->x_step;
-// 		next_y += r->y_step;
-// 	}
-// 	r->distance = get_ray_distance(game->player, *r);
-// }

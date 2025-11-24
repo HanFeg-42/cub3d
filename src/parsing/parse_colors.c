@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 16:40:47 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:09:40 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	parse_rgb(t_game *game, char *nbr)
 	int	n;
 
 	if (!is_numeric(nbr))
-		exit_game(game, UNVALID_COLOR, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	n = ft_atoi(nbr);
 	return (n);
 }
@@ -66,10 +66,10 @@ static int	get_parsed_rgb(t_game *game, char *color)
 	int		rgb;
 
 	if (count_occ(color, ',') != 2)
-		exit_game(game, UNVALID_COLOR, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	rgb_arr = gc_split(color, ',');
 	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2] || rgb_arr[3])
-		exit_game(game, UNVALID_COLOR, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	parsed_rgb[0] = parse_rgb(game, rgb_arr[0]);
 	parsed_rgb[1] = parse_rgb(game, rgb_arr[1]);
 	parsed_rgb[2] = parse_rgb(game, rgb_arr[2]);
@@ -84,5 +84,5 @@ void	parse_color(t_game *game, char *color)
 	else if (color[0] == 'F' && game->config.f_rgb == -1)
 		game->config.f_rgb = get_parsed_rgb(game, color + 1);
 	else
-		exit_game(game, UNVALID_COLOR, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 }

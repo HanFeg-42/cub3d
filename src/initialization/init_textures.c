@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 17:40:00 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 17:40:01 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/23 21:42:08 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,4 @@ void	init_anim_textures(t_game *game)
 		i++;
 	}
 	game->gun.current_frame = 0;
-	game->gun.anim_timer = 0;
 }
