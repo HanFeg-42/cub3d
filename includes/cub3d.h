@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 21:41:58 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 21:02:01 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define MAGIC_PINK	0xFF00FF
 # define MINIMAP_COLOR 0xC8C8C8
 # define PLAYER_COLOR 0x64FF64
+# define DOOR_COLOR BLUE
 
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue

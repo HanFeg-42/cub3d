@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:07:55 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/24 21:15:37 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	is_all_config_loaded(t_game *game)
 
 int	has_adjacent_space(t_parse *parser, int x, int y)
 {
-	if (!parser->map[y - 1][x] || !parser->map[y + 1][x]
+	if (y - 1 < 0 || x - 1 < 0
+			|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
 			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
 		return (1);
 	if (parser->map[y - 1][x] == ' '

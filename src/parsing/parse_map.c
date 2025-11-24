@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 12:07:24 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/23 20:06:02 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 22:04:27 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,20 @@ static void	check_player(t_game *game, t_parse *parser)
 		exit_game(game, ERROR_NO_PLAYER, EXIT_FAILURE);
 }
 
+int is_door_valid(t_parse *parser, int x, int y)
+{
+	if (y - 1 < 0 || x - 1 < 0
+			|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
+			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
+		return (0);
+	if (!((parser->map[y - 1][x] == '1'
+			&& parser->map[y + 1][x] == '1')
+			|| (parser->map[y][x - 1] == '1'
+			&& parser->map[y][x + 1] == '1')))
+		return (0);
+	return (1);
+}
+
 static void	check_map_walls(t_game *game, t_parse *parser)
 {
 	int	x;
@@ -82,9 +96,11 @@ static void	check_map_walls(t_game *game, t_parse *parser)
 		x = 0;
 		while (parser->map[y][x])
 		{
-			if (ft_strchr("NSWE0", parser->map[y][x])
+			if (ft_strchr("NSWE0D", parser->map[y][x])
 					&& has_adjacent_space(parser, x, y))
 				exit_game(game, ERROR_INVALID_MAP, EXIT_FAILURE);
+			if (parser->map[y][x] == 'D' && !is_door_valid(parser, x, y))
+				exit_game(game, ERROR_INVALID_DOOR, EXIT_FAILURE);
 			x++;
 		}
 		y++;
@@ -101,5 +117,6 @@ void	parse_map(t_game *game, t_parse *parser)
 	parser->map = gc_split(map_str, '\n');
 	check_player(game, parser);
 	check_map_walls(game, parser);
+	// check_door(game, parser);
 	game->map = ft_split(parser->join_map, '\n');
 }
