@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 18:49:02 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 21:39:59 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/26 23:01:33 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	update_animation(t_game *game)
 {
 	if (game->player.is_shooting)
 	{
-		usleep(20000);
+		// usleep(20000);
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_SHOT)
 			{
@@ -27,7 +27,7 @@ void	update_animation(t_game *game)
 	}
 	else if (game->player.is_moving)
 	{
-		usleep(20000);
+		// usleep(20000);
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_MOVE)
 				game->gun.current_frame = 0;

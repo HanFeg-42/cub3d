@@ -27,6 +27,7 @@
 #define ERROR_MULTIPLE_PLAYERS  "Error\nMultiple player spawn positions found"
 #define ERROR_NO_PLAYER         "Error\nNo player spawn position found"
 #define ERROR_INVALID_MAP       "Error\nMap is not properly enclosed by walls"
+#define ERROR_INVALID_DOOR		"Error\nInvalid door position"
 
 typedef struct s_parse
 {
@@ -45,5 +46,5 @@ void    parse_map(t_game *game, t_parse *parser);
 char	*gc_strtrim_all(char const *s1, char const *set);
 int		has_adjacent_space(t_parse *parser, int x, int y);
 int		is_file_ext_valid(char *filename, char *right_ext);
-
+int		is_door_valid(t_parse *parser, int x, int y);
 #endif

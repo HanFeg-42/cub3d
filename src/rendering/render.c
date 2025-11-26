@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/23 20:10:47 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/24 21:01:39 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	draw_minimap(t_game *game)
 					j * SCALE * MINIMAP_SCALE_FACTOR,
 					i * SCALE * MINIMAP_SCALE_FACTOR,
 					MINIMAP_COLOR);
+			if (game->map[i][j] == 'D')
+				draw_square(&game->img,
+					j * SCALE * MINIMAP_SCALE_FACTOR,
+					i * SCALE * MINIMAP_SCALE_FACTOR,
+					DOOR_COLOR);
 			j++;
 		}
 		i++;

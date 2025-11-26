@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 15:39:40 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 17:25:51 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/26 23:42:22 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	draw_textured_column(t_game *game, t_tex *tex, int i)
 	int	x;
 	int	tex_y;
 	int	color;
+	
 
 	y = tex->draw_start;
 	while (y < tex->draw_end)
@@ -29,7 +30,7 @@ void	draw_textured_column(t_game *game, t_tex *tex, int i)
 		x = i;
 		while (x < i + WALL_STRIP_WIDTH)
 		{
-			my_mlx_pixel_put(&game->img, x, y, color);
+					my_mlx_pixel_put(&game->img, x, y, color);
 			x++;
 		}
 		tex->tex_pos += tex->step;

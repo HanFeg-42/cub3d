@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/24 20:57:51 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 00:11:59 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define MAGIC_PINK	0xFF00FF
 # define MINIMAP_COLOR 0xC8C8C8
 # define PLAYER_COLOR 0x64FF64
+# define DOOR_COLOR BLUE
 
 
 // #define CEILING_COLOR  0x87CEEB  // light sky blue
@@ -49,7 +50,7 @@
 // #define CEILING_COLOR  0xA9A9A9  // gray ceiling
 // #define FLOOR_COLOR    0x444444  // dark gray floor
 
-# define MOVE_SPEED 5
+# define MOVE_SPEED 2
 # define ROTATION_SPEED 1
 # define RAD(x) ((x) * M_PI / 180)
 # define _USE_MATH_DEFINES
@@ -65,10 +66,13 @@
 #define NUM_TEXTURES 4
 #define NUM_FRAME_SHOT 10
 #define NUM_FRAME_MOVE 22
+#define NUM_DOOR_FRAME 15
 #define ANIM_SPEED 2
 #define GUN_SCALE 1
 # define DIST 10
 # define MARGIN 10
+# define DOOR_DIST 1.3
+
 
 # define EXIST 1
 
@@ -146,10 +150,15 @@ typedef struct s_gun
     int     current_frame;
 }   t_gun;
 
-// typedef struct s_door
-// {
-// 	t_img *door_closed;
-// }
+typedef struct s_door
+{
+	int x;
+	int y;
+	int is_open;
+	double open_progress;
+	
+}t_door;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -162,10 +171,9 @@ typedef struct s_game
 	t_config	config;
 	t_ray		ray[NUM_RAYS];
 	t_img texture[NUM_TEXTURES];
-	// t_door *door;
 	t_img door;
 	t_gun gun;
-}			t_game;
+} t_game;
 
 char	*get_next_line(int fd);
 void    get_map(t_game *game, int ac, char **av);
@@ -209,4 +217,6 @@ void			init_wall_textures(t_game *game);
 void			init_anim_textures(t_game *game);
 void 			render_animation(t_game *game);
 void update_animation(t_game *game);
+void check_door_interaction(t_game *game);
+
 #endif

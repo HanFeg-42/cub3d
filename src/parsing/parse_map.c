@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 12:07:24 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/24 20:56:39 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/26 23:48:56 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,14 @@ static void	check_map_walls(t_game *game, t_parse *parser)
 		x = 0;
 		while (parser->map[y][x])
 		{
-			if (ft_strchr("NSWED0", parser->map[y][x])
+			if (ft_strchr("NSWE0D", parser->map[y][x])
 					&& has_adjacent_space(parser, x, y))
 				exit_game(game, ERROR_INVALID_MAP, EXIT_FAILURE);
+			if (parser->map[y][x] == 'D')
+			{
+				if(!is_door_valid(parser, x, y))
+					exit_game(game, ERROR_INVALID_DOOR, EXIT_FAILURE);
+			}
 			x++;
 		}
 		y++;
@@ -101,5 +106,6 @@ void	parse_map(t_game *game, t_parse *parser)
 	parser->map = gc_split(map_str, '\n');
 	check_player(game, parser);
 	check_map_walls(game, parser);
+	// check_door(game, parser);
 	game->map = ft_split(parser->join_map, '\n');
 }

@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/23 20:05:49 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/26 23:40:44 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void    get_game(t_game *game)
     initialize_mlx(game);
 	init_wall_textures(game);
 	init_anim_textures(game);
+	// init_doors(game);
 }
 
 t_game	*init_game(void)
