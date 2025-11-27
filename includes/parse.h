@@ -27,6 +27,7 @@
 #define ERROR_MULTIPLE_PLAYERS  "Error\nMultiple player spawn positions found"
 #define ERROR_NO_PLAYER         "Error\nNo player spawn position found"
 #define ERROR_INVALID_MAP       "Error\nMap is not properly enclosed by walls"
+#define ERROR_MULTI_COMMAS       "Error\nMultiple commas"
 
 typedef struct s_parse
 {

@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_split.c                                         :+:      :+:    :+:   */
+/*   gc_split_set.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 21:22:18 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/27 21:41:45 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 21:45:45 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
 
-static int	ft_countword(char const *s, char c)
+static int	is_delimiter(char c, char const *set)
+{
+	int	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (c == set[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	ft_countword_set(char const *s, char const *set)
 {
 	int	count;
 	int	i;
@@ -24,9 +38,9 @@ static int	ft_countword(char const *s, char c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (is_delimiter(s[i], set))
 			j = 1;
-		else if (s[i] != c && j == 1)
+		else if (!is_delimiter(s[i], set) && j == 1)
 		{
 			count++;
 			j = 0;
@@ -47,7 +61,7 @@ static char	**ft_freeme(char **s, int index)
 	return (NULL);
 }
 
-static char	**ft_slices(char **ret, char const *s, char c, int a)
+static char	**ft_slices_set(char **ret, char const *s, char const *set, int a)
 {
 	int	len;
 	int	i;
@@ -57,12 +71,12 @@ static char	**ft_slices(char **ret, char const *s, char c, int a)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (is_delimiter(s[i], set))
 			j = 1;
-		else if (s[i] != c && j == 1)
+		else if (!is_delimiter(s[i], set) && j == 1)
 		{
 			len = 0;
-			while (s[i + len] && s[i + len] != c)
+			while (s[i + len] && !is_delimiter(s[i + len], set))
 				len++;
 			ret[a] = gc_substr(s, i, len);
 			if (!ret[a])
@@ -76,17 +90,17 @@ static char	**ft_slices(char **ret, char const *s, char c, int a)
 	return (ret);
 }
 
-char	**gc_split(char const *s, char c)
+char	**gc_split_set(char const *s, char const *set)
 {
 	char	**ret;
 	int		a;
 
 	a = 0;
-	if (!s)
+	if (!s || !set)
 		return (NULL);
-	ret = gc_alloc(sizeof(char *) * (ft_countword(s, c) + 1));
+	ret = gc_alloc(sizeof(char *) * (ft_countword_set(s, set) + 1));
 	if (!ret)
 		return (NULL);
-	ret = ft_slices(ret, s, c, a);
+	ret = ft_slices_set(ret, s, set, a);
 	return (ret);
 }

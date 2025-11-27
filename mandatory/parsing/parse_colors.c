@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 16:08:50 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 22:15:07 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,34 @@ static int	parse_rgb(t_game *game, char *nbr)
 	return (n);
 }
 
-static int	get_parsed_rgb(t_game *game, char *color)
+static int	get_parsed_rgb(t_game *game, char *color, char **rgb_arr)
 {
-	char	**rgb_arr;
 	int		parsed_rgb[3];
 	int		rgb;
 
 	if (count_occ(color, ',') != 2)
+		exit_game(game, ERROR_MULTI_COMMAS, EXIT_FAILURE);
+	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2]
+			|| !rgb_arr[3] || rgb_arr[4])
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
-	rgb_arr = gc_split(color, ',');
-	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2] || rgb_arr[3])
-		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
-	parsed_rgb[0] = parse_rgb(game, rgb_arr[0]);
-	parsed_rgb[1] = parse_rgb(game, rgb_arr[1]);
-	parsed_rgb[2] = parse_rgb(game, rgb_arr[2]);
+	parsed_rgb[0] = parse_rgb(game, rgb_arr[1]);
+	parsed_rgb[1] = parse_rgb(game, rgb_arr[2]);
+	parsed_rgb[2] = parse_rgb(game, rgb_arr[3]);
 	rgb = (parsed_rgb[0] << 16) | (parsed_rgb[1] << 8) | parsed_rgb[2];
 	return (rgb);
 }
 
-int	rgb_form_valid(char *color)
+void	parse_color(t_game *game, char *color, char *full_line)
 {
 	char	**elemt;
 
-	color = gc_strtrim(color, " ");
-	elemt = gc_split(color, ' ');
-}
-
-void	parse_color(t_game *game, char *color, char *full_line)
-{
-	if (!rgb_form_valid(full_line))
+	elemt = gc_split_set(full_line, " ,");
+	if (!elemt)
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
-	if (color[0] == 'C' && game->config.c_rgb == -1)
-		game->config.c_rgb = get_parsed_rgb(game, color + 1);
-	else if (color[0] == 'F' && game->config.f_rgb == -1)
-		game->config.f_rgb = get_parsed_rgb(game, color + 1);
+	if (!ft_strcmp(elemt[0], "F") && game->config.f_rgb == -1)
+		game->config.f_rgb = get_parsed_rgb(game, color, elemt);
+	else if (!ft_strcmp(elemt[0], "C") && game->config.c_rgb == -1)
+		game->config.c_rgb = get_parsed_rgb(game, color, elemt);
 	else
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 }

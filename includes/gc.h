@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:18:59 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/09 12:22:31 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 21:45:31 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*gc_strdup(const char *str);
 char	**gc_split(char const *s, char c);
 char	*gc_strtrim(char const *s1, char const *set);
 char	*gc_substr(char const *s, unsigned int start, size_t len);
+char	**gc_split_set(char const *s, char const *set);
 
 #endif
