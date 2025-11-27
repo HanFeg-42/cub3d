@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 13:33:16 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/27 14:09:20 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:28:01 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@
 #define NUM_DOOR_FRAME 15
 #define ANIM_SPEED 2
 #define GUN_SCALE 1
-# define DIST 10
-# define MARGIN 10
+# define DIST 5
+# define MARGIN 5
 # define DOOR_DIST 1.3
 
 
@@ -219,5 +219,6 @@ void			init_anim_textures(t_game *game);
 void 			render_animation(t_game *game);
 void update_animation(t_game *game);
 void check_door_interaction(t_game *game);
+int mouse_click(int button , int x, int y, t_game *game);
 
 #endif

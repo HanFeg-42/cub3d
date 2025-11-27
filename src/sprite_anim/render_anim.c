@@ -6,17 +6,34 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 18:49:02 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/26 23:01:33 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:37:24 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int mouse_click(int button , int x, int y, t_game *game)
+{
+	(void) x;
+	(void) y;
+	
+	if(button == 1)
+	{
+		if (game->player.is_shooting == false)
+		{
+			game->player.is_shooting = true;
+			game->gun.current_frame = 0;
+		}	
+	}
+	else if(button == 2)
+		check_door_interaction(game);
+	return (0);
+}
+
 void	update_animation(t_game *game)
 {
 	if (game->player.is_shooting)
 	{
-		// usleep(20000);
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_SHOT)
 			{
@@ -27,7 +44,6 @@ void	update_animation(t_game *game)
 	}
 	else if (game->player.is_moving)
 	{
-		// usleep(20000);
 			game->gun.current_frame++;
 			if (game->gun.current_frame >= NUM_FRAME_MOVE)
 				game->gun.current_frame = 0;
@@ -57,7 +73,6 @@ void	draw_anim_texture(t_game *game, t_img *frame, int drawn_height,
 	int	color;
 
 	screen_y = WINDOW_HEIGHT - drawn_height;
-	// screen_x = (WINDOW_WIDTH / 2) - (drawn_width / 2);
 	screen_x = 0;
 	y = 0;
 	while (y < drawn_height)
