@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:07:39 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 22:46:29 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static void	parse_config(t_game *game, t_parse *parser)
 	i = 0;
 	while (parser->config[i])
 	{
-		trim = gc_strtrim_all(parser->config[i], " ");
+		trim = gc_strtrim(parser->config[i], " ");
 		if (strchr("NSWE", trim[0]))
 			parse_texture(game, parser->config[i]);
 		else if (strchr("FC", trim[0]))
-			parse_color(game, trim);
+			parse_color(game, trim, parser->config[i]);
 		else
 			exit_game(game, ERROR_INVALID_CONFIG, EXIT_FAILURE);
 		i++;

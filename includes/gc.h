@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 20:18:59 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/20 19:16:42 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 22:45:30 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	**gc_split(char const *s, char c);
 char	*gc_strtrim(char const *s1, char const *set);
 char	*gc_substr(char const *s, unsigned int start, size_t len);
 char	*gc_itoa(int nbr);
+char	**gc_split_set(char const *s, char const *set);
 
 #endif

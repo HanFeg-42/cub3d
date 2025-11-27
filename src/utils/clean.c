@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:10:16 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 14:13:36 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/18 15:23:44 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,17 @@ void	free_2d_table(char **arr)
 	free(arr);
 }
 
-void clean_anim_textures(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while(i < NUM_FRAME_SHOT)
-	{
-		if(game->gun.shot[i].img)
-			mlx_destroy_image(game->mlx, game->gun.shot[i].img);
-		i++;
-	}
-	i = 0;
-	while(i < NUM_FRAME_MOVE)
-	{
-		if(game->gun.move[i].img)
-			mlx_destroy_image(game->mlx, game->gun.move[i].img);
-		i++;
-	}
-	if(game->gun.idle.img)
-			mlx_destroy_image(game->mlx, game->gun.idle.img);
-}
-
 void	clean_textures(t_game *game)
 {
 	int	i;
 
 	i = 0;
-
 	while (i < NUM_TEXTURES)
 	{
 		if (game->texture[i].img)
 			mlx_destroy_image(game->mlx, game->texture[i].img);
 		i++;
 	}
-	clean_anim_textures(game);
-	
-	if(game->door.img)
-			mlx_destroy_image(game->mlx, game->door.img);
 }
 
 void	destroy_game(t_game *game)
@@ -85,9 +58,8 @@ void	exit_game(t_game *game, char *msg, int status)
 		if (game->mlx)
 		{
 			clean_textures(game);
-			if( game->img.img)
-				mlx_destroy_image(game->mlx, game->img.img);
 			mlx_destroy_window(game->mlx, game->win);
+			mlx_destroy_image(game->mlx, game->img.img);
 			mlx_destroy_display(game->mlx);
 			free(game->mlx);
 		}
