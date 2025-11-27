@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:29:38 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/23 20:11:57 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 13:43:08 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int main(int ac, char **av)
 	render_game(game);
 	mlx_hook(game->win, 17, 0,close_window, game);
 	mlx_mouse_hide(game->mlx, game->win);
+	mlx_mouse_move(game->mlx, game->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	mlx_hook(game->win, 6, (1L << 6),mouse_move, game);
 	mlx_hook(game->win, 2, (1L << 0),key_press, game);
 	mlx_hook(game->win, 3, (1L << 1),key_release, game);

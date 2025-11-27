@@ -6,7 +6,7 @@
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:17:01 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/23 20:11:28 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/27 14:16:08 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	draw_square(t_img *img, double x, double y, int color)
 	int	j;
 
 	i = y + 2;
-	while (i < y + SCALE * MINIMAP_SCALE_FACTOR)
+	while (i < y + SCALE * MM_FACTOR)
 	{
 		j = x + 2;
-		while (j < x + SCALE * MINIMAP_SCALE_FACTOR)
+		while (j < x + SCALE * MM_FACTOR)
 		{
 			my_mlx_pixel_put(img, j, i, color);
 			j++;
@@ -99,12 +99,3 @@ void	line(t_img *img, t_point start, t_point end)
 		i++;
 	}
 }
-
-
-
-// https://sketchfab.com/3d-models/fps-pistol-animated-a8cdd6c2e936484aaf67e1786c8320d9
-
-
-
-
-// https://sketchfab.com/3d-models/fps-arms-saiga-animations-remake-74e30b71e4a049b2a82b9d18f58e623c

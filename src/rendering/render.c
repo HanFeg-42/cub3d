@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/24 21:01:39 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:10:48 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void	draw_minimap(t_game *game)
 		while (game->map[i][j])
 		{
 			if (game->map[i][j] == '1')
-				draw_square(&game->img,
-					j * SCALE * MINIMAP_SCALE_FACTOR,
-					i * SCALE * MINIMAP_SCALE_FACTOR,
-					MINIMAP_COLOR);
+				draw_square(&game->img, j * SCALE * MM_FACTOR,
+					i * SCALE * MM_FACTOR, MINIMAP_COLOR);
 			if (game->map[i][j] == 'D')
-				draw_square(&game->img,
-					j * SCALE * MINIMAP_SCALE_FACTOR,
-					i * SCALE * MINIMAP_SCALE_FACTOR,
-					DOOR_COLOR);
+				draw_square(&game->img, j * SCALE * MM_FACTOR,
+					i * SCALE * MM_FACTOR, DOOR_COLOR);
+			if (game->map[i][j] == 'O')
+			draw_square(&game->img, j * SCALE * MM_FACTOR,
+					i * SCALE * MM_FACTOR, OPEN_DOOR_COLOR);
+			
 			j++;
 		}
 		i++;
@@ -45,14 +45,14 @@ void	render_minimap(t_game *game)
 	t_point	end;
 	int		i;
 
-	start.x = game->player.x * MINIMAP_SCALE_FACTOR;
-	start.y = game->player.y * MINIMAP_SCALE_FACTOR;
+	start.x = game->player.x * MM_FACTOR;
+	start.y = game->player.y * MM_FACTOR;
 	draw_minimap(game);
 	i = 0;
 	while (i < NUM_RAYS)
 	{
-		end.x = game->ray[i].wall_hit_x * MINIMAP_SCALE_FACTOR;
-		end.y = game->ray[i].wall_hit_y * MINIMAP_SCALE_FACTOR;
+		end.x = game->ray[i].wall_hit_x * MM_FACTOR;
+		end.y = game->ray[i].wall_hit_y * MM_FACTOR;
 		line(&game->img, start, end);
 		i++;
 	}
@@ -94,12 +94,15 @@ int	render_game(t_game *game)
 int mouse_move(int x, int y ,t_game *game)
 {
 	(void)y;
+	int center_x;
+	int delta_x;
 	
-    int delta_x = x - (WINDOW_WIDTH / 2);
+	center_x = WINDOW_WIDTH / 2;
+    delta_x = x - center_x;
 	if (delta_x == 0)
         return (0);
     
 		game->player.angle = normalize_angle(game->player.angle + delta_x * SENSITIVITY);
-		mlx_mouse_move(game->mlx, game->win, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+		mlx_mouse_move(game->mlx, game->win, center_x, WINDOW_HEIGHT / 2);
 	return (0);
 }
