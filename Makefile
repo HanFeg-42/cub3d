@@ -10,7 +10,8 @@ INC_D		=	includes
 LIBFT		=	$(LIBFT_D)/libft.a
 OBJ_D		=	obj
 
-SRC		=	$(shell find src/ -name "*.c")
+# SRC		=	$(shell find src/ -name "*.c")
+SRC		=	$(shell find mandatory/ -name "*.c")
 OBJ		=	$(SRC:%.c=$(OBJ_D)/%.o)
 DEP		=	$(OBJ:.o=.d)
 
