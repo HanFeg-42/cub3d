@@ -39,7 +39,7 @@ typedef struct s_parse
 }	t_parse;
 
 void    is_all_config_loaded(t_game *game);
-void    parse_color(t_game *game, char *color_line);
+void	parse_color(t_game *game, char *color, char *full_line);
 void    parse_texture(t_game *game, char *texture);
 void    parse_map(t_game *game, t_parse *parser);
 char	*gc_strtrim_all(char const *s1, char const *set);

@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 23:40:45 by kali              #+#    #+#             */
-/*   Updated: 2025/11/18 14:36:36 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:38:14 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@
 # define GRAY	 0x505050
 # define MINIMAP_COLOR 0xC8C8C8
 # define PLAYER_COLOR 0x64FF64
-
-
-// #define CEILING_COLOR  0x87CEEB  // light sky blue
-// #define FLOOR_COLOR    0x3E2C1C  // dark brown
-// #define CEILING_COLOR  0xC0E8FF  // pale blue
-// #define FLOOR_COLOR    0x705438  // medium brown
-// #define CEILING_COLOR  0xA9A9A9  // gray ceiling
-// #define FLOOR_COLOR    0x444444  // dark gray floor
-
 # define MOVE_SPEED 3
 # define ROTATION_SPEED 0.5
 # define RAD(x) ((x) * M_PI / 180)
@@ -182,5 +173,4 @@ void			draw_textured_column(t_game *g, t_tex *tex,int i);
 t_img			*get_correct_texture(t_game *g, t_ray ray);
 int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y);
 int mouse_move(int x, int y ,t_game *game);
-int shade_color(int color, double factor);
 #endif

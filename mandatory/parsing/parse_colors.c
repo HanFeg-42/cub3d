@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:09:40 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/27 16:08:50 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,18 @@ static int	get_parsed_rgb(t_game *game, char *color)
 	return (rgb);
 }
 
-void	parse_color(t_game *game, char *color)
+int	rgb_form_valid(char *color)
 {
+	char	**elemt;
+
+	color = gc_strtrim(color, " ");
+	elemt = gc_split(color, ' ');
+}
+
+void	parse_color(t_game *game, char *color, char *full_line)
+{
+	if (!rgb_form_valid(full_line))
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	if (color[0] == 'C' && game->config.c_rgb == -1)
 		game->config.c_rgb = get_parsed_rgb(game, color + 1);
 	else if (color[0] == 'F' && game->config.f_rgb == -1)
