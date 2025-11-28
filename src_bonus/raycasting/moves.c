@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 15:36:18 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/28 11:21:37 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ int is_valid_position(t_game *game, t_point pos)
 	x_minus_mar = (int)((pos.x - MARGIN) / SCALE);
 	if (game->map[y_plus_mar][x_plus_mar] == '1' || game->map[y_plus_mar][x_plus_mar] == 'D')
 		return (0);
-	if (game->map[y_plus_mar][x_minus_mar] == '1' || game->map[y_plus_mar][x_plus_mar] == 'D')
+	if (game->map[y_plus_mar][x_minus_mar] == '1' || game->map[y_plus_mar][x_minus_mar] == 'D')
 		return (0);
-	if (game->map[y_minus_mar][x_plus_mar] == '1' || game->map[y_plus_mar][x_plus_mar] == 'D')
+	if (game->map[y_minus_mar][x_plus_mar] == '1' || game->map[y_minus_mar][x_plus_mar] == 'D')
 		return (0);
-	if (game->map[y_minus_mar][x_minus_mar] == '1' || game->map[y_plus_mar][x_plus_mar] == 'D')
+	if (game->map[y_minus_mar][x_minus_mar] == '1' || game->map[y_minus_mar][x_minus_mar] == 'D')
 		return (0);
 	return (1);
 }
 
-void check_move_valid(t_game *game, t_point new)
+static void check_move_valid(t_game *game, t_point new)
 {
 	t_point check_x;
 	t_point check_y;
@@ -87,7 +87,7 @@ void check_move_valid(t_game *game, t_point new)
 	}
 }
 
-void update_player(t_game *game)
+void	update_player_bonus(t_game *game)
 {
 	t_point new;
 	t_point step;

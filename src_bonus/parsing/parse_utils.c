@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/24 22:26:59 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/28 10:12:28 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int is_door_valid(t_parse *parser, int x, int y)
 			|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
 			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
 		return (0);
-	if (!((parser->map[y - 1][x] == '1'
-			&& parser->map[y + 1][x] == '1')
-			|| (parser->map[y][x - 1] == '1'
-			&& parser->map[y][x + 1] == '1')))
+	if (!(((parser->map[y - 1][x] == '1' && parser->map[y + 1][x] == '1')
+			&& !(parser->map[y][x - 1] == '1' && parser->map[y][x + 1] == '1'))
+			|| (!(parser->map[y - 1][x] == '1' && parser->map[y + 1][x] == '1')
+			&& (parser->map[y][x - 1] == '1' && parser->map[y][x + 1] == '1'))))
 		return (0);
 	return (1);
 }

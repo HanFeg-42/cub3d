@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:18:45 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:28:59 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ void	check_move_valid(t_game *game, t_point new)
 	check_x.y = game->player.y;
 	check_y.x = game->player.x;
 	check_y.y = new.y;
-	if (is_valid_position(game, check_x))
+	if (is_valid_position(game, check_x) && is_valid_position(game, check_y))
+	{
 		game->player.x = new.x;
-	if (is_valid_position(game, check_y))
 		game->player.y = new.y;
+	}
 }
 
 void	update_player(t_game *game)

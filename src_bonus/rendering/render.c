@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 14:10:48 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/28 10:30:58 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	draw_minimap(t_game *game)
 			if (game->map[i][j] == 'O')
 			draw_square(&game->img, j * SCALE * MM_FACTOR,
 					i * SCALE * MM_FACTOR, OPEN_DOOR_COLOR);
-			
 			j++;
 		}
 		i++;
@@ -96,7 +95,7 @@ int mouse_move(int x, int y ,t_game *game)
 	(void)y;
 	int center_x;
 	int delta_x;
-	
+
 	center_x = WINDOW_WIDTH / 2;
     delta_x = x - center_x;
 	if (delta_x == 0)
