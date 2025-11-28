@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/28 10:30:58 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:34:37 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	proj_walls(t_game *game)
 
 int	render_game(t_game *game)
 {
-	update_player(game);
+	update_player_bonus(game);
 	update_animation(game);
 	ft_memset(game->img.addr, 0, game->img.line_length * WINDOW_HEIGHT);
 	ray_cast(game);
