@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:57:42 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/28 10:36:34 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:40:52 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	init_ray(t_ray *ray, double angle, int is_horz)
 		ray->is_facing_left = 1;
 }
 
-void	init_hit_intersect(t_game *game, t_ray *r, double next_x, double next_y)
+void	init_hit(t_game *game, t_ray *r, double next_x, double next_y)
 {
 	while (next_x / SCALE >= 0 && next_x / SCALE < game->width
 		&& next_y / SCALE >= 0 && next_y / SCALE < game->height)

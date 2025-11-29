@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:16:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 17:15:06 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:34:35 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,9 @@ double	max(double a, double b)
 	if (a > b)
 		return (a);
 	return (b);
+}
+
+double    rad(double deg)
+{
+    return (deg * M_PI / 180);
 }

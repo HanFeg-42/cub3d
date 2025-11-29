@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 15:54:43 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/12 17:04:43 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:42:24 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void	init_first_vert_intercept(t_game *game, t_ray *ray, double angle)
 {
 	ray->xintercept = (int)(game->player.x / SCALE) * SCALE;
-	if (cos(RAD(angle)) > 0)
+	if (cos(rad(angle)) > 0)
 		ray->xintercept += SCALE;
 	ray->yintercept = game->player.y
-		+ (ray->xintercept - game->player.x) * tan(RAD(angle));
+		+ (ray->xintercept - game->player.x) * tan(rad(angle));
 }
 
 void	init_vert_step(t_ray *ray, double angle)
 {
 	ray->x_step = SCALE;
-	if (cos(RAD(angle)) < 0)
+	if (cos(rad(angle)) < 0)
 		ray->x_step *= -1;
-	ray->y_step = SCALE * tan(RAD(angle));
-	if (sin(RAD(angle)) < 0 && ray->y_step > 0)
+	ray->y_step = SCALE * tan(rad(angle));
+	if (sin(rad(angle)) < 0 && ray->y_step > 0)
 		ray->y_step *= -1;
-	if (sin(RAD(angle)) > 0 && ray->y_step < 0)
+	if (sin(rad(angle)) > 0 && ray->y_step < 0)
 		ray->y_step *= -1;
 }
 
@@ -44,6 +44,6 @@ t_ray	vert_wall_intersection(t_game *game, double angle)
 	init_vert_step(&ray, angle);
 	next_vert_x = ray.xintercept;
 	next_vert_y = ray.yintercept;
-	init_hit_intersect(game, &ray, next_vert_x, next_vert_y);
+	init_hit(game, &ray, next_vert_x, next_vert_y);
 	return (ray);
 }

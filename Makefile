@@ -34,7 +34,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX_LINUX) $(MLXFLAGS) -o $(NAME)
 	@echo "✅ Mandatory compiled successfully!"
 
-bonus: fclean $(OBJ_B)
+bonus: $(NAME) $(OBJ_B)
 	@$(MAKE) -s -C $(LIBFT_D)
 	@$(MAKE) -s -C $(LIBMLX_D)
 	$(CC) $(CFLAGS) $(OBJ_B) $(LIBFT) $(LIBMLX_LINUX) $(MLXFLAGS) -o $(NAME)
@@ -54,3 +54,4 @@ re: fclean
 
 .PHONY: all bonus clean fclean re
 -include $(DEP) $(DEP_B)
+.SECONDARY:

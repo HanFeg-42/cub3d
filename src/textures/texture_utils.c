@@ -3,24 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 16:08:44 by gstitou           #+#    #+#             */
-/*   Updated: 2025/11/12 14:56:24 by gstitou          ###   ########.fr       */
+/*   Updated: 2025/11/29 16:01:58 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y)
+int	get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y)
 {
-	char *pixel_address;
+	char	*pixel_address;
 
-	pixel_address = tex_img->addr + (int)((tex_y * tex_img->line_length) + tex_x * (tex_img->bits_per_pixel / 8));
+	pixel_address = tex_img->addr + (int)((tex_y * tex_img->line_length)
+			+ tex_x * (tex_img->bits_per_pixel / 8));
 	return (*(int *)pixel_address);
 }
 
-t_img *get_correct_texture(t_game *game, t_ray ray)
+t_img	*get_correct_texture(t_game *game, t_ray ray)
 {
 	if (ray.is_horz)
 	{
@@ -32,4 +33,3 @@ t_img *get_correct_texture(t_game *game, t_ray ray)
 		return (&game->texture[WEST]);
 	return (&game->texture[EAST]);
 }
-

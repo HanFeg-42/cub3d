@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 20:46:41 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/28 11:21:37 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/29 15:31:42 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,15 @@ void	update_player_bonus(t_game *game)
 		game->player.angle + game->player.turn_dir * ROTATION_SPEED);
 	if (game->player.y_dir != 0)
 	{
-		step.x = game->player.y_dir * cos(RAD(game->player.angle));
-		step.y = game->player.y_dir * sin(RAD(game->player.angle));
+		step.x = game->player.y_dir * cos(rad(game->player.angle));
+		step.y = game->player.y_dir * sin(rad(game->player.angle));
 		new.x = game->player.x + step.x * MOVE_SPEED;
 		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else if (game->player.x_dir != 0)
 	{
-		step.x = cos(RAD(game->player.angle + game->player.x_dir * 90));
-		step.y = sin(RAD(game->player.angle + game->player.x_dir * 90));
+		step.x = cos(rad(game->player.angle + game->player.x_dir * 90));
+		step.y = sin(rad(game->player.angle + game->player.x_dir * 90));
 		new.x = game->player.x + step.x * MOVE_SPEED;
 		new.y = game->player.y + step.y * MOVE_SPEED;
 	}

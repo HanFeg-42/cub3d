@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 12:07:24 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/18 15:09:19 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/29 14:58:40 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ static void	check_player(t_game *game, t_parse *parser)
 		{
 			ptr = ft_strchr("NWSE", parser->map[y][x]);
 			if (ptr && !parser->is_player)
-				parser->is_player = EXIST;
-			else if (ptr && parser->is_player == EXIST)
+				parser->is_player = 1;
+			else if (ptr && parser->is_player == 1)
 				exit_game(game, ERROR_MULTIPLE_PLAYERS, EXIT_FAILURE);
 			x++;
 		}
 		y++;
 	}
-	if (parser->is_player != EXIST)
+	if (parser->is_player != 1)
 		exit_game(game, ERROR_NO_PLAYER, EXIT_FAILURE);
 }
 

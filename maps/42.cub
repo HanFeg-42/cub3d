@@ -1,10 +1,10 @@
-NO IMG/Wolfenstein/bluestone.xpm
-SO IMG/Wolfenstein/greystone.xpm
-WE IMG/Wolfenstein/wood.xpm
-EA IMG/Wolfenstein/redbrick.xpm
+NO textures/walls/Marble_white.xpm
+SO textures/walls/Marble_white.xpm
+WE textures/walls/Marbleblack.xpm
+EA textures/walls/Marbleblack.xpm
 
-F 220,100,0
-C 225,30,0
+F 127, 140, 170
+C 51, 52, 70
 
 111111111111111111111111111
 100000000000000000000000001
