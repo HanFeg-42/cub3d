@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 22:46:29 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/30 21:21:12 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	read_file(t_game *game, t_parse *parser)
 	}
 	while (line)
 	{
+		if (line[0] == '\n' || gc_strtrim(line, " ")[0] == '\n')
+			exit_game(game, ERROR_EMPTY_LINE, EXIT_FAILURE);
 		parser->join_map = gc_strjoin(parser->join_map, line);
 		free_one(line);
 		line = get_next_line(parser->fd);
@@ -54,7 +56,12 @@ static void	parse_config(t_game *game, t_parse *parser)
 	i = 0;
 	while (parser->config[i])
 	{
-		trim = gc_strtrim(parser->config[i], " ");
+		trim = gc_strtrim_all(parser->config[i], " ");
+		if (trim[0] == '\0')
+		{
+			i++;
+			continue ;
+		}
 		if (strchr("NSWE", trim[0]))
 			parse_texture(game, parser->config[i]);
 		else if (strchr("FC", trim[0]))

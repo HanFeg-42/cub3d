@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:25:28 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/29 15:27:13 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:52:24 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # define ERROR_NO_PLAYER		"Error\nNo player spawn position found"
 # define ERROR_INVALID_MAP		"Error\nMap is not properly enclosed by walls"
 # define ERROR_INVALID_DOOR		"Error\nInvalid door position"
-# define ERROR_MULTI_COMMAS		"Error\nMultiple commas"
 
 typedef struct s_parse
 {

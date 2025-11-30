@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 20:31:50 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/27 22:43:25 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/11/30 20:52:19 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	get_parsed_rgb(t_game *game, char *color, char **rgb_arr)
 	int		rgb;
 
 	if (count_occ(color, ',') != 2)
-		exit_game(game, ERROR_MULTI_COMMAS, EXIT_FAILURE);
+		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2]
 			|| !rgb_arr[3] || rgb_arr[4])
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
