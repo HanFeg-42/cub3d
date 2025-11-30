@@ -22,12 +22,8 @@ int	is_file_ext_valid(char *filename, char *right_ext)
 
 void	is_all_config_loaded(t_game *game)
 {
-	if (
-		!game->config.ea
-		|| !game->config.no
-		|| !game->config.so
-		|| !game->config.we
-	)
+	if (!game->config.ea || !game->config.no || !game->config.so
+		|| !game->config.we)
 		exit_game(game, ERROR_MISSING_TEXTURE, EXIT_FAILURE);
 	if (game->config.c_rgb == -1 || game->config.f_rgb == -1)
 		exit_game(game, ERROR_MISSING_COLOR, EXIT_FAILURE);
@@ -35,28 +31,25 @@ void	is_all_config_loaded(t_game *game)
 
 int	has_adjacent_space(t_parse *parser, int x, int y)
 {
-	if (y - 1 < 0 || x - 1 < 0
-			|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
-			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
+	if (y - 1 < 0 || x - 1 < 0 || !parser->map[y - 1][x] || !parser->map[y
+		+ 1][x] || !parser->map[y][x + 1] || !parser->map[y][x - 1])
 		return (1);
-	if (parser->map[y - 1][x] == ' '
-			|| parser->map[y + 1][x] == ' '
-			|| parser->map[y][x - 1] == ' '
-			|| parser->map[y][x + 1] == ' ')
+	if (parser->map[y - 1][x] == ' ' || parser->map[y + 1][x] == ' '
+		|| parser->map[y][x - 1] == ' ' || parser->map[y][x + 1] == ' ')
 		return (1);
 	return (0);
 }
 
-int is_door_valid(t_parse *parser, int x, int y)
+int	is_door_valid(t_parse *parser, int x, int y)
 {
-	if (y - 1 < 0 || x - 1 < 0
-			|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
-			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
+	if (y - 1 < 0 || x - 1 < 0 || !parser->map[y - 1][x] || !parser->map[y
+		+ 1][x] || !parser->map[y][x + 1] || !parser->map[y][x - 1])
 		return (0);
 	if (!(((parser->map[y - 1][x] == '1' && parser->map[y + 1][x] == '1')
-			&& !(parser->map[y][x - 1] == '1' && parser->map[y][x + 1] == '1'))
-			|| (!(parser->map[y - 1][x] == '1' && parser->map[y + 1][x] == '1')
-			&& (parser->map[y][x - 1] == '1' && parser->map[y][x + 1] == '1'))))
+		&& !(parser->map[y][x - 1] == '1' && parser->map[y][x
+		+ 1] == '1')) || (!(parser->map[y - 1][x] == '1'
+		&& parser->map[y + 1][x] == '1') && (parser->map[y][x
+		- 1] == '1' && parser->map[y][x + 1] == '1'))))
 		return (0);
 	return (1);
 }

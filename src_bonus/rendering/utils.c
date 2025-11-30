@@ -16,8 +16,7 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_length
-			+ x * (img->bits_per_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -28,7 +27,7 @@ double	max(double a, double b)
 	return (b);
 }
 
-double    rad(double deg)
+double	rad(double deg)
 {
-    return (deg * M_PI / 180);
+	return (deg * M_PI / 180);
 }

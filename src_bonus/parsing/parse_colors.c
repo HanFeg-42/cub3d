@@ -61,13 +61,13 @@ static int	parse_rgb(t_game *game, char *nbr)
 
 static int	get_parsed_rgb(t_game *game, char *color, char **rgb_arr)
 {
-	int		parsed_rgb[3];
-	int		rgb;
+	int	parsed_rgb[3];
+	int	rgb;
 
 	if (count_occ(color, ',') != 2)
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
-	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2]
-			|| !rgb_arr[3] || rgb_arr[4])
+	if (!rgb_arr || !rgb_arr[0] || !rgb_arr[1] || !rgb_arr[2] || !rgb_arr[3]
+		|| rgb_arr[4])
 		exit_game(game, ERROR_INVALID_COLOR, EXIT_FAILURE);
 	parsed_rgb[0] = parse_rgb(game, rgb_arr[1]);
 	parsed_rgb[1] = parse_rgb(game, rgb_arr[2]);

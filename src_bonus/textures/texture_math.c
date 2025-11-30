@@ -29,8 +29,8 @@ void	calculate_horz_map(t_ray ray, t_tex *tex)
 		tex->tex_x = 0;
 	if (tex->tex_x >= tex->tex_img->width)
 		tex->tex_x = tex->tex_img->width - 1;
-	if ((ray.is_horz && ray.is_facing_up)
-		|| (!ray.is_horz && ray.is_facing_left))
+	if ((ray.is_horz && ray.is_facing_up) || (!ray.is_horz
+			&& ray.is_facing_left))
 		tex->tex_x = tex->tex_img->width - tex->tex_x - 1;
 }
 
@@ -46,11 +46,3 @@ void	calculate_vert_map(t_tex *tex, double wall_height)
 	tex->tex_pos = (tex->draw_start - (WINDOW_HEIGHT / 2) + (wall_height / 2))
 		* tex->step;
 }
-
-// Realistic textures (e.g., brick, wood, stone, concrete)?
-
-// Sci-fi textures (e.g., metal panels, futuristic screens)?
-
-// Fantasy textures (e.g., ancient runes, castle walls)?
-
-// Abstract patterns?

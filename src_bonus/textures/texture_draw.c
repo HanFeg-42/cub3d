@@ -18,7 +18,6 @@ void	draw_textured_column(t_game *game, t_tex *tex, int i)
 	int	x;
 	int	tex_y;
 	int	color;
-	
 
 	y = tex->draw_start;
 	while (y < tex->draw_end)
@@ -30,7 +29,7 @@ void	draw_textured_column(t_game *game, t_tex *tex, int i)
 		x = i;
 		while (x < i + WALL_STRIP_WIDTH)
 		{
-					my_mlx_pixel_put(&game->img, x, y, color);
+			my_mlx_pixel_put(&game->img, x, y, color);
 			x++;
 		}
 		tex->tex_pos += tex->step;
@@ -64,7 +63,7 @@ void	draw_ceiling(t_game *game, t_tex tex, int x)
 
 void	texture_mapping_and_draw(t_game *game, t_ray ray, int i, double wall_h)
 {
-	t_tex		tex;
+	t_tex	tex;
 
 	ft_bzero(&tex, sizeof(t_tex));
 	tex.tex_img = get_correct_texture(game, ray);

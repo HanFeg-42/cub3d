@@ -43,10 +43,9 @@ int	has_door_at(t_game *game, t_ray *ray, double next_x, double next_y)
 	return (game->map[map_y][map_x] == 'D');
 }
 
-
 t_img	*get_correct_texture(t_game *game, t_ray ray)
 {
-	if(has_door_at(game, &ray, ray.wall_hit_x,ray.wall_hit_y))
+	if (has_door_at(game, &ray, ray.wall_hit_x, ray.wall_hit_y))
 	{
 		return (&game->door);
 	}

@@ -5,13 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gstitou <gstitou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 06:15:40 by marvin            #+#    #+#             */
+/*   Created: 2024/10/25 06:15:40 by gstitou           #+#    #+#             */
 /*   Updated: 2025/11/20 19:17:55 by gstitou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../libft/libft.h"
 #include "gc.h"
+
 static	unsigned int	nbr_size(long n, long d)
 {
 	unsigned int	size;

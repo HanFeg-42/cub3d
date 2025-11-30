@@ -64,8 +64,8 @@ void	init_ray(t_ray *ray, double angle, int is_horz)
 
 void	init_hit(t_game *game, t_ray *r, double next_x, double next_y)
 {
-	while (next_x / SCALE >= 0 && next_x / SCALE < game->width
-		&& next_y / SCALE >= 0 && next_y / SCALE < game->height)
+	while (next_x / SCALE >= 0 && next_x / SCALE < game->width && next_y
+		/ SCALE >= 0 && next_y / SCALE < game->height)
 	{
 		if (has_wall_at(game, r, next_x, next_y))
 		{

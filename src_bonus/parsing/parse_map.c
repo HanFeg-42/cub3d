@@ -83,11 +83,11 @@ static void	check_map_walls(t_game *game, t_parse *parser)
 		while (parser->map[y][x])
 		{
 			if (ft_strchr("NSWE0D", parser->map[y][x])
-					&& has_adjacent_space(parser, x, y))
+				&& has_adjacent_space(parser, x, y))
 				exit_game(game, ERROR_INVALID_MAP, EXIT_FAILURE);
 			if (parser->map[y][x] == 'D')
 			{
-				if(!is_door_valid(parser, x, y))
+				if (!is_door_valid(parser, x, y))
 					exit_game(game, ERROR_INVALID_DOOR, EXIT_FAILURE);
 			}
 			x++;
@@ -102,10 +102,8 @@ void	parse_map(t_game *game, t_parse *parser)
 
 	map_str = gc_strtrim(parser->join_map, "\n");
 	check_map_elements(game, map_str);
-	// check_map_shape(game, map_str);
 	parser->map = gc_split(map_str, '\n');
 	check_player(game, parser);
 	check_map_walls(game, parser);
-	// check_door(game, parser);
 	game->map = ft_split(parser->join_map, '\n');
 }

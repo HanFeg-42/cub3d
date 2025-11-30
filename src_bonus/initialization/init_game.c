@@ -12,14 +12,13 @@
 
 #include "cub3d.h"
 
-void    get_game(t_game *game)
+void	get_game(t_game *game)
 {
-    init_config(game);
-    init_player(game);
-    initialize_mlx(game);
+	init_config(game);
+	init_player(game);
+	initialize_mlx(game);
 	init_wall_textures(game);
 	init_anim_textures(game);
-	// init_doors(game);
 }
 
 t_game	*init_game(void)

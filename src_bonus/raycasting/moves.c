@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int key_press(int key, t_game *data)
+int	key_press(int key, t_game *data)
 {
 	if (key == XK_w)
 		data->player.y_dir = 1;
@@ -31,7 +31,7 @@ int key_press(int key, t_game *data)
 	return (0);
 }
 
-	int key_release(int key, t_game *data)
+int	key_release(int key, t_game *data)
 {
 	if (key == XK_w || key == XK_s)
 		data->player.y_dir = 0;
@@ -44,32 +44,36 @@ int key_press(int key, t_game *data)
 	return (0);
 }
 
-int is_valid_position(t_game *game, t_point pos)
+int	is_valid_position(t_game *game, t_point pos)
 {
-	int y_plus_mar;
-	int y_minus_mar;
-	int x_plus_mar;
-	int x_minus_mar;
+	int	y_plus_mar;
+	int	y_minus_mar;
+	int	x_plus_mar;
+	int	x_minus_mar;
 
 	y_plus_mar = (int)((pos.y + MARGIN) / SCALE);
 	y_minus_mar = (int)((pos.y - MARGIN) / SCALE);
 	x_plus_mar = (int)((pos.x + MARGIN) / SCALE);
 	x_minus_mar = (int)((pos.x - MARGIN) / SCALE);
-	if (game->map[y_plus_mar][x_plus_mar] == '1' || game->map[y_plus_mar][x_plus_mar] == 'D')
+	if (game->map[y_plus_mar][x_plus_mar] == '1'
+		|| game->map[y_plus_mar][x_plus_mar] == 'D')
 		return (0);
-	if (game->map[y_plus_mar][x_minus_mar] == '1' || game->map[y_plus_mar][x_minus_mar] == 'D')
+	if (game->map[y_plus_mar][x_minus_mar] == '1'
+		|| game->map[y_plus_mar][x_minus_mar] == 'D')
 		return (0);
-	if (game->map[y_minus_mar][x_plus_mar] == '1' || game->map[y_minus_mar][x_plus_mar] == 'D')
+	if (game->map[y_minus_mar][x_plus_mar] == '1'
+		|| game->map[y_minus_mar][x_plus_mar] == 'D')
 		return (0);
-	if (game->map[y_minus_mar][x_minus_mar] == '1' || game->map[y_minus_mar][x_minus_mar] == 'D')
+	if (game->map[y_minus_mar][x_minus_mar] == '1'
+		|| game->map[y_minus_mar][x_minus_mar] == 'D')
 		return (0);
 	return (1);
 }
 
-static void check_move_valid(t_game *game, t_point new)
+static void	check_move_valid(t_game *game, t_point new)
 {
-	t_point check_x;
-	t_point check_y;
+	t_point	check_x;
+	t_point	check_y;
 
 	check_x.x = new.x;
 	check_x.y = game->player.y;
@@ -89,11 +93,11 @@ static void check_move_valid(t_game *game, t_point new)
 
 void	update_player_bonus(t_game *game)
 {
-	t_point new;
-	t_point step;
+	t_point	new;
+	t_point	step;
 
-	game->player.angle = normalize_angle(
-		game->player.angle + game->player.turn_dir * ROTATION_SPEED);
+	game->player.angle = normalize_angle(game->player.angle
+			+ game->player.turn_dir * ROTATION_SPEED);
 	if (game->player.y_dir != 0)
 	{
 		step.x = game->player.y_dir * cos(rad(game->player.angle));
@@ -109,6 +113,6 @@ void	update_player_bonus(t_game *game)
 		new.y = game->player.y + step.y * MOVE_SPEED;
 	}
 	else
-		return;
+		return ;
 	check_move_valid(game, new);
 }

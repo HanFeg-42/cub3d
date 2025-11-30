@@ -24,14 +24,14 @@ void	draw_minimap(t_game *game)
 		while (game->map[i][j])
 		{
 			if (game->map[i][j] == '1')
-				draw_square(&game->img, j * SCALE * MM_FACTOR,
-					i * SCALE * MM_FACTOR, MINIMAP_COLOR);
+				draw_square(&game->img, j * SCALE * MM_FACTOR, i * SCALE
+					* MM_FACTOR, MINIMAP_COLOR);
 			if (game->map[i][j] == 'D')
-				draw_square(&game->img, j * SCALE * MM_FACTOR,
-					i * SCALE * MM_FACTOR, DOOR_COLOR);
+				draw_square(&game->img, j * SCALE * MM_FACTOR, i * SCALE
+					* MM_FACTOR, DOOR_COLOR);
 			if (game->map[i][j] == 'O')
-			draw_square(&game->img, j * SCALE * MM_FACTOR,
-					i * SCALE * MM_FACTOR, OPEN_DOOR_COLOR);
+				draw_square(&game->img, j * SCALE * MM_FACTOR, i * SCALE
+					* MM_FACTOR, OPEN_DOOR_COLOR);
 			j++;
 		}
 		i++;
@@ -60,20 +60,22 @@ void	render_minimap(t_game *game)
 
 void	proj_walls(t_game *game)
 {
-    int i;
-    double  dist_proj_plane;
-    double  wall_strip_height;
+	int		i;
+	double	dist_proj_plane;
+	double	wall_strip_height;
 
 	dist_proj_plane = (WINDOW_WIDTH / 2) / tan(rad(FOV / 2));
-    i = 0;
-    while (i < NUM_RAYS)
-    {
-        game->ray[i].correct_wall_dist = game->ray[i].distance
-            * cos(rad(game->ray[i].angle - game->player.angle));
-        wall_strip_height = (SCALE / game->ray[i].correct_wall_dist) * dist_proj_plane;
-        texture_mapping_and_draw(game, game->ray[i], i,fabs(wall_strip_height));
-        i++;
-    }
+	i = 0;
+	while (i < NUM_RAYS)
+	{
+		game->ray[i].correct_wall_dist = game->ray[i].distance
+			* cos(rad(game->ray[i].angle - game->player.angle));
+		wall_strip_height = (SCALE / game->ray[i].correct_wall_dist)
+			* dist_proj_plane;
+		texture_mapping_and_draw(game, game->ray[i], i,
+			fabs(wall_strip_height));
+		i++;
+	}
 }
 
 int	render_game(t_game *game)
@@ -89,19 +91,18 @@ int	render_game(t_game *game)
 	return (0);
 }
 
-
-int mouse_move(int x, int y ,t_game *game)
+int	mouse_move(int x, int y, t_game *game)
 {
-	(void)y;
-	int center_x;
-	int delta_x;
+	int	center_x;
+	int	delta_x;
 
+	(void)y;
 	center_x = WINDOW_WIDTH / 2;
-    delta_x = x - center_x;
+	delta_x = x - center_x;
 	if (delta_x == 0)
-        return (0);
-    
-		game->player.angle = normalize_angle(game->player.angle + delta_x * SENSITIVITY);
-		mlx_mouse_move(game->mlx, game->win, center_x, WINDOW_HEIGHT / 2);
+		return (0);
+	game->player.angle = normalize_angle(game->player.angle + delta_x
+			* SENSITIVITY);
+	mlx_mouse_move(game->mlx, game->win, center_x, WINDOW_HEIGHT / 2);
 	return (0);
 }

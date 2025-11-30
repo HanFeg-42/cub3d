@@ -17,8 +17,8 @@ void	init_first_horz_intercept(t_game *game, t_ray *ray, double angle)
 	ray->yintercept = (int)(game->player.y / SCALE) * SCALE;
 	if (angle < 180)
 		ray->yintercept += SCALE;
-	ray->xintercept = game->player.x
-		+ (ray->yintercept - game->player.y) / tan(rad(angle));
+	ray->xintercept = game->player.x + (ray->yintercept - game->player.y)
+		/ tan(rad(angle));
 }
 
 void	init_horz_step(t_ray *ray, double angle)

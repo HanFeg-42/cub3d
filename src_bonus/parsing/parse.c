@@ -66,7 +66,6 @@ static void	parse_config(t_game *game, t_parse *parser)
 			parse_texture(game, parser->config[i]);
 		else if (strchr("FC", trim[0]))
 			parse_color(game, trim, parser->config[i]);
-
 		else
 			exit_game(game, ERROR_INVALID_CONFIG, EXIT_FAILURE);
 		i++;

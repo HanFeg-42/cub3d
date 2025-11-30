@@ -17,8 +17,8 @@ void	init_first_vert_intercept(t_game *game, t_ray *ray, double angle)
 	ray->xintercept = (int)(game->player.x / SCALE) * SCALE;
 	if (cos(rad(angle)) > 0)
 		ray->xintercept += SCALE;
-	ray->yintercept = game->player.y
-		+ (ray->xintercept - game->player.x) * tan(rad(angle));
+	ray->yintercept = game->player.y + (ray->xintercept - game->player.x)
+		* tan(rad(angle));
 }
 
 void	init_vert_step(t_ray *ray, double angle)

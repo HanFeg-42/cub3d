@@ -36,7 +36,7 @@ void	init_wall_textures(t_game *game)
 	load_one_texture(game, &game->texture[SOUTH], game->config.so);
 	load_one_texture(game, &game->texture[EAST], game->config.ea);
 	load_one_texture(game, &game->texture[WEST], game->config.we);
-	load_one_texture(game,&game->door,"textures/door/door.xpm");
+	load_one_texture(game, &game->door, "textures/door/door.xpm");
 }
 
 void	init_anim_textures(t_game *game)
