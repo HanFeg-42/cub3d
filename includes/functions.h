@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:38:21 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/29 15:54:56 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/12/01 09:52:36 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ void	init_wall_textures(t_game *game);
 void	init_anim_textures(t_game *game);
 
 /* ===== Rendering ===== */
-int		render_game(t_game *game);
+int		start_game(t_game *game);
 void	render_minimap(t_game *game);
 void	render_animation(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	mlx_hooks(t_game *game);
+int		close_window(t_game *game);
 
 /* ===== Raycasting ===== */
 void	ray_cast(t_game *game);
@@ -47,7 +49,6 @@ void	calculate_vert_map(t_tex *tex, double wall_height);
 void	draw_textured_column(t_game *g, t_tex *tex, int i);
 t_img	*get_correct_texture(t_game *g, t_ray ray);
 int		get_texture_pixel_color(t_img *tex_img, int tex_x, int tex_y);
-int		shade_color(int color, double factor);
 
 /* ===== Drawing Utilities ===== */
 void	draw_square(t_img *img, double x, double y, int color);

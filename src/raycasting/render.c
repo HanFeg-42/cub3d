@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/29 15:59:53 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/12/01 09:42:31 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	proj_walls(t_game *game)
 	}
 }
 
-int	render_game(t_game *game)
+int	start_game(t_game *game)
 {
 	update_player(game);
 	ft_memset(game->img.addr, 0, game->img.line_length * WINDOW_HEIGHT);

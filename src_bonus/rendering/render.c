@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 14:20:05 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/29 15:31:42 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/12/01 09:44:09 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	proj_walls(t_game *game)
 	}
 }
 
-int	render_game(t_game *game)
+int	start_game(t_game *game)
 {
 	update_player_bonus(game);
 	update_animation(game);
@@ -88,21 +88,5 @@ int	render_game(t_game *game)
 	render_minimap(game);
 	render_animation(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img, 0, 0);
-	return (0);
-}
-
-int	mouse_move(int x, int y, t_game *game)
-{
-	int	center_x;
-	int	delta_x;
-
-	(void)y;
-	center_x = WINDOW_WIDTH / 2;
-	delta_x = x - center_x;
-	if (delta_x == 0)
-		return (0);
-	game->player.angle = normalize_angle(game->player.angle + delta_x
-			* SENSITIVITY);
-	mlx_mouse_move(game->mlx, game->win, center_x, WINDOW_HEIGHT / 2);
 	return (0);
 }
