@@ -6,7 +6,7 @@
 /*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:36:14 by hfegrach          #+#    #+#             */
-/*   Updated: 2025/11/29 15:36:46 by hfegrach         ###   ########.fr       */
+/*   Updated: 2025/12/01 10:48:54 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ typedef struct s_img
 typedef struct s_tex
 {
 	t_img	*tex_img;
-	int		tex_x;
 	double	step;
 	double	tex_pos;
+	int		tex_x;
 	int		draw_start;
 	int		draw_end;
 }	t_tex;
@@ -52,9 +52,9 @@ typedef struct s_player
 	double	x;
 	double	y;
 	double	angle;
-	int		turn_dir;
 	double	x_dir;
 	double	y_dir;
+	int		turn_dir;
 	bool	is_moving;
 	bool	is_shooting;
 }	t_player;
@@ -81,10 +81,10 @@ typedef struct s_ray
 	double	x_step;
 	double	y_step;
 	double	distance;
+	double	correct_wall_dist;
 	int		is_horz;
 	int		is_facing_up;
 	int		is_facing_left;
-	double	correct_wall_dist;
 }	t_ray;
 
 /* Gun animation frames */
@@ -99,10 +99,10 @@ typedef struct s_gun
 /* Door state and animation */
 typedef struct s_door
 {
+	double	open_progress;
 	int		x;
 	int		y;
 	int		is_open;
-	double	open_progress;
 }	t_door;
 
 /* Main game structure */
