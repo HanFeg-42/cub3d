@@ -3,82 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 23:48:32 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:50:19 by kali             ###   ########.fr       */
+/*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/12/01 10:22:02 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "parse.h"
 
-// TODO: chech .cub extention
-// TODO: open the file 
-// TODO: use get_next_line to read it
-
-static void	init_game_data(t_game_data *data)
+static void	open_file(t_game *game, t_parse *parser, char *filename)
 {
-	data->mlx_ptr = NULL;
-	data->win_ptr = NULL;
-	data->map_path = NULL;
-	data->join = NULL;
-	data->map = NULL;
-	data->fd = 0;
-	data->no_path = NULL;
-	data->so_path = NULL;
-	data->we_path = NULL;
-	data->ea_path = NULL;
-	data->f_rgb = -1;
-	data->c_rgb = -1;
+	if (is_file_ext_valid(filename, ".cub") == FALSE)
+		exit_game(game, ERROR_INVALID_EXTENSION, EXIT_FAILURE);
+	parser->fd = open(filename, O_RDONLY);
+	if (parser->fd == -1)
+		exit_game(game, ERROR_FILE_OPEN_FAILED, EXIT_FAILURE);
 }
 
-static void	check_file_extention(char *filename)
-{
-	char	*ext;
-
-	ext = ft_strrstr(filename, ".cub");
-	if (!ext || ft_strlen(ext) != 4)
-		clean_and_exit("Usage: ./cub3D path_to_map.cub\n");
-}
-
-static void	open_file(char *filename, t_game_data *data)
-{
-	check_file_extention(filename);
-	data->fd = open(filename, O_RDONLY);
-	if (data->fd == -1)
-		clean_and_exit("Failed to open the file");
-}
-
-static void	read_file(t_game_data *data)
+static void	read_file(t_game *game, t_parse *parser)
 {
 	char	*line;
 
-	line = get_next_line(data->fd, 0);
+	line = get_next_line(parser->fd);
+	if (!line)
+		exit_game(game, ERROR_EMPTY_FILE, EXIT_FAILURE);
+	while (line && !ft_strchr("1", gc_strtrim(line, " ")[0]))
+	{
+		parser->join_config = gc_strjoin(parser->join_config, line);
+		free_one(line);
+		line = get_next_line(parser->fd);
+	}
 	while (line)
 	{
-		load_line(line, data);
-		free(line);
-		line = get_next_line(data->fd, 0);
+		if (line[0] == '\n' || gc_strtrim(line, " ")[0] == '\n')
+			exit_game(game, ERROR_EMPTY_LINE, EXIT_FAILURE);
+		parser->join_map = gc_strjoin(parser->join_map, line);
+		free_one(line);
+		line = get_next_line(parser->fd);
 	}
-	init_map_matrix(data);
+	return ;
 }
 
-/**
- * @brief Parses command line arguments and initializes game data.
- * @param ac Argument count.
- * @param av Argument vector.
- * @param data Pointer to the game data structure to be initialized.
- * @return true if parsing and initialization are successful, false otherwise.
- */
-bool	parse_args(int ac, char **av, t_game_data *data)
+static void	parse_config(t_game *game, t_parse *parser)
 {
-	init_game_data(data);
-	if (ac != 2)
+	int		i;
+	char	*trim;
+
+	parser->config = gc_split(parser->join_config, '\n');
+	if (!parser->config)
+		exit_game(game, ERROR_INVALID_CONFIG, EXIT_FAILURE);
+	i = 0;
+	while (parser->config[i])
 	{
-		printf("Error\nUsage: ./cub3D path_to_map.cub\n");
-		return (1);
+		trim = gc_strtrim_all(parser->config[i], " ");
+		if (trim[0] == '\0')
+		{
+			i++;
+			continue ;
+		}
+		if (ft_strchr("NSWE", trim[0]))
+			parse_texture(game, parser->config[i]);
+		else if (ft_strchr("FC", trim[0]))
+			parse_color(game, trim, parser->config[i]);
+		else
+			exit_game(game, ERROR_INVALID_CONFIG, EXIT_FAILURE);
+		i++;
 	}
-	open_file(av[1], data);
-	read_file(data);
-	return (true);
+	is_all_config_loaded(game);
+}
+
+void	parse_input(t_game *game, int ac, char **av)
+{
+	t_parse	parser;
+
+	if (ac != 2)
+		exit_game(game, ERROR_INVALID_ARGS, EXIT_FAILURE);
+	ft_bzero(&parser, sizeof(t_parse));
+	open_file(game, &parser, av[1]);
+	read_file(game, &parser);
+	parse_config(game, &parser);
+	parse_map(game, &parser);
+	free_all();
 }

@@ -3,62 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hfegrach <hfegrach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 23:46:19 by kali              #+#    #+#             */
-/*   Updated: 2025/07/27 23:51:52 by kali             ###   ########.fr       */
+/*   Created: 2025/11/08 11:30:28 by hfegrach          #+#    #+#             */
+/*   Updated: 2025/11/29 15:55:33 by hfegrach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "parse.h"
 
-void	clean_and_exit(char *message)
+int	is_file_ext_valid(char *filename, char *right_ext)
 {
-	ft_putstr_fd(message, STDERR_FILENO);
-	exit(EXIT_FAILURE);
+	char	*ext;
+
+	ext = ft_strrstr(filename, right_ext);
+	return (!ext || ft_strlen(ext) != 4);
 }
 
-int	is_numeric(const char *a)
+void	is_all_config_loaded(t_game *game)
 {
-	int		i;
-	int		sign;
-	long	res;
-
-	i = 0;
-	sign = 1;
-	res = 0;
-	if (a[i] == '-' || a[i] == '+')
-	{
-		if (a[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	if (!(a[i] >= '0' && a[i] <= '9'))
-		return (false);
-	while (a[i] >= '0' && a[i] <= '9')
-	{
-		res = res * 10 + a[i] - '0';
-		if (res > 255 || res * sign < 0)
-			return (false);
-		i++;
-	}
-	return ((a[i] == '\0'));
+	if (
+		!game->config.ea
+		|| !game->config.no
+		|| !game->config.so
+		|| !game->config.we
+	)
+		exit_game(game, ERROR_MISSING_TEXTURE, EXIT_FAILURE);
+	if (game->config.c_rgb == -1 || game->config.f_rgb == -1)
+		exit_game(game, ERROR_MISSING_COLOR, EXIT_FAILURE);
 }
 
-bool	conf_params_loaded(t_game_data *data)
+int	has_adjacent_space(t_parse *parser, int x, int y)
 {
-	if (data->no_path && data->so_path && data->we_path && data->ea_path
-		&& data->f_rgb >= 0 && data->c_rgb >= 0)
-		return (true);
-	return (false);
-}
-
-void	ft_free_split(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr && arr[i])
-		free(arr[i++]);
-	free(arr);
+	if (y - 1 < 0 || x - 1 < 0
+		|| !parser->map[y - 1][x] || !parser->map[y + 1][x]
+			|| !parser->map[y][x + 1] || !parser->map[y][x - 1])
+		return (1);
+	if (parser->map[y - 1][x] == ' '
+			|| parser->map[y + 1][x] == ' '
+			|| parser->map[y][x - 1] == ' '
+			|| parser->map[y][x + 1] == ' ')
+		return (1);
+	return (0);
 }
